@@ -16,6 +16,7 @@ import {
   faRectangleAd,
   faXmark 
 } from "@fortawesome/free-solid-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
@@ -132,19 +133,15 @@ const Sidebar = () => {
                   </li>
                   <li className="sidebar-item">
                     <NavLink className="sidebar-link" to="/managegoogleaccount">
-                      <span></span>
+                      <span>
+                      <FontAwesomeIcon icon={faGoogle} />
+                      </span>
                       <span className="hide-menu">Manage Google Account</span>
                     </NavLink>
                   </li>
                 </ul>
               </li>
-              <li className="sidebar-item">
-                <NavLink className="sidebar-link" to="/demo">
-                  <span>
-                  </span>
-                  <span className="hide-menu">Demo</span>
-                </NavLink>
-              </li>
+              
  
             </ul>
           </nav>
