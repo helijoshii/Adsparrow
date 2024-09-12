@@ -8,6 +8,8 @@ const Navbar = () => {
     const login = () => {
       navigate("/login");
     };
+
+    
   return (
     <div>
       <div className="app-header">
