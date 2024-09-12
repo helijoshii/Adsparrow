@@ -21604,3 +21604,86 @@ table.dataTable>tbody>tr:hover {
       background-position: -200% 0;
     }
   }
+/* Styling for sidebar */
+.toggle-btn {
+    display: none;
+  }
+  
+ 
+  /* Responsive styles for smaller screens */
+  @media (max-width: 1199.98px) {
+    .content {
+      margin-left: 0;
+      padding: 20px;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -270px; 
+        height: 100vh;
+        transition: left 0.3s ease; 
+      }
+      
+      /* When sidebar is open */
+      .sidebar.open {
+        left: 0; /* Bring sidebar into view */
+        background: white;
+        width: 80%;
+      }
+      
+      /* When sidebar is closed */
+      .sidebar.closed {
+        left: -270px; /* Hide sidebar off-screen */
+      }
+      
+      /* Sidebar toggle button */
+      .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+        display: block;
+        border: 1px solid white;
+        background: black;
+        border-radius: 50%;
+        top: 6px;
+        left: 22px;
+        font-size: 9px;
+        height: 40px;
+        width: 40px;
+      }
+    .toggle-btn {
+        display: block;
+    }
+    .sidebar {
+      width: 100%; /* Full-width on small screens */
+      left: -100%; /* Hide off-screen on small devices */
+    }
+  
+   
+    .left-sidebar.open {
+        left: 0 !important;
+    }
+    /* #main-wrapper[data-layout=vertical][data-sidebar-position=fixed] .left-sidebar {
+        position: fixed;
+        top: 0;
+        width: 42%;
+    } */
+    /* .toggle-btn:before {
+        position: absolute;
+        top: 0;
+        content: '\f0c9';
+        font-size: 25px;
+        color: white;
+        font-family: "Font Awesome 5 Free";
+        font-weight: 700;
+        display: block;
+    } */
+    
+  }
+  

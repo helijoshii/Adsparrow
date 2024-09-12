@@ -14,13 +14,13 @@ const Navbar = () => {
     <div>
       <div className="app-header">
     <nav className="navbar navbar-expand-lg navbar-light">
-      <ul className="navbar-nav">
+      {/* <ul className="navbar-nav">
         <li className="nav-item d-block d-xl-none">
           <a className="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
           <FontAwesomeIcon icon={faBars} />
           </a>
         </li>
-      </ul>
+      </ul> */}
       <div className="navbar-collapse justify-content-end px-0" id="navbarNav">
         <ul className="navbar-nav flex-row ms-auto align-items-center justify-content-end">
           <li className="nav-item dropdown">

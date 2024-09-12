@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Sidebar from '../../components/Sidebar/Sidebar';
+import Temp from '../../components/temp';
 
 
 const MainLayout = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Function to toggle sidebar
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
   return (
     <div>
       <div>
@@ -18,13 +25,15 @@ const MainLayout = () => {
         data-sidebar-position="fixed"
         data-header-position="fixed"
       >
-        <Sidebar />
+        {/* <Sidebar /> */}
+        <Sidebar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+        {/* <Temp /> */}
         <div className="body-wrapper">
-          <Navbar />
+          <Navbar isOpen={isOpen}/>
           <div className="container-fluid">
-              <Outlet /> {/* This will render the matched child route components */}
+              <Outlet isOpen={isOpen}/> {/* This will render the matched child route components */}
             </div>
-          <Footer />
+          <Footer isOpen={isOpen}/>
         </div>
       </div>
     </div>

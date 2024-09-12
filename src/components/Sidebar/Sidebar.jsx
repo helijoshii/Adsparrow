@@ -14,16 +14,18 @@ import {
   faAngleDown,
   faGears,
   faRectangleAd,
-  faXmark 
+  faXmark,
+  faBars
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { NavLink, useLocation } from "react-router-dom";
 
 const Sidebar = () => {
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
   const location = useLocation();
-
-
 
   useEffect(() => {
     // Unbind any existing click events to prevent multiple toggles
@@ -78,75 +80,86 @@ const Sidebar = () => {
     });
   }, [location]);
 
-
   return (
     <div>
-      <aside className="left-sidebar">
-        <div>
-          <div className="brand-logo d-flex align-items-center justify-content-center">
-            <NavLink className="text-nowrap logo-img" to="/" end>
-              <img src={logo} width="150" alt="" />
-            </NavLink>
-            <div
-              className="close-btn d-xl-none d-block sidebartoggler cursor-pointer "
-              id="sidebarCollapse"
-            >
-              <FontAwesomeIcon icon={faXmark} />
-              
+       
+      <div className={`left-sidebar ${isOpen ? "open" : "closed"}`}>
+
+
+          <button className="toggle-btn" onClick={toggleSidebar}>
+            {/* {isOpen ? "Close" : "Open"} */}
+            <FontAwesomeIcon icon={isOpen ? faXmark : faBars} size="2x" color="white" />
+          </button>
+          <div>
+            <div className="brand-logo d-flex align-items-center justify-content-center">
+              <NavLink className="text-nowrap logo-img" to="/" end>
+                <img src={logo} width="150" alt="" />
+              </NavLink>
+              {/* <div
+                className="close-btn d-xl-none d-block sidebartoggler cursor-pointer "
+                id="sidebarCollapse"
+              >
+                <FontAwesomeIcon icon={faXmark} />
+              </div> */}
             </div>
+            <nav className="sidebar-nav scroll-sidebar" data-simplebar="">
+              <ul id="sidebarnav">
+                <li className="sidebar-item">
+                  <NavLink className="sidebar-link" to="/" end>
+                    <span>
+                      <FontAwesomeIcon icon={faGauge} />
+                    </span>
+                    <span className="hide-menu">Dashboard</span>
+                  </NavLink>
+                </li>
+                <li className="sidebar-item">
+                  <NavLink className="sidebar-link" to="/analytics">
+                    <span>
+                      <FontAwesomeIcon icon={faChartLine} />
+                    </span>
+                    <span className="hide-menu">Analytics</span>
+                  </NavLink>
+                </li>
+                {/* current setting tab */}
+                <li className="sidebar-item">
+                  <a className="sidebar-link" href="#" aria-expanded="false">
+                    <span>
+                      <FontAwesomeIcon icon={faGears} />
+                    </span>
+                    <span className="hide-menu">Setting</span>
+                    <FontAwesomeIcon icon={faAngleDown} />
+                  </a>
+                  <ul className="submenu">
+                    <li className="sidebar-item">
+                      <NavLink className="sidebar-link" to="/ManageAdAccount">
+                        <span>
+                          <FontAwesomeIcon icon={faRectangleAd} />
+                        </span>
+                        <span className="hide-menu">Manage AD Account</span>
+                      </NavLink>
+                    </li>
+                    <li className="sidebar-item">
+                      <NavLink
+                        className="sidebar-link"
+                        to="/managegoogleaccount"
+                      >
+                        <span>
+                          <FontAwesomeIcon icon={faGoogle} />
+                        </span>
+                        <span className="hide-menu">Manage Google Account</span>
+                      </NavLink>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </nav>
           </div>
-          <nav className="sidebar-nav scroll-sidebar" data-simplebar="">
-            <ul id="sidebarnav">
-              <li className="sidebar-item">
-                <NavLink className="sidebar-link" to="/" end>
-                  <span>
-                    <FontAwesomeIcon icon={faGauge} />
-                  </span>
-                  <span className="hide-menu">Dashboard</span>
-                </NavLink>
-              </li>
-              <li className="sidebar-item">
-                <NavLink className="sidebar-link" to="/analytics">
-                  <span>
-                    <FontAwesomeIcon icon={faChartLine} />
-                  </span>
-                  <span className="hide-menu">Analytics</span>
-                </NavLink>
-              </li>
-              {/* current setting tab */}
-              <li className="sidebar-item">
-                <a className="sidebar-link" href="#" aria-expanded="false">
-                  <span>
-                    <FontAwesomeIcon icon={faGears} />
-                  </span>
-                  <span className="hide-menu">Setting</span>
-                  <FontAwesomeIcon icon={faAngleDown} />
-                </a>
-                <ul className="submenu">
-                  <li className="sidebar-item">
-                    <NavLink className="sidebar-link" to="/ManageAdAccount">
-                      <span>
-                        <FontAwesomeIcon icon={faRectangleAd} />
-                      </span>
-                      <span className="hide-menu">Manage AD Account</span>
-                    </NavLink>
-                  </li>
-                  <li className="sidebar-item">
-                    <NavLink className="sidebar-link" to="/managegoogleaccount">
-                      <span>
-                      <FontAwesomeIcon icon={faGoogle} />
-                      </span>
-                      <span className="hide-menu">Manage Google Account</span>
-                    </NavLink>
-                  </li>
-                </ul>
-              </li>
-              
- 
-            </ul>
-          </nav>
-        </div>
-      </aside>
+
+
+
+
+
+      </div>
     </div>
   );
 };
