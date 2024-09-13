@@ -21664,26 +21664,15 @@ table.dataTable>tbody>tr:hover {
       width: 100%; /* Full-width on small screens */
       left: -100%; /* Hide off-screen on small devices */
     }
-  
-   
+    .left-sidebar.open .toggle-btn {
+        left: 92%;
+        position: absolute;
+    }
     .left-sidebar.open {
         left: 0 !important;
     }
-    /* #main-wrapper[data-layout=vertical][data-sidebar-position=fixed] .left-sidebar {
-        position: fixed;
-        top: 0;
-        width: 42%;
-    } */
-    /* .toggle-btn:before {
-        position: absolute;
-        top: 0;
-        content: '\f0c9';
-        font-size: 25px;
-        color: white;
-        font-family: "Font Awesome 5 Free";
-        font-weight: 700;
-        display: block;
-    } */
+    
+
     
   }
   
