@@ -55,7 +55,6 @@ const Analytics = () => {
   // }, []);
 
   useEffect(() => {
-    // Destroy the DataTable if it is already initialized
     if ($.fn.DataTable.isDataTable("#Analytics_table_data")) {
       $("#Analytics_table_data").DataTable().destroy();
     }
@@ -63,16 +62,15 @@ const Analytics = () => {
     // Simulate data loading
     setTimeout(() => {
       setLoading(false);
-    }, 1000); // Simulate loading delay
+    }, 1000);
 
-    // Once data is loaded, initialize DataTable
     if (!loading) {
       $("#Analytics_table_data").DataTable({
         scrollX: true,
-        destroy: true, // Ensure old table is destroyed before reinitializing
+        destroy: true, 
       });
     }
-  }, [loading]); // Re-run effect when loading state changes
+  }, [loading]); 
 
 
   

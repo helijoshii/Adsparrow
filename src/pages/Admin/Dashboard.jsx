@@ -24,23 +24,43 @@ const ShimmerRow = () => (
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
+  
   useEffect(() => {
-    // Initialize DataTable on the table after the component mounts
-    $(document).ready(function () {
-      $("#Meta_data_table").DataTable();
-      $("#Google_data_table").DataTable();
-    });
+    if ($.fn.DataTable.isDataTable("#Meta_data_table")) {
+      $("#Meta_data_table").DataTable().destroy();
+    }
+
+    // Simulate data loading
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+
     if (!loading) {
       $("#Meta_data_table").DataTable({
         scrollX: true,
-        destroy: true, // Ensure old table is destroyed before reinitializing
+        destroy: true, 
       });
     }
+  }, [loading]); 
 
-  }, []);
+  useEffect(() => {
+    if ($.fn.DataTable.isDataTable("#Google_data_table")) {
+      $("#Google_data_table").DataTable().destroy();
+    }
+
+    // Simulate data loading
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    if (!loading) {
+      $("#Google_data_table").DataTable({
+        scrollX: true,
+        destroy: true, 
+      });
+    }
+  }, [loading]); 
+
 
   return (
     <div>
@@ -82,7 +102,6 @@ const Dashboard = () => {
                   // Show shimmer rows when data is loading
                   [...Array(3)].map((_, index) => <ShimmerRow key={index} />)
                 ) : (
-                  // Show actual data after loading
                   <>
                            <tr>
                              <td>1</td>
