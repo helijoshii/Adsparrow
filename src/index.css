@@ -21675,4 +21675,75 @@ table.dataTable>tbody>tr:hover {
 
     
   }
+
+  .react-datepicker__day--selected, .react-datepicker__day--in-selecting-range, .react-datepicker__day--in-range, .react-datepicker__month-text--selected, .react-datepicker__month-text--in-selecting-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--selected, .react-datepicker__quarter-text--in-selecting-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--selected, .react-datepicker__year-text--in-selecting-range, .react-datepicker__year-text--in-range {
+    border-radius: 0.3rem;
+    background-color: #000000;
+    color: #fff;
+}
+
+button.cal-btn {
+    padding: 4px;
+    margin: 0 14px;
+    border: 1px solid gray;
+    border-radius: 2px;
+}
+.align-items-center {
+    position: relative;
+}
+.react-datepicker__day--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range), .react-datepicker__month-text--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range), .react-datepicker__quarter-text--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range), .react-datepicker__year-text--in-selecting-range:not(.react-datepicker__day--in-range, .react-datepicker__month-text--in-range, .react-datepicker__quarter-text--in-range, .react-datepicker__year-text--in-range) {
+    background-color: #000000;
+}
+@keyframes shimmerCard {
+    0% {
+      background-position: -100% 0;
+    }
+    100% {
+      background-position: 100% 0;
+    }
+  }
   
+  .shimmerCard {
+    display: inline-block;
+    background: linear-gradient(
+      90deg,
+      #f0f0f0 25%,
+      #e0e0e0 50%,
+      #f0f0f0 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  
+  .shimmerCard .left span,
+  .shimmerCard .left h3 {
+    background: #e0e0e0;
+    color: transparent;
+    border-radius: 4px;
+  }
+  
+  .shimmerCard .left span {
+    display: block;
+    height: 16px; /* Match height of text */
+    width: 150px; /* Match width of text */
+    margin-bottom: 10px;
+  }
+  
+  .shimmerCard .left h3 {
+    display: block;
+    height: 24px; /* Match height of number */
+    width: 50px;  /* Match width of number */
+    margin-bottom: 10px;
+  }
+  
+  .white_shadow.dasboard-3 {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    min-width: 200px; /* Ensure consistent width */
+    min-height: 100px; /* Ensure consistent height */
+  }

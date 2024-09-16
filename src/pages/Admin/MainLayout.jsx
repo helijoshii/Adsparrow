@@ -3,7 +3,8 @@ import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import Sidebar from '../../components/Sidebar/Sidebar';
-// import Temp from "../../components/temp";
+// import Temp from "../../components/Temp"; 
+
 
 
 
@@ -34,7 +35,7 @@ const MainLayout = () => {
 
           
           <div className="container-fluid">
-              <Outlet isOpen={isOpen}/> {/* This will render the matched child route components */}
+              <Outlet isOpen={isOpen}/>
             </div>
           <Footer isOpen={isOpen}/>
         </div>

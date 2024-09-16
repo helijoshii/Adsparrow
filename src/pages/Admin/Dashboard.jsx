@@ -126,12 +126,12 @@ const Dashboard = () => {
                              <td>
                                <p className="mb-0">
                                  <span className="d-flex justify-content-center align-items-center">
-                                   <i className="fa fa-calendar-alt me-2"></i>
+                                 <FontAwesomeIcon icon={faCalendarDays} className=' me-2' />
                                    27/03/2021
                                    <br />
                                  </span>
                                  <span className="d-flex justify-content-center align-items-center time_span">
-                                   <i className="fa fa-clock me-2"></i>07:00AM
+                                 <FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM
                                  </span>
                                </p>
                              </td>
@@ -142,12 +142,12 @@ const Dashboard = () => {
                              <td>
                                <p className="mb-0">
                                  <span className="d-flex justify-content-center align-items-center">
-                                   <i className="fa fa-calendar-alt me-2"></i>
+                                 <FontAwesomeIcon icon={faCalendarDays} className=' me-2' />
                                    27/03/2021
                                    <br />
                                  </span>
                                  <span className="d-flex justify-content-center align-items-center time_span">
-                                   <i className="fa fa-clock me-2"></i>07:00AM
+                                 <FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM
                                  </span>
                                </p>
                              </td>

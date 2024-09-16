@@ -86,7 +86,7 @@ const Sidebar = () => {
       <div className={`left-sidebar ${isOpen ? "open" : "closed"}`}>
 
           <button className="toggle-btn" onClick={toggleSidebar}>
-            {/* {isOpen ? "Close" : "Open"} */}
+            
             <FontAwesomeIcon icon={isOpen ? faXmark : faBars} size="2x" color="white" />
           </button>
           <div>
