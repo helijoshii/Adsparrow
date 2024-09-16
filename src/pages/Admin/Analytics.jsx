@@ -172,7 +172,7 @@ const Analytics = () => {
             </div>
           </div>
         </div>
-
+ 
         <div className="row">
           <div className="col-12">
             <div className="white_table">

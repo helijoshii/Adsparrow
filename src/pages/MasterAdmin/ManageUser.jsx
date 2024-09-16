@@ -4,6 +4,10 @@ import 'datatables.net-bs5';
 import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenToSquare, faCalendarDays, faClock, faPlus   } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+const MySwal = withReactContent(Swal);
+
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -20,6 +24,73 @@ const ShimmerRow = () => (
 const ManageUser = () => {
   const [loading, setLoading] = useState(true);
 
+  const [checkboxStates, setCheckboxStates] = useState({
+    toggle1: false,
+    toggle2: false,
+    toggle3: false, // Add more toggles as needed
+  });
+
+  const handleCheckboxChange = (id) => (event) => {
+    const isChecked = event.target.checked;
+
+    // Show confirmation dialog based on the checkbox state
+    if (isChecked) {
+      checked(id);
+    } else {
+      unChecked(id);
+    }
+  };
+
+  const checked = (id) => {
+    MySwal.fire({
+      title: <p>Are you sure?</p>,
+      text: "Do you want to activate your status?",
+      icon: "success",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCheckboxStates((prev) => ({
+          ...prev,
+          [id]: true,
+        }));
+      } else {
+        // If cancelled, reset the checkbox state
+        setCheckboxStates((prev) => ({
+          ...prev,
+          [id]: false,
+        }));
+      }
+    });
+  };
+
+  const unChecked = (id) => {
+    MySwal.fire({
+      title: "Are you sure?",
+      text: "Do you want to deactivate your status?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setCheckboxStates((prev) => ({
+          ...prev,
+          [id]: false,
+        }));
+      } else {
+        // If cancelled, reset the checkbox state
+        setCheckboxStates((prev) => ({
+          ...prev,
+          [id]: true,
+        }));
+      }
+    });
+  };
+  
       useEffect(() => {
     // Destroy the DataTable if it is already initialized
     if ($.fn.DataTable.isDataTable("#Manage_User")) {
@@ -93,10 +164,16 @@ const ManageUser = () => {
               
               
               <td>
-                  <div class="toggle">
-                    <input type="checkbox" class="phase-class" />
-                    <label></label>
-                  </div>
+              <div className="toggle">
+                            <input
+                              type="checkbox"
+                              className="phase-class"
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange('toggle1')}
+                            />
+                            <label></label>
+                          </div>
                 </td>
               
                 <td>
@@ -119,10 +196,16 @@ const ManageUser = () => {
               
               
               <td>
-                  <div class="toggle">
-                    <input type="checkbox" class="phase-class" />
-                    <label></label>
-                  </div>
+              <div className="toggle">
+                            <input
+                              type="checkbox"
+                              className="phase-class"
+                              id="toggle2"
+                              checked={checkboxStates.toggle2}
+                              onChange={handleCheckboxChange('toggle2')}
+                            />
+                            <label></label>
+                          </div>
                 </td>
               
                 <td>
