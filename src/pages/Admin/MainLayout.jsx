@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-import Sidebar from '../../components/Sidebar/Sidebar';
+import Sidebar from '../../components/Sidebar';
 // import Temp from "../../components/Temp"; 
 
 

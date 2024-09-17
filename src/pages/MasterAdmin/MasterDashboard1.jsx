@@ -11,8 +11,9 @@ const MasterDashboard1 = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false); // Set loading to false after data is fetched
-    }, 2000);
+    }, 1000);
   }, []);
+  
     return (
         <div>
           <div className="container-fluid">

@@ -21747,3 +21747,55 @@ button.cal-btn {
     min-width: 200px; /* Ensure consistent width */
     min-height: 100px; /* Ensure consistent height */
   }
+  .notfound-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .notfound-title {
+    font-size: 6rem;
+    font-weight: bold;
+    color: #cf2027;
+    margin-bottom: 20px;
+  }
+  
+  .notfound-message {
+    font-size: 1.5rem;
+    color: #555;
+  }
+  
+  .notfound-description {
+    font-size: 1rem;
+    color: #888;
+    margin-bottom: 40px;
+  }
+  
+  .notfound-home-link {
+    padding: 10px 20px;
+    background-color: #cf2027;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .notfound-home-link:hover {
+    background-color: #a81a20;
+    color: white;
+  }
+  
+  .notfound-image {
+    margin-top: 40px;
+  }
+  
+  .notfound-image img {
+    max-width: 20%;
+    height: auto;
+  }
+  

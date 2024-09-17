@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import logo from "../../assets/logo.png";
-import bgImg from "../../assets/bg.png";
+import logo from "../assets/logo.png";
+import bgImg from "../assets/bg.png";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {

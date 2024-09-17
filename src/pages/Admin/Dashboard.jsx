@@ -74,7 +74,7 @@ const Dashboard = () => {
           <div className="col-lg-6 col-md-6 col-sm-6 col-12">
             <div className="row">
               <div className="col-lg-auto col-md-auto col-sm-auto col-12">
-                <div className="white_shadow dasboard-3">
+                <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
                   <div className="left">
                     <span>Total META ADS Counts</span>
                     <h3>30 </h3>
@@ -163,7 +163,7 @@ const Dashboard = () => {
           <div className="col-lg-6 col-md-6 col-sm-6 col-12">
             <div className="row">
               <div className="col-lg-auto col-md-auto col-sm-auto col-12">
-                <div className="white_shadow dasboard-3">
+                <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
                   <div className="left">
                     <span>Total Google Counts</span>
                     <h3>1 </h3>
