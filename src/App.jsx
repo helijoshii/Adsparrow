@@ -1,5 +1,7 @@
-import './App.css'
-import Login from './components/Login';
+import { Suspense, lazy } from 'react';
+import './App.css';
+// import Login from './components/Login';
+const Login = lazy(() => import('./components/Login'));
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Admin/Dashboard';
 import MainLayout from './pages/Admin/MainLayout';
@@ -18,6 +20,8 @@ function App() {
   return (
     <Router>
     <div className='wrapper'>
+    <Suspense fallback={<div>Loading...</div>}> 
+    
       <Routes>
       <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<Login />} />
@@ -32,6 +36,7 @@ function App() {
           <Route path="manage-user" element={<ManageUser />} />
         </Route>
       </Routes>
+    </Suspense>
     </div>  
     </Router>
   )
