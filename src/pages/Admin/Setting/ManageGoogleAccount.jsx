@@ -62,14 +62,14 @@ const ManageGoogleAccount = () => {
               type="button"
               class="btn btn-primary"
               data-bs-toggle="modal"
-              data-bs-target="#add_account"
+              data-bs-target="#add_google_account"
             >
               <FontAwesomeIcon icon={faPlus} className="me-2" /> Add Google Account
             </button>
           </div>
         </div>
 
-        <div class="row">
+      <div class="row">
       <div class="col-12">
       <div class="white_table">
         
@@ -124,7 +124,70 @@ const ManageGoogleAccount = () => {
         </div>
       </div>
      
-    </div>
+      </div>
+      <div
+          class="modal fade"
+          id="add_google_account"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Add Google Account
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    AD Account ID
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter AD Account ID"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Token ID
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Token ID"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    AD Name
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter AD Name"
+                  />
+                </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
