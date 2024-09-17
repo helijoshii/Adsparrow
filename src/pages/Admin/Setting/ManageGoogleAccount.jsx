@@ -57,6 +57,16 @@ const ManageGoogleAccount = () => {
           <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
             <h2 class="main_title m-0">Manage Google Account</h2>
           </div>
+          <div class="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#add_account"
+            >
+              <FontAwesomeIcon icon={faPlus} className="me-2" /> Add Google Account
+            </button>
+          </div>
         </div>
 
         <div class="row">
