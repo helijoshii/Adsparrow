@@ -19,7 +19,7 @@ const Sidebar = () => {
       <aside className="left-sidebar">
         <div>
           <div className="brand-logo d-flex align-items-center justify-content-center">
-            <NavLink className="text-nowrap logo-img" to="/MasterAdmin" end>
+            <NavLink className="text-nowrap logo-img" to="/master-admin" end>
               <img src={logo} width="150" alt="" />
             </NavLink>
             <div
