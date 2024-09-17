@@ -27,7 +27,7 @@ function App() {
           <Route path="manage-ad-account" element={<ManageAdAccount />} />
           <Route path="manage-google-account" element={<ManageGoogleAccount />} />
         </Route>
-        <Route path="/MasterAdmin" element={<MasterAdmin />}>
+        <Route path="/master-admin" element={<MasterAdmin />}>
           <Route index element={<MasterDashboard1 />} />
           <Route path="manage-user" element={<ManageUser />} />
         </Route>

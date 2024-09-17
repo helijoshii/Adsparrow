@@ -32,7 +32,7 @@ const Sidebar = () => {
           <nav className="sidebar-nav scroll-sidebar" data-simplebar="">
             <ul id="sidebarnav">
               <li className="sidebar-item">
-                <NavLink className="sidebar-link" to="/MasterAdmin/" end>
+                <NavLink className="sidebar-link" to="/master-admin/" end>
                   <span>
                     <FontAwesomeIcon icon={faGauge} />
                   </span>
@@ -40,7 +40,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="sidebar-item">
-                <NavLink className="sidebar-link" to="/MasterAdmin/manage-user">
+                <NavLink className="sidebar-link" to="/master-admin/manage-user">
                   <span>
                   <FontAwesomeIcon icon={faUsersRays} />
                   </span>
