@@ -130,7 +130,7 @@ const Sidebar = () => {
                   </a>
                   <ul className="submenu">
                     <li className="sidebar-item">
-                      <NavLink className="sidebar-link" to="/ManageAdAccount">
+                      <NavLink className="sidebar-link" to="/manage-ad-account">
                         <span>
                           <FontAwesomeIcon icon={faRectangleAd} />
                         </span>
@@ -140,7 +140,7 @@ const Sidebar = () => {
                     <li className="sidebar-item">
                       <NavLink
                         className="sidebar-link"
-                        to="/managegoogleaccount"
+                        to="/manage-google-account"
                       >
                         <span>
                           <FontAwesomeIcon icon={faGoogle} />

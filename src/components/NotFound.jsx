@@ -19,7 +19,7 @@ const NotFound = () => {
         </Link>
       </div>
       <div className="notfound-image">
-        <img src={logo} alt="Page Not Found" />
+        {/* <img src={logo} alt="Page Not Found" /> */}
       </div>
     </div>
     </div>

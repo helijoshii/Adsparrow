@@ -40,7 +40,7 @@ const Sidebar = () => {
                 </NavLink>
               </li>
               <li className="sidebar-item">
-                <NavLink className="sidebar-link" to="/MasterAdmin/ManageUser">
+                <NavLink className="sidebar-link" to="/MasterAdmin/manage-user">
                   <span>
                   <FontAwesomeIcon icon={faUsersRays} />
                   </span>
