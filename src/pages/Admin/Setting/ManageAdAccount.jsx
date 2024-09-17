@@ -167,7 +167,7 @@ const ManageAdAccount = () => {
                             type="button"
                             class="btn btn-primary small_bt"
                             data-bs-toggle="modal"
-                            data-bs-target="#edit"
+                            data-bs-target="#add_account"
                           >
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
