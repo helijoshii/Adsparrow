@@ -167,7 +167,7 @@ const ManageAdAccount = () => {
                             type="button"
                             class="btn btn-primary small_bt"
                             data-bs-toggle="modal"
-                            data-bs-target="#add_account"
+                            data-bs-target="#edit"
                           >
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
@@ -213,7 +213,7 @@ const ManageAdAccount = () => {
                         </td>
                       </tr>
                       <tr>
-                        <td>1</td>
+                        <td>2</td>
                         <td>
                           <button
                             type="button"
@@ -336,46 +336,69 @@ const ManageAdAccount = () => {
           </div>
         </div>
         <div
-          className="modal fade"
+          class="modal fade"
           id="edit"
-          tabIndex="-1"
+          tabindex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h1 className="modal-title fs-5" id="edit">
-                  Edit Buget
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Edit Account
                 </h1>
                 <button
                   type="button"
-                  className="btn-close"
+                  class="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div className="modal-body">
-                <div className="mb-3">
-                  <label htmlFor="" className="form-label"></label>
-                  <input type="text" className="form-control" id="" />
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    AD Account ID
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter AD Account ID"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Token ID
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Token ID"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    AD Name
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter AD Name"
+                  />
                 </div>
               </div>
-              <div className="modal-footer justify-content-center">
-                <button
-                  type="button"
-                  className="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" className="btn btn-primary">
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary">
                   Save
                 </button>
               </div>
             </div>
           </div>
         </div>
+        
       </div>
     </div>
   );
