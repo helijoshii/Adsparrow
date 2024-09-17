@@ -327,7 +327,7 @@ const Analytics = () => {
                     <th>Campaign Name</th>
                     <th>AD Sets</th>
                     <th>AD Name</th>
-                    <th>Buget</th>
+                    <th>Budget</th>
                     <th>Amount Spent</th>
                     <th>Current CPC</th>
                     <th>Average CPC</th>
@@ -351,7 +351,15 @@ const Analytics = () => {
                           <span className="Inactive">Instagram</span>
                         </td>
                         <td>
-                          <span></span>
+                        <span className="badge text-bg-info">5</span>
+                          <button
+                            type="button"
+                            className="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#buget"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
                         </td>
                         <td>20,000</td>
                         <td>4500</td>
@@ -514,7 +522,15 @@ const Analytics = () => {
                           <span className="Inactive">Twitter</span>
                         </td>
                         <td>
-                          <span></span>
+                        <span className="badge text-bg-info">5</span>
+                          <button
+                            type="button"
+                            className="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#buget"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
                         </td>
                         <td>25,000</td>
                         <td>4000</td>
@@ -677,7 +693,15 @@ const Analytics = () => {
                           <span className="Inactive">Linkedin</span>
                         </td>
                         <td>
-                          <span></span>
+                        <span className="badge text-bg-info">5</span>
+                          <button
+                            type="button"
+                            className="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#buget"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
                         </td>
                         <td>25,000</td>
                         <td>4000</td>
@@ -897,7 +921,15 @@ const Analytics = () => {
                           <span className="Active">Blinkit</span>
                         </td>
                         <td>
-                          <span></span>
+                        <span className="badge text-bg-info">5</span>
+                          <button
+                            type="button"
+                            className="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#buget"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
                         </td>
                         <td>25,000</td>
                         <td>4000</td>
