@@ -18,6 +18,9 @@ import 'select2'; // Import Select2 JavaScript
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns"; // This helps format the date
+import { DateRangePicker } from 'react-date-range';
+import 'react-date-range/dist/styles.css'; // Main CSS file
+import 'react-date-range/dist/theme/default.css'; // Theme CSS file
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 const MySwal = withReactContent(Swal);
@@ -41,6 +44,68 @@ const Analytics = () => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    },
+  ]);
+
+  // const calendarRef = useRef(null); // Reference for the calendar container
+
+  // const handleRangeClick = () => {
+  //   setIsCalendarOpen((prev) => !prev); // Toggle calendar open/close
+  // };
+
+  // // Close calendar when clicking outside
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+  //       setIsCalendarOpen(false);
+  //     }
+  //   };
+
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, []);
+
+
+
+  const [tempState, setTempState] = useState(state); // Temporary state for date selection
+  const calendarRef = useRef(null);
+
+  const handleRangeClick = () => {
+    setIsCalendarOpen(!isCalendarOpen);
+  };
+
+  const handleApply = () => {
+    setState(tempState); // Update the main state with the temporary selection
+    setIsCalendarOpen(false); // Close the calendar
+  };
+
+  const handleCancel = () => {
+    setTempState(state); // Reset temporary state to the original state
+    setIsCalendarOpen(false); // Close the calendar
+  };
+
+  // Close calendar when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+        setIsCalendarOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
   
   // status toggle 
   const [checkboxStates, setCheckboxStates] = useState({
@@ -58,7 +123,6 @@ const Analytics = () => {
     toggle12: false,
     toggle13: false,
   });
-
   const handleCheckboxChange = (id) => (event) => {
     const isChecked = event.target.checked;
 
@@ -141,39 +205,39 @@ const Analytics = () => {
 
   // Date picker 
   // Toggle the calendar
-    const handleToggleCalendar = () => {
-      setIsOpen(!isOpen);
-    };
+    // const handleToggleCalendar = () => {
+    //   setIsOpen(!isOpen);
+    // };
   
     // Close the calendar when clicking outside
-    const datePickerRef = useRef(null);
-    const handleClickOutside = (e) => {
-      if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
+    // const datePickerRef = useRef(null);
+    // const handleClickOutside = (e) => {
+    //   if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
+    //     setIsOpen(false);
+    //   }
+    // };
   
     // Add event listener to detect clicks outside
-    React.useEffect(() => {
-      document.addEventListener("mousedown", handleClickOutside);
-      return () => {
-        document.removeEventListener("mousedown", handleClickOutside);
-      };
-    }, []);
+    // React.useEffect(() => {
+    //   document.addEventListener("mousedown", handleClickOutside);
+    //   return () => {
+    //     document.removeEventListener("mousedown", handleClickOutside);
+    //   };
+    // }, []);
   
-    const handleDateChange = (dates) => {
-      const [start, end] = dates;
-      setStartDate(start);
-      setEndDate(end);
-    };
+    // const handleDateChange = (dates) => {
+    //   const [start, end] = dates;
+    //   setStartDate(start);
+    //   setEndDate(end);
+    // };
   
     // Handle the "Today" button click
-    const handleTodayClick = () => {
-      const today = new Date();
-      setStartDate(today);
-      setEndDate(today);
-      setIsOpen(false); // Optionally close the calendar after selecting today
-    };
+    // const handleTodayClick = () => {
+    //   const today = new Date();
+    //   setStartDate(today);
+    //   setEndDate(today);
+    //   setIsOpen(false); // Optionally close the calendar after selecting today
+    // };
 
   return (
     <div>
@@ -216,66 +280,68 @@ const Analytics = () => {
                 <span>January 11, 2024 - February 9, 2024</span>{" "}
                 <FontAwesomeIcon icon={faAngleDown} />
               </div> */}
-              <div
+
+              {/* <div
+                id="reportrange"
+                className="daterange"
+                onClick={handleRangeClick}
+              >
+                <FontAwesomeIcon icon={faCalendarDays} />
+                &nbsp;
+                <span>
+                  {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
+                </span>{" "}
+                <FontAwesomeIcon icon={faAngleDown} />
+              </div>
+
+              {isCalendarOpen && (
+                <div className="calendar-container" ref={calendarRef} style={{ position: "absolute", zIndex: 1000, top: "100%", display: "block", left: "auto", right: 0 }}>
+                  <DateRangePicker
+                    ranges={state}
+                    onChange={(item) => setState([item.selection])}
+                    showSelectionPreview={true}
+                    moveRangeOnFirstSelection={false}
+                    months={2} // Display two months at a time
+                    direction="horizontal" // Layout to show months side by side
+                    rangeColors={["#fff"]} // Custom color for the selected range
+                  />
+                </div>
+              )} */}
+
+
+
+<div
         id="reportrange"
         className="daterange"
-        onClick={handleToggleCalendar}
-        style={{ cursor: "pointer", display: "inline-block", position: "relative" }}
+        onClick={handleRangeClick}
       >
         <FontAwesomeIcon icon={faCalendarDays} />
         &nbsp;
         <span>
-          {format(startDate, "MMMM dd, yyyy")} - {format(endDate || startDate, "MMMM dd, yyyy")}
+          {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
         </span>{" "}
         <FontAwesomeIcon icon={faAngleDown} />
       </div>
 
-      {isOpen && (
-        <div ref={datePickerRef} style={{ position: "absolute", zIndex: 1000, top: '100%' }}>
-          <DatePicker
-            selected={startDate}
-            onChange={handleDateChange}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            inline
-            renderCustomHeader={({
-              monthDate,
-              customHeaderCount,
-              decreaseMonth,
-              increaseMonth,
-            }) => (
-              <div>
-                <button className="cal-btn" onClick={decreaseMonth}>{"<"}</button>
-                <span>{format(monthDate, "MMMM yyyy")}</span>
-                <button className="cal-btn" onClick={increaseMonth}>{">"}</button>
-              </div>
-            )}
-            renderDayContents={(day, date) => <span>{day}</span>}
-            // Adding today button in calendar footer
-            calendarContainer={({ className, children }) => (
-              <div className={className}>
-                {children}
-                <div style={{ textAlign: "center", padding: "10px 0" }}>
-                  <button
-                    style={{
-                      background: "#cf2027",
-                      color: "#fff",
-                      border: "none",
-                      padding: "5px 10px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
-                    onClick={handleTodayClick}
-                  >
-                    Today
-                  </button>
-                </div>
-              </div>
-            )}
+      {isCalendarOpen && (
+        <div className="calendar-container" ref={calendarRef} style={{ position: "absolute", zIndex: 1000, top: "45px", left: "auto", right: 0 }}>
+          <DateRangePicker
+            ranges={tempState}
+            onChange={(item) => setTempState([item.selection])} // Update temporary state
+            showSelectionPreview={true}
+            moveRangeOnFirstSelection={false}
+            months={2} // Display two months at a time
+            direction="horizontal" // Layout to show months side by side
+            rangeColors={["#fff"]} // Custom color for the selected range
           />
+          <div className="button-container" style={{  backgroundColor: "white" }}>
+          <button onClick={handleCancel} className="btn btn-danger btn-cal">Cancel</button>
+            <button onClick={handleApply} className="btn btn-primary btn-cal"  style={{ marginLeft: '10px' }}>Apply</button>
+            
+          </div>
         </div>
       )}
+
               <a href="#" className="btn btn-primary ms-2">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
               </a>
@@ -351,7 +417,7 @@ const Analytics = () => {
                           <span className="Inactive">Instagram</span>
                         </td>
                         <td>
-                        <span className="badge text-bg-info">5</span>
+                          <span className="badge text-bg-info">5</span>
                           <button
                             type="button"
                             className="btn btn-primary small_bt"
@@ -374,7 +440,7 @@ const Analytics = () => {
                               className="phase-class"
                               id="toggle1"
                               checked={checkboxStates.toggle1}
-                              onChange={handleCheckboxChange('toggle1')}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
@@ -425,13 +491,13 @@ const Analytics = () => {
                         <td>30</td>
 
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle2"
                               checked={checkboxStates.toggle2}
-                              onChange={handleCheckboxChange('toggle2')}
+                              onChange={handleCheckboxChange("toggle2")}
                             />
                             <label></label>
                           </div>
@@ -482,13 +548,13 @@ const Analytics = () => {
                         <td>20</td>
                         <td>30</td>
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle3"
                               checked={checkboxStates.toggle3}
-                              onChange={handleCheckboxChange('toggle3')}
+                              onChange={handleCheckboxChange("toggle3")}
                             />
                             <label></label>
                           </div>
@@ -522,7 +588,7 @@ const Analytics = () => {
                           <span className="Inactive">Twitter</span>
                         </td>
                         <td>
-                        <span className="badge text-bg-info">5</span>
+                          <span className="badge text-bg-info">5</span>
                           <button
                             type="button"
                             className="btn btn-primary small_bt"
@@ -545,7 +611,7 @@ const Analytics = () => {
                               className="phase-class"
                               id="toggle4"
                               checked={checkboxStates.toggle4}
-                              onChange={handleCheckboxChange('toggle4')}
+                              onChange={handleCheckboxChange("toggle4")}
                             />
                             <label></label>
                           </div>
@@ -596,13 +662,13 @@ const Analytics = () => {
                         <td>38</td>
 
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle5"
                               checked={checkboxStates.toggle5}
-                              onChange={handleCheckboxChange('toggle5')}
+                              onChange={handleCheckboxChange("toggle5")}
                             />
                             <label></label>
                           </div>
@@ -653,13 +719,13 @@ const Analytics = () => {
                         <td>20</td>
                         <td>30</td>
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle6"
                               checked={checkboxStates.toggle6}
-                              onChange={handleCheckboxChange('toggle6')}
+                              onChange={handleCheckboxChange("toggle6")}
                             />
                             <label></label>
                           </div>
@@ -693,7 +759,7 @@ const Analytics = () => {
                           <span className="Inactive">Linkedin</span>
                         </td>
                         <td>
-                        <span className="badge text-bg-info">5</span>
+                          <span className="badge text-bg-info">5</span>
                           <button
                             type="button"
                             className="btn btn-primary small_bt"
@@ -716,7 +782,7 @@ const Analytics = () => {
                               className="phase-class"
                               id="toggle7"
                               checked={checkboxStates.toggle7}
-                              onChange={handleCheckboxChange('toggle7')}
+                              onChange={handleCheckboxChange("toggle7")}
                             />
                             <label></label>
                           </div>
@@ -767,13 +833,13 @@ const Analytics = () => {
                         <td>38</td>
 
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle8"
                               checked={checkboxStates.toggle8}
-                              onChange={handleCheckboxChange('toggle8')}
+                              onChange={handleCheckboxChange("toggle8")}
                             />
                             <label></label>
                           </div>
@@ -824,13 +890,13 @@ const Analytics = () => {
                         <td>20</td>
                         <td>30</td>
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle9"
                               checked={checkboxStates.toggle9}
-                              onChange={handleCheckboxChange('toggle9')}
+                              onChange={handleCheckboxChange("toggle9")}
                             />
                             <label></label>
                           </div>
@@ -881,13 +947,13 @@ const Analytics = () => {
                         <td>20</td>
                         <td>30</td>
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle10"
                               checked={checkboxStates.toggle10}
-                              onChange={handleCheckboxChange('toggle10')}
+                              onChange={handleCheckboxChange("toggle10")}
                             />
                             <label></label>
                           </div>
@@ -921,7 +987,7 @@ const Analytics = () => {
                           <span className="Active">Blinkit</span>
                         </td>
                         <td>
-                        <span className="badge text-bg-info">5</span>
+                          <span className="badge text-bg-info">5</span>
                           <button
                             type="button"
                             className="btn btn-primary small_bt"
@@ -944,7 +1010,7 @@ const Analytics = () => {
                               className="phase-class"
                               id="toggle11"
                               checked={checkboxStates.toggle11}
-                              onChange={handleCheckboxChange('toggle11')}
+                              onChange={handleCheckboxChange("toggle11")}
                             />
                             <label></label>
                           </div>
@@ -995,13 +1061,13 @@ const Analytics = () => {
                         <td>38</td>
 
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle12"
                               checked={checkboxStates.toggle12}
-                              onChange={handleCheckboxChange('toggle12')}
+                              onChange={handleCheckboxChange("toggle12")}
                             />
                             <label></label>
                           </div>
@@ -1052,13 +1118,13 @@ const Analytics = () => {
                         <td>20</td>
                         <td>30</td>
                         <td>
-                        <div className="toggle">
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle13"
                               checked={checkboxStates.toggle13}
-                              onChange={handleCheckboxChange('toggle13')}
+                              onChange={handleCheckboxChange("toggle13")}
                             />
                             <label></label>
                           </div>

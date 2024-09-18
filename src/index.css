@@ -21799,3 +21799,107 @@ button.cal-btn {
     height: auto;
   }
   
+  .predefined-range.selected:active {
+    background-color: black;
+    color: white;
+}
+
+.predefined-range:hover {
+    background: #eee;
+    cursor: pointer;
+}
+.predefined-range.selected:hover {
+    background-color: black;
+    color: white;
+}
+
+
+.rdrEndEdge, .rdrInRange, .rdrStartEdge {
+    background-color: black;
+}
+.rdrDayStartPreview, .rdrDayEndPreview {
+    border-color: black;
+}
+.rdrInputRanges {
+    /* padding: 10px 0; */
+    display: none;
+}
+.rdrStaticRangeSelected {
+    background-color: black;
+    border-radius: 6px;
+}
+.rdrStaticRangeSelected:hover {
+    background-color: black;
+    color: white;
+}
+.rdrDateDisplayWrapper {
+    background-color: rgb(239, 242, 247);
+    display: none;
+}
+@media (max-width: 600px) {
+    .rdrDateRangePickerWrapper {
+        display: flex;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .rdrMonths {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .rdrDateDisplayWrapper {
+        background-color: rgb(239, 242, 247);
+        display: none;
+    }
+
+    .calendar-container {
+        display: block;
+        right: auto;
+        left: 0;
+        position: absolute;
+    }
+
+    .rdrDefinedRangesWrapper {
+        width: 100%;
+    }
+}
+
+
+.calendar-container {
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+
+}
+.button-container {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+.rdrMonthName {
+    text-align: left;
+    font-weight: 600;
+    color: #849095;
+    padding: 3px;
+}
+.rdrMonth {
+    padding: 0 10px 0 12px;
+    font-size: 11px;
+}
+.rdrMonthAndYearWrapper {
+    align-items: center;
+    height: 50px;
+    /* padding-top: 10px; */
+}
+.rdrDefinedRangesWrapper {
+    font-size: 12px;
+    width: 174px;
+    border-right: solid 1px #eff2f7;
+    background: #fff;
+}
+.btn-cal {
+    padding: 3px 6px;
+}

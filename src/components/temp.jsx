@@ -1,114 +1,242 @@
-import React, { useState, useRef } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDays, faAngleDown } from "@fortawesome/free-solid-svg-icons";
-import { format } from "date-fns"; // This helps format the date
+// import React, { useState } from 'react';
+// import { DateRangePicker } from 'react-date-range';
+// import { addDays, startOfMonth, endOfMonth, startOfMonth as startOfLastMonth, endOfMonth as endOfLastMonth, subDays, startOfToday, endOfToday, startOfYesterday, endOfYesterday } from 'date-fns';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCalendarDays, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+// import 'react-date-range/dist/styles.css'; // Main CSS file
+// import 'react-date-range/dist/theme/default.css'; // Theme CSS file
+
+// const Temp = () => {
+//   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+//   // const [state, setState] = useState({
+//   //   startDate: startOfMonth(new Date()), 
+//   //   endDate: endOfMonth(new Date()), 
+//   //   key: 'selection',
+//   // });
+//   const [state, setState] = useState([
+//     {
+//       startDate: new Date(),
+//       endDate: new Date(),
+//       key: 'selection',
+//     },
+//   ]);
+//   const [selectedRange, setSelectedRange] = useState('This Month');
+
+//   const predefinedRanges = [
+//     // { label: 'Today', range: () => ({ startDate: new Date(), endDate: new Date() }) },
+//     // { label: 'Yesterday', range: () => ({ startDate: subDays(new Date(), 1), endDate: subDays(new Date(), 1) }) },
+//     // { label: 'Last 7 Days', range: () => ({ startDate: subDays(new Date(), 6), endDate: new Date() }) },
+//     // { label: 'Last 30 Days', range: () => ({ startDate: subDays(new Date(), 29), endDate: new Date() }) },
+//     // { label: 'This Month', range: () => ({ startDate: startOfMonth(new Date()), endDate: endOfMonth(new Date()) }) },
+//     // { label: 'Last Month', range: () => ({ startDate: startOfMonth(subDays(new Date(), 30)), endDate: endOfMonth(subDays(new Date(), 30)) }) },
+//     {
+//       label: 'Custom Range',
+//       range: () => ([{ startDate: state[0].startDate, endDate: state[0].endDate, key: 'selection' }]),
+//     },
+//     // { label: 'Custom Range', range: () => ({ startDate: state.startDate, endDate: state.endDate }) }
+//   ];
+
+//   const handleRangeClick = (range) => {
+//     setState(range.range());
+//     setSelectedRange(range.label);
+//     setIsCalendarOpen(range.label === 'Custom Range');
+//   };
+
+//   return (
+//     <div>
+//        <div>
+//       <div
+//         id="reportrange"
+//         className="daterange"
+//         onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+//       >
+//         <FontAwesomeIcon icon={faCalendarDays} />
+//         &nbsp;
+//         <span>
+//           {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
+//         </span>{" "}
+//         <FontAwesomeIcon icon={faAngleDown} />
+//       </div>
+
+//       {isCalendarOpen && (
+//         <div className="calendar-container">
+//           {!['Custom Range'].includes(selectedRange) && (
+//             <div className="predefined-ranges">
+//               {predefinedRanges.map((range) => (
+//                 <div
+//                   key={range.label}
+//                   onClick={() => handleRangeClick(range)}
+//                   className={`predefined-range ${selectedRange === range.label ? 'selected' : ''}`}
+//                 >
+//                   {range.label}
+//                 </div>
+//               ))}
+//             </div>
+//           )}
+
+//           {selectedRange === 'Custom Range' && (
+//             <DateRangePicker
+//               ranges={state}
+//               onChange={(item) => setState([item.selection])}
+//               showSelectionPreview={true}
+//               moveRangeOnFirstSelection={false}
+//               months={2} // Display two months at a time
+//               direction="horizontal" // Layout to show months side by side
+//               rangeColors={['#3d91ff']} // Custom color for the selected range
+//             />
+//           )}
+//         </div>
+//       )}
+//     </div>
+//     </div>
+//   );
+// };
+
+// export default Temp;
+
+
+import React, { useState } from 'react';
+import { DateRangePicker } from 'react-date-range';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCalendarDays, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import 'react-date-range/dist/styles.css'; // Main CSS file
+import 'react-date-range/dist/theme/default.css'; // Theme CSS file
 
 const Temp = () => {
-  const [startDate, setStartDate] = useState(new Date("2024/09/12"));
-  const [endDate, setEndDate] = useState(new Date("2024/09/15"));
-  const [isOpen, setIsOpen] = useState(false);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection',
+    },
+  ]);
 
-  // Toggle the calendar
-  const handleToggleCalendar = () => {
-    setIsOpen(!isOpen);
-  };
-
-  // Close the calendar when clicking outside
-  const datePickerRef = useRef(null);
-  const handleClickOutside = (e) => {
-    if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
-      setIsOpen(false);
-    }
-  };
-
-  // Add event listener to detect clicks outside
-  React.useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  const handleDateChange = (dates) => {
-    const [start, end] = dates;
-    setStartDate(start);
-    setEndDate(end);
-  };
-
-  // Handle the "Today" button click
-  const handleTodayClick = () => {
-    const today = new Date();
-    setStartDate(today);
-    setEndDate(today);
-    setIsOpen(false); // Optionally close the calendar after selecting today
+  const handleRangeClick = () => {
+    // Open the calendar directly when the date range is clicked
+    setIsCalendarOpen(true);
   };
 
   return (
     <div>
-      <div
-        id="reportrange"
-        className="daterange"
-        onClick={handleToggleCalendar}
-        style={{ cursor: "pointer", display: "inline-block" }}
-      >
-        <FontAwesomeIcon icon={faCalendarDays} />
-        &nbsp;
-        <span>
-          {format(startDate, "MMMM dd, yyyy")} - {format(endDate || startDate, "MMMM dd, yyyy")}
-        </span>{" "}
-        <FontAwesomeIcon icon={faAngleDown} />
-      </div>
-
-      {isOpen && (
-        <div ref={datePickerRef} style={{ position: "absolute", zIndex: 1000 }}>
-          <DatePicker
-            selected={startDate}
-            onChange={handleDateChange}
-            startDate={startDate}
-            endDate={endDate}
-            selectsRange
-            inline
-            renderCustomHeader={({
-              monthDate,
-              customHeaderCount,
-              decreaseMonth,
-              increaseMonth,
-            }) => (
-              <div>
-                <button className="cal-btn" onClick={decreaseMonth}>{"<"}</button>
-                <span>{format(monthDate, "MMMM yyyy")}</span>
-                <button className="cal-btn" onClick={increaseMonth}>{">"}</button>
-              </div>
-            )}
-            renderDayContents={(day, date) => <span>{day}</span>}
-            // Adding today button in calendar footer
-            calendarContainer={({ className, children }) => (
-              <div className={className}>
-                {children}
-                <div style={{ textAlign: "center", padding: "10px 0" }}>
-                  <button
-                    style={{
-                      background: "#cf2027",
-                      color: "#fff",
-                      border: "none",
-                      padding: "5px 10px",
-                      borderRadius: "5px",
-                      cursor: "pointer",
-                    }}
-                    onClick={handleTodayClick}
-                  >
-                    Today
-                  </button>
-                </div>
-              </div>
-            )}
-          />
+      <div>
+        <div
+          id="reportrange"
+          className="daterange"
+          onClick={handleRangeClick}
+        >
+          <FontAwesomeIcon icon={faCalendarDays} />
+          &nbsp;
+          <span>
+            {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
+          </span>{" "}
+          <FontAwesomeIcon icon={faAngleDown} />
         </div>
-      )}
+
+        {isCalendarOpen && (
+          <div className="calendar-container">
+            <DateRangePicker
+              ranges={state}
+              onChange={(item) => setState([item.selection])}
+              showSelectionPreview={true}
+              moveRangeOnFirstSelection={false}
+              months={2} // Display two months at a time
+              direction="horizontal" // Layout to show months side by side
+              rangeColors={['#fff']} // Custom color for the selected range
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
 export default Temp;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useRef, useEffect } from 'react';
+// import { DateRangePicker } from 'react-date-range';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faCalendarDays, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+// import 'react-date-range/dist/styles.css'; // Main CSS file
+// import 'react-date-range/dist/theme/default.css'; // Theme CSS file
+
+// const Temp = () => {
+//   const [state, setState] = useState([
+//     {
+//       startDate: new Date(),
+//       endDate: new Date(),
+//       key: 'selection',
+//     },
+//   ]);
+//   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+//   const calendarRef = useRef(null);
+
+//   // Close calendar when clicking outside
+//   useEffect(() => {
+//     const handleClickOutside = (event) => {
+//       if (calendarRef.current && !calendarRef.current.contains(event.target)) {
+//         setIsCalendarOpen(false);
+//       }
+//     };
+//     document.addEventListener('mousedown', handleClickOutside);
+//     return () => {
+//       document.removeEventListener('mousedown', handleClickOutside);
+//     };
+//   }, []);
+
+//   return (
+//     <div>
+//       <div>
+//         <div
+//           id="reportrange"
+//           className="daterange"
+//           onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+//         >
+//           <FontAwesomeIcon icon={faCalendarDays} />
+//           &nbsp;
+//           <span>
+//             {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
+//           </span>{" "}
+//           <FontAwesomeIcon icon={faAngleDown} />
+//         </div>
+
+//         {isCalendarOpen && (
+//           <div className="calendar-container" ref={calendarRef}>
+//             <DateRangePicker
+//               ranges={state}
+//               onChange={(item) => setState([item.selection])}
+//               showSelectionPreview={true}
+//               moveRangeOnFirstSelection={false}
+//               months={2} // Display two months at a time
+//               direction="horizontal" // Layout to show months side by side
+//               rangeColors={['#3d91ff']} // Custom color for the selected range
+//               staticRanges={[]} // Do not display static ranges
+//               inputRanges={[]} // Do not display input ranges
+//             />
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Temp;
