@@ -28,16 +28,13 @@ const Sidebar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Unbind any existing click events to prevent multiple toggles
     $(".sidebar-link").off("click");
 
-    // jQuery to toggle submenu and handle active class
     $(".sidebar-link").click(function (event) {
       const submenu = $(this).next(".submenu");
 
-      // If it's a submenu link (e.g., Manage Google Account), do nothing
       if ($(this).closest(".submenu").length) {
-        return; // Prevent toggling when clicking a submenu link
+        return; 
       }
 
       // Only toggle if the clicked link has a submenu (i.e., the main 'Settings' tab)

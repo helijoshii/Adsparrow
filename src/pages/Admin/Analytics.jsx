@@ -13,18 +13,17 @@ import {
   faCalendarDays,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
-import 'select2/dist/css/select2.min.css'; // Import Select2 CSS
-import 'select2'; // Import Select2 JavaScript
+import "select2/dist/css/select2.min.css"; // Import Select2 CSS
+import "select2"; // Import Select2 JavaScript
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns"; // This helps format the date
-import { DateRangePicker } from 'react-date-range';
-import 'react-date-range/dist/styles.css'; // Main CSS file
-import 'react-date-range/dist/theme/default.css'; // Theme CSS file
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // Main CSS file
+import "react-date-range/dist/theme/default.css"; // Theme CSS file
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
-
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -38,9 +37,8 @@ const ShimmerRow = () => (
 );
 
 const Analytics = () => {
-
   const [loading, setLoading] = useState(true);
-  // date picker 
+  // date picker
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
@@ -50,7 +48,7 @@ const Analytics = () => {
     {
       startDate: new Date(),
       endDate: new Date(),
-      key: 'selection',
+      key: "selection",
     },
   ]);
 
@@ -73,8 +71,6 @@ const Analytics = () => {
   //     document.removeEventListener('mousedown', handleClickOutside);
   //   };
   // }, []);
-
-
 
   const [tempState, setTempState] = useState(state); // Temporary state for date selection
   const calendarRef = useRef(null);
@@ -101,13 +97,13 @@ const Analytics = () => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  
-  // status toggle 
+
+  // status toggle
   const [checkboxStates, setCheckboxStates] = useState({
     toggle1: false,
     toggle2: false,
@@ -184,7 +180,7 @@ const Analytics = () => {
     });
   };
 
-  // shimmer effect timer 
+  // shimmer effect timer
   useEffect(() => {
     if ($.fn.DataTable.isDataTable("#Analytics_table_data")) {
       $("#Analytics_table_data").DataTable().destroy();
@@ -198,46 +194,46 @@ const Analytics = () => {
     if (!loading) {
       $("#Analytics_table_data").DataTable({
         scrollX: true,
-        destroy: true, 
+        destroy: true,
       });
     }
-  }, [loading]); 
+  }, [loading]);
 
-  // Date picker 
+  // Date picker
   // Toggle the calendar
-    // const handleToggleCalendar = () => {
-    //   setIsOpen(!isOpen);
-    // };
-  
-    // Close the calendar when clicking outside
-    // const datePickerRef = useRef(null);
-    // const handleClickOutside = (e) => {
-    //   if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
-    //     setIsOpen(false);
-    //   }
-    // };
-  
-    // Add event listener to detect clicks outside
-    // React.useEffect(() => {
-    //   document.addEventListener("mousedown", handleClickOutside);
-    //   return () => {
-    //     document.removeEventListener("mousedown", handleClickOutside);
-    //   };
-    // }, []);
-  
-    // const handleDateChange = (dates) => {
-    //   const [start, end] = dates;
-    //   setStartDate(start);
-    //   setEndDate(end);
-    // };
-  
-    // Handle the "Today" button click
-    // const handleTodayClick = () => {
-    //   const today = new Date();
-    //   setStartDate(today);
-    //   setEndDate(today);
-    //   setIsOpen(false); // Optionally close the calendar after selecting today
-    // };
+  // const handleToggleCalendar = () => {
+  //   setIsOpen(!isOpen);
+  // };
+
+  // Close the calendar when clicking outside
+  // const datePickerRef = useRef(null);
+  // const handleClickOutside = (e) => {
+  //   if (datePickerRef.current && !datePickerRef.current.contains(e.target)) {
+  //     setIsOpen(false);
+  //   }
+  // };
+
+  // Add event listener to detect clicks outside
+  // React.useEffect(() => {
+  //   document.addEventListener("mousedown", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("mousedown", handleClickOutside);
+  //   };
+  // }, []);
+
+  // const handleDateChange = (dates) => {
+  //   const [start, end] = dates;
+  //   setStartDate(start);
+  //   setEndDate(end);
+  // };
+
+  // Handle the "Today" button click
+  // const handleTodayClick = () => {
+  //   const today = new Date();
+  //   setStartDate(today);
+  //   setEndDate(today);
+  //   setIsOpen(false); // Optionally close the calendar after selecting today
+  // };
 
   return (
     <div>
@@ -310,39 +306,60 @@ const Analytics = () => {
                 </div>
               )} */}
 
+              <div
+                id="reportrange"
+                className="daterange"
+                onClick={handleRangeClick}
+              >
+                <FontAwesomeIcon icon={faCalendarDays} />
+                &nbsp;
+                <span>
+                  {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
+                </span>{" "}
+                <FontAwesomeIcon icon={faAngleDown} />
+              </div>
 
-
-<div
-        id="reportrange"
-        className="daterange"
-        onClick={handleRangeClick}
-      >
-        <FontAwesomeIcon icon={faCalendarDays} />
-        &nbsp;
-        <span>
-          {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
-        </span>{" "}
-        <FontAwesomeIcon icon={faAngleDown} />
-      </div>
-
-      {isCalendarOpen && (
-        <div className="calendar-container" ref={calendarRef} style={{ position: "absolute", zIndex: 1000, top: "45px", left: "auto", right: 0 }}>
-          <DateRangePicker
-            ranges={tempState}
-            onChange={(item) => setTempState([item.selection])} // Update temporary state
-            showSelectionPreview={true}
-            moveRangeOnFirstSelection={false}
-            months={2} // Display two months at a time
-            direction="horizontal" // Layout to show months side by side
-            rangeColors={["#fff"]} // Custom color for the selected range
-          />
-          <div className="button-container" style={{  backgroundColor: "white" }}>
-          <button onClick={handleCancel} className="btn btn-danger btn-cal">Cancel</button>
-            <button onClick={handleApply} className="btn btn-primary btn-cal"  style={{ marginLeft: '10px' }}>Apply</button>
-            
-          </div>
-        </div>
-      )}
+              {isCalendarOpen && (
+                <div
+                  className="calendar-container"
+                  ref={calendarRef}
+                  style={{
+                    position: "absolute",
+                    zIndex: 1000,
+                    top: "45px",
+                    left: "auto",
+                    right: 0,
+                  }}
+                >
+                  <DateRangePicker
+                    ranges={tempState}
+                    onChange={(item) => setTempState([item.selection])} // Update temporary state
+                    showSelectionPreview={true}
+                    moveRangeOnFirstSelection={false}
+                    months={2} // Display two months at a time
+                    direction="horizontal" // Layout to show months side by side
+                    rangeColors={["#fff"]} // Custom color for the selected range
+                  />
+                  <div
+                    className="button-container"
+                    style={{ backgroundColor: "white" }}
+                  >
+                    <button
+                      onClick={handleCancel}
+                      className="btn btn-danger btn-cal"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      onClick={handleApply}
+                      className="btn btn-primary btn-cal"
+                      style={{ marginLeft: "10px" }}
+                    >
+                      Apply
+                    </button>
+                  </div>
+                </div>
+              )}
 
               <a href="#" className="btn btn-primary ms-2">
                 <FontAwesomeIcon icon={faMagnifyingGlass} />
