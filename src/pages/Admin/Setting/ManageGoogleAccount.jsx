@@ -14,6 +14,7 @@ import {
   faPlus,
   faClock,
 } from "@fortawesome/free-solid-svg-icons";
+import upload from "../../../assets/upload.png"
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -64,68 +65,77 @@ const ManageGoogleAccount = () => {
               data-bs-toggle="modal"
               data-bs-target="#add_google_account"
             >
-              <FontAwesomeIcon icon={faPlus} className="me-2" /> Add Google Account
+              <FontAwesomeIcon icon={faPlus} className="me-2" /> Add Google
+              Account
             </button>
           </div>
         </div>
 
-      <div class="row">
-      <div class="col-12">
-      <div class="white_table">
-        
-        <table id="Manage_Google_table" class="table table-striped data-table-dr" style={{ width: "100%" }}
+        <div class="row">
+          <div class="col-12">
+            <div class="white_table">
+              <table
+                id="Manage_Google_table"
+                class="table table-striped data-table-dr"
+                style={{ width: "100%" }}
               >
-          <thead>
-            <tr>
-              <th>Sr No</th>
-              
-              <th>AD Name</th>
-              
-              <th>Last Sync</th> 
-            </tr>
-          </thead>
-          <tbody>
-          {loading ? (
-                  // Show shimmer rows when data is loading
-                  [...Array(2)].map((_, index) => <ShimmerRow key={index} />)
-                ) : (
-                  <>
-            <tr>
-             <td>1</td>
-             <td>Facebook </td>
-             
-              <td>
-                <p class="mb-0">
-                  <span class="d-flex justify-content-center align-items-center"><FontAwesomeIcon
-                            icon={faCalendarDays}
-                            className=" me-2"
-                          />27/03/2021<br /></span>
-                </p>
-              </td>
-            </tr>
-            <tr>
-             <td>2</td>
-             <td>Google </td>
-             
-              <td>
-                <p class="mb-0">
-                  <span class="d-flex justify-content-center align-items-center"><FontAwesomeIcon
-                            icon={faCalendarDays}
-                            className=" me-2"
-                          />27/03/2021<br /></span>
-                </p>
-              </td>
-            </tr>
-            </>
-                )}
-           
-          </tbody>
-        </table>        
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+
+                    <th>AD Name</th>
+
+                    <th>Last Sync</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? (
+                    // Show shimmer rows when data is loading
+                    [...Array(2)].map((_, index) => <ShimmerRow key={index} />)
+                  ) : (
+                    <>
+                      <tr>
+                        <td>1</td>
+                        <td>Facebook </td>
+
+                        <td>
+                          <p class="mb-0">
+                            <span class="d-flex justify-content-center align-items-center">
+                              <FontAwesomeIcon
+                                icon={faCalendarDays}
+                                className=" me-2"
+                              />
+                              27/03/2021
+                              <br />
+                            </span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>Google </td>
+
+                        <td>
+                          <p class="mb-0">
+                            <span class="d-flex justify-content-center align-items-center">
+                              <FontAwesomeIcon
+                                icon={faCalendarDays}
+                                className=" me-2"
+                              />
+                              27/03/2021
+                              <br />
+                            </span>
+                          </p>
+                        </td>
+                      </tr>
+                    </>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>
-     
-      </div>
-      <div
+        <div
           class="modal fade"
           id="add_google_account"
           tabindex="-1"
@@ -147,37 +157,32 @@ const ManageGoogleAccount = () => {
               </div>
               <div class="modal-body">
                 <div class="mb-3">
-                  <label for="" class="form-label">
-                    AD Account ID
+                  <label for="property_id" class="form-label">
+                    Property ID
                   </label>
                   <input
                     type="text"
                     class="form-control"
-                    id=""
-                    placeholder="Enter AD Account ID"
+                    id="property_id"
+                    placeholder="Enter Property ID"
                   />
                 </div>
                 <div class="mb-3">
-                  <label for="" class="form-label">
-                    Token ID
+                  <label for="json_key" class="form-label">
+                    File Upload
                   </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter Token ID"
-                  />
-                </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                    AD Name
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter AD Name"
-                  />
+                  <div class="upload_img">
+                    <div class="up_img">
+                      <img src={upload} />
+                    </div>
+                    <span>Drop Files Here Or Browse Files</span>
+                    <input
+                      type="file"
+                      name="json_key"
+                      class="form-control"
+                      id="json_key"
+                    />
+                  </div>
                 </div>
               </div>
               <div class="modal-footer justify-content-center">
@@ -190,7 +195,7 @@ const ManageGoogleAccount = () => {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default ManageGoogleAccount
