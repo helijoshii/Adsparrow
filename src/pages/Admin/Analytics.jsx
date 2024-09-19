@@ -248,8 +248,9 @@ const Analytics = () => {
           </div>
           <div className="col-lg-auto  col-md-auto col-sm-auto">
             <select
-              className="select2 js-example-basic-single select-label form-control w-100"
+              // className="select2 js-example-basic-single select-label form-control w-100"
               name="select-label"
+              class="form-control select_control"
             >
               <option value="Senora" selected>
                 Ad Account name
@@ -261,7 +262,8 @@ const Analytics = () => {
           </div>
           <div className="col-lg-auto  col-md-auto col-sm-auto">
             <select
-              className="select2 js-example-basic-single select-label form-control w-100"
+              // className="select2 js-example-basic-single select-label form-control w-100"
+              className="form-control select_control"
               name="select-label"
             >
               <option value="Senora" selected>
