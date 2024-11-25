@@ -8,7 +8,7 @@ import Sidebar from './Sidebar';
 
 const MasterAdmin = () => {
   return (
-    <div>
+    <>
       <div>
       <div
         className="page-wrapper"
@@ -29,7 +29,7 @@ const MasterAdmin = () => {
         </div>
       </div>
     </div>
-    </div>
+    </>
   )
 }
 

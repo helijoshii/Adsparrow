@@ -15,7 +15,7 @@ import { NavLink } from 'react-router-dom';
 const Sidebar = () => {
   
   return (
-    <div>
+    <>
       <aside className="left-sidebar">
         <div>
           <div className="brand-logo d-flex align-items-center justify-content-center">
@@ -51,7 +51,7 @@ const Sidebar = () => {
           </nav>
         </div>
       </aside>
-    </div>
+    </>
   );
 };
 

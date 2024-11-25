@@ -52,7 +52,7 @@ const ManageGoogleAccount = () => {
   }, [loading]); 
 
   return (
-    <div>
+    <>
       <div class="container-fluid">
         <div class="row g-2">
           <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
@@ -194,7 +194,7 @@ const ManageGoogleAccount = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

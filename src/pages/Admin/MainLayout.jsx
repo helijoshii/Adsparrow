@@ -16,7 +16,7 @@ const MainLayout = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div>
+    <>
       <div>
       <div
         className="page-wrapper"
@@ -41,7 +41,7 @@ const MainLayout = () => {
         </div>
       </div>
     </div>
-    </div>
+    </>
   )
 }
 

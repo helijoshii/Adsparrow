@@ -112,7 +112,7 @@ const ManageUser = () => {
   }, [loading]); 
 
   return (
-    <div>
+    <>
       <div class="container-fluid">
 
     <div class="row g-2">
@@ -278,7 +278,7 @@ const ManageUser = () => {
         </div>
         
   </div>
-    </div>
+    </>
   )
 }
 

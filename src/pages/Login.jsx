@@ -74,7 +74,7 @@ const Login = () => {
 
 
   return (
-    <div>
+    <>
       <div>
       <div id="particles-js" class="snow"></div>
         <div className="bg_login" style={{ backgroundImage: `url(${bgImg})` }}>
@@ -111,7 +111,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

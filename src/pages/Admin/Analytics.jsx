@@ -222,7 +222,7 @@ const Analytics = () => {
   // }, []);
 
   return (
-    <div>
+    <>
       <div className="container-fluid">
         <div className="row g-2">
           <div className="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
@@ -1172,7 +1172,7 @@ const Analytics = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

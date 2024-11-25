@@ -78,7 +78,7 @@ const Sidebar = () => {
   }, [location]);
 
   return (
-    <div>
+    <>
        
       <div className={`left-sidebar ${isOpen ? "open" : "closed"}`}>
 
@@ -156,7 +156,7 @@ const Sidebar = () => {
 
 
       </div>
-    </div>
+    </>
   );
 };
 

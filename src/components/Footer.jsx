@@ -2,7 +2,7 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <div>
+    <>
       <div className="footer">
         <div className="container">
           <div className="row">
@@ -12,7 +12,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

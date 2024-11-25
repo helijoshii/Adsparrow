@@ -63,7 +63,7 @@ const Dashboard = () => {
 
 
   return (
-    <div>
+    <>
       <div className="container-fluid">
         <div className="row pt-3">
           <div className="col-auto">
@@ -234,7 +234,7 @@ const Dashboard = () => {
           <div className="row"></div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

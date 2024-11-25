@@ -15,7 +15,7 @@ const MasterDashboard1 = () => {
   }, []);
   
     return (
-        <div>
+        <>
           <div className="container-fluid">
             <div class="row pt-3">
               <div class="col-auto">
@@ -66,7 +66,7 @@ const MasterDashboard1 = () => {
       </div>
             </div>
           </div>
-        </div>
+        </>
       )
 }
 
