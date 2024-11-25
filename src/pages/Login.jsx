@@ -1,13 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import bgImg from "../assets/bg.png";
 import { useNavigate } from "react-router-dom";
+import { z } from "zod";
+
+const loginSchema = z.object({
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(6, "Password must be at least 6 characters"),
+});
 
 const Login = () => {
     const navigate = useNavigate();
     const dashboard = () => {
       navigate("/");
     };
+
+    const [formData, setFormData] = useState({ email: "", password: "" });
+    const [errors, setErrors] = useState({ email: "", password: "" });
+  
+    const handleChange = (e) => {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      const result = loginSchema.safeParse(formData);
+  
+      if (!result.success) {
+        // Format and display errors
+        const formattedErrors = result.error.format();
+        setErrors({
+          email: formattedErrors.email?._errors[0] || "",
+          password: formattedErrors.password?._errors[0] || "",
+        });
+      } else {
+        setErrors({});
+        dashboard(); // Proceed to dashboard or handle login success
+        
+      }
+    };
+
+
+
+
 
     useEffect(() => {
         // Initialize particles.js
@@ -76,7 +112,7 @@ const Login = () => {
   return (
     <>
       <div>
-      <div id="particles-js" class="snow"></div>
+        <div id="particles-js" class="snow"></div>
         <div className="bg_login" style={{ backgroundImage: `url(${bgImg})` }}>
           <div className="container-login">
             <div className="login_from">
@@ -85,13 +121,13 @@ const Login = () => {
                   <img src={logo} alt="logo" />
                 </div>
                 <h3>Login</h3>
-                <form>
+                {/* <form>
                   <div className="login_in">
                     <div className="mb-3">
                       <input
                         type="email"
                         className="form-control"
-                        placeholder="User Name"
+                        placeholder="Email"
                       />
                     </div>
                     <div className="mb-3">
@@ -101,7 +137,49 @@ const Login = () => {
                         placeholder="Password"
                       />
                     </div>
-                    <button type="button" className="w-100 btn btn-primary mt-4"  onClick={dashboard}>
+                    <button type="submit" className="w-100 btn btn-primary mt-4"  onClick={dashboard}>
+                      Login
+                    </button>
+                  </div>
+                </form> */}
+                <form onSubmit={handleSubmit}>
+                  <div className="login_in">
+                    <div className="mb-3">
+                      <input
+                        type="email"
+                        className={`form-control ${
+                          errors.email ? "is-invalid" : ""
+                        }`}
+                        name="email"
+                        placeholder="Email"
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                      {errors.email && (
+                        <div className="invalid-feedback">{errors.email}</div>
+                      )}
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        type="password"
+                        className={`form-control ${
+                          errors.password ? "is-invalid" : ""
+                        }`}
+                        name="password"
+                        placeholder="Password"
+                        value={formData.password}
+                        onChange={handleChange}
+                      />
+                      {errors.password && (
+                        <div className="invalid-feedback">
+                          {errors.password}
+                        </div>
+                      )}
+                    </div>
+                    <button
+                      type="submit"
+                      className="w-100 btn btn-primary mt-4"
+                    >
                       Login
                     </button>
                   </div>

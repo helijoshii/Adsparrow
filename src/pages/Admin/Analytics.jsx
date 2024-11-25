@@ -15,7 +15,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "select2/dist/css/select2.min.css"; // Import Select2 CSS
 import "select2"; // Import Select2 JavaScript
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from "date-fns"; // This helps format the date
 import { DateRangePicker } from "react-date-range";
@@ -24,6 +23,8 @@ import "react-date-range/dist/theme/default.css"; // Theme CSS file
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 const MySwal = withReactContent(Swal);
+import { z } from "zod";
+
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -38,10 +39,12 @@ const ShimmerRow = () => (
 
 const Analytics = () => {
   const [loading, setLoading] = useState(true);
+  const [budget, setBudget] = useState("");
+  const [error, setError] = useState("");
   // date picker
-  const [startDate, setStartDate] = useState(new Date());
-  const [endDate, setEndDate] = useState(new Date());
-  const [isOpen, setIsOpen] = useState(false);
+  // const [startDate, setStartDate] = useState(new Date());
+  // const [endDate, setEndDate] = useState(new Date());
+  // const [isOpen, setIsOpen] = useState(false);
 
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [state, setState] = useState([
@@ -102,6 +105,29 @@ const Analytics = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const handleChange = (e) => {
+    const value = e.target.value;
+    if (/^\d*$/.test(value)) { // Allow only numbers
+      setBudget(value);
+      setError(""); // Clear error while typing valid input
+    }
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault();
+
+    // Parse the budget as a number and validate using Zod
+    const result = budgetSchema.safeParse({ budget: Number(budget) });
+
+    if (!result.success) {
+      setError(result.error.format().budget?._errors[0] || "Invalid input");
+    } else {
+      setError("");
+      console.log("Budget saved:", budget);
+      // Perform save operation or API call here
+    }
+  };
+
 
   // status toggle
   const [checkboxStates, setCheckboxStates] = useState({
@@ -363,17 +389,18 @@ const Analytics = () => {
                 <thead>
                   <tr>
                     <th>Sr No</th>
-                    <th>Campaign Name</th>
-                    <th>AD Sets</th>
+                    <th>Ad Account</th>
                     <th>AD Name</th>
                     <th>Budget</th>
                     <th>Amount Spent</th>
+                    <th>Amount Spent
+                    (18% GST)</th>
                     <th>Current CPC</th>
-                    <th>Average CPC</th>
+                    <th> CPC</th>
                     <th>Revenue</th>
+                    <th> P & L</th>
                     <th>ROI </th>
                     <th>Action</th>
-                    <th>Date And Time</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -384,11 +411,8 @@ const Analytics = () => {
                     <>
                       <tr>
                         <td>1</td>
-                        <td>Jayesh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Inactive">Instagram</span>
-                        </td>
+                        <td>Temuu2</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -400,11 +424,15 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
@@ -418,34 +446,11 @@ const Analytics = () => {
                             <label></label>
                           </div>
                         </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
-                        </td>
                       </tr>
                       <tr>
                         <td>2</td>
-                        <td>Suresh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Active">Google</span>
-                        </td>
+                        <td>Temuu2</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -457,53 +462,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle2"
-                              checked={checkboxStates.toggle2}
-                              onChange={handleCheckboxChange("toggle2")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>3</td>
-                        <td>Rajesh</td>
-                        <td>Ram</td>
-
-                        <td>
-                          <span className="Review_Pending">Facebook</span>
-                        </td>
+                        <td>Temuu3</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -515,51 +500,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
+
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle3"
-                              checked={checkboxStates.toggle3}
-                              onChange={handleCheckboxChange("toggle3")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>4</td>
-                        <td>Jayesh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Inactive">Twitter</span>
-                        </td>
+                        <td>Temuu4</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -571,52 +538,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>25,000</td>
-                        <td>4000</td>
-                        <td>900</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle4"
-                              checked={checkboxStates.toggle4}
-                              onChange={handleCheckboxChange("toggle4")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>5</td>
-                        <td>Suresh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Inactive">Amazon</span>
-                        </td>
+                        <td>Temuu5</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -628,53 +576,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>2,000</td>
-                        <td>900</td>
-                        <td>2000</td>
-                        <td>26</td>
-                        <td>38</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle5"
-                              checked={checkboxStates.toggle5}
-                              onChange={handleCheckboxChange("toggle5")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>6</td>
-                        <td>Rajesh</td>
-                        <td>Ram</td>
-
-                        <td>
-                          <span className="Review_Pending">Zomato</span>
-                        </td>
+                        <td>Temuu6</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -686,51 +614,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
+
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle6"
-                              checked={checkboxStates.toggle6}
-                              onChange={handleCheckboxChange("toggle6")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>7</td>
-                        <td>Jayesh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Inactive">Linkedin</span>
-                        </td>
+                        <td>Temuu7</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -742,52 +652,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>25,000</td>
-                        <td>4000</td>
-                        <td>900</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle7"
-                              checked={checkboxStates.toggle7}
-                              onChange={handleCheckboxChange("toggle7")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>8</td>
-                        <td>Suresh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Active">Snapchat</span>
-                        </td>
+                        <td>Temuu8</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -799,53 +690,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>2,000</td>
-                        <td>900</td>
-                        <td>2000</td>
-                        <td>26</td>
-                        <td>38</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle8"
-                              checked={checkboxStates.toggle8}
-                              onChange={handleCheckboxChange("toggle8")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>9</td>
-                        <td>Rajesh</td>
-                        <td>Shyam</td>
-
-                        <td>
-                          <span className="Active">Aloha</span>
-                        </td>
+                        <td>Temuu9</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -857,52 +728,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
+
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle9"
-                              checked={checkboxStates.toggle9}
-                              onChange={handleCheckboxChange("toggle9")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>10</td>
-                        <td>Rajesh</td>
-                        <td>Ram</td>
-
-                        <td>
-                          <span className="Review_Pending">Instamart</span>
-                        </td>
+                        <td>Temuu10</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -914,51 +766,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
+
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle10"
-                              checked={checkboxStates.toggle10}
-                              onChange={handleCheckboxChange("toggle10")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>11</td>
-                        <td>Jayesh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Active">Blinkit</span>
-                        </td>
+                        <td>Temuu11</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -970,52 +804,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>25,000</td>
-                        <td>4000</td>
-                        <td>900</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle11"
-                              checked={checkboxStates.toggle11}
-                              onChange={handleCheckboxChange("toggle11")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>12</td>
-                        <td>Suresh</td>
-                        <td>Ram</td>
-                        <td>
-                          <span className="Inactive">Swiggy</span>
-                        </td>
+                        <td>Temuu12</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -1027,53 +842,33 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>2,000</td>
-                        <td>900</td>
-                        <td>2000</td>
-                        <td>26</td>
-                        <td>38</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
 
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle12"
-                              checked={checkboxStates.toggle12}
-                              onChange={handleCheckboxChange("toggle12")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                       <tr>
                         <td>13</td>
-                        <td>Rajesh</td>
-                        <td>Shyam</td>
-
-                        <td>
-                          <span className="Review_Pending">Goldman</span>
-                        </td>
+                        <td>Temuu13</td>
+                        <td>boss386</td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -1085,42 +880,27 @@ const Analytics = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>20,000</td>
-                        <td>4500</td>
-                        <td>9000</td>
-                        <td>20</td>
-                        <td>30</td>
+                        <td>
+                        5948.20
+                        </td>
+                        <td>7018.88</td>
+                        <td>0.37</td>
+                        <td>0.34</td>
+                        <td>13442.12	</td>
+                        <td>+ 6423.24</td>
+                        <td>1.92</td>
+
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
-                              id="toggle13"
-                              checked={checkboxStates.toggle13}
-                              onChange={handleCheckboxChange("toggle13")}
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                        </td>
-
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
                         </td>
                       </tr>
                     </>
@@ -1144,7 +924,7 @@ const Analytics = () => {
                   Edit Budget
                 </h1>
                 <button
-                  type="button"
+                  type="submit"
                   className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
@@ -1153,7 +933,14 @@ const Analytics = () => {
               <div className="modal-body">
                 <div className="mb-3">
                   <label htmlFor="" className="form-label"></label>
-                  <input type="text" className="form-control" id="" />
+                  <input
+                type="text"
+                className={`form-control ${error ? "is-invalid" : ""}`}
+                id="budget"
+                value={budget}
+                onChange={handleChange}
+              />
+                  {error && <div className="invalid-feedback">{error} </div>}
                 </div>
               </div>
               <div className="modal-footer justify-content-center">
@@ -1164,7 +951,7 @@ const Analytics = () => {
                 >
                   Close
                 </button>
-                <button type="button" className="btn btn-primary">
+                <button type="submit" className="btn btn-primary"  onClick={handleSave}>
                   Save
                 </button>
               </div>

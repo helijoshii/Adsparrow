@@ -25,6 +25,11 @@ const ShimmerRow = () => (
 
 const ManageAdAccount = () => {
   const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    adAccountId: "",
+    tokenId: "",
+    adName: "",
+  });
 
     // status toggle 
     const [checkboxStates, setCheckboxStates] = useState({
@@ -114,6 +119,19 @@ const ManageAdAccount = () => {
       });
     }
   }, [loading]); 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  // Check if all fields are filled
+  const isFormComplete =
+    formData.adAccountId.trim() &&
+    formData.tokenId.trim() &&
+    formData.adName.trim();
 
   return (
     <>
@@ -146,9 +164,12 @@ const ManageAdAccount = () => {
                   <tr>
                     <th>Sr No</th>
                     <th>Action</th>
+                    <th>AD Account Name</th>
                     <th>AD Account ID</th>
-                    <th>Token ID</th>
-                    <th>AD Name</th>
+                    <th>Access Token ID</th>
+                    <th>App Id</th>
+                    <th>Secret Key</th>
+                    <th>Account Status</th>
                     <th>Visibility</th>
                     <th>Status</th>
                     <th>Last Sync</th>
@@ -172,9 +193,12 @@ const ManageAdAccount = () => {
                             <FontAwesomeIcon icon={faPenToSquare} />
                           </button>
                         </td>
-                        <td>AD9879</td>
-                        <td>98ASV</td>
-                        <td>Facebook </td>
+                        <td>Temuu2</td>
+                        <td>276971163774132</td>
+                        <td>EAAPBBfYwfZBEBO</td>
+                        <td>1056656279502817	</td>
+                        <td>2262d17143d0195c0384c347f63f6434</td>
+                        <td>Success</td>
                         <td>
                           <div className="toggle">
                             <input
@@ -187,6 +211,8 @@ const ManageAdAccount = () => {
                             <label></label>
                           </div>
                         </td>
+                       
+                        
                         <td>
                           <div className="toggle">
                             <input
@@ -212,58 +238,7 @@ const ManageAdAccount = () => {
                           </p>
                         </td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>
-                          <button
-                            type="button"
-                            class="btn btn-primary small_bt"
-                            data-bs-toggle="modal"
-                            data-bs-target="#edit"
-                          >
-                            <FontAwesomeIcon icon={faPenToSquare} />
-                          </button>
-                        </td>
-                        <td>AD9879</td>
-                        <td>98ASV</td>
-                        <td>Google </td>
-                        <td>
-                          <div className="toggle">
-                            <input
-                              type="checkbox"
-                              className="phase-class"
-                              id="toggle3"
-                              checked={checkboxStates.toggle3}
-                              onChange={handleCheckboxChange("toggle3")}
-                            />
-                            <label></label>
-                          </div>
-                        </td>
-                        <td>
-                          <div className="toggle">
-                            <input
-                              type="checkbox"
-                              className="phase-class"
-                              id="toggle4"
-                              checked={checkboxStates.toggle4}
-                              onChange={handleCheckboxChange("toggle4")}
-                            />
-                            <label></label>
-                          </div>
-                        </td>
-                        <td>
-                          <p class="mb-0">
-                            <span class="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                          </p>
-                        </td>
-                      </tr>
+                      
                     </>
                   )}
                 </tbody>
@@ -298,37 +273,50 @@ const ManageAdAccount = () => {
                     AD Account ID
                   </label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter AD Account ID"
-                  />
+              type="text"
+              className="form-control"
+              id="adAccountId"
+              name="adAccountId"
+              placeholder="Enter AD Account ID"
+              value={formData.adAccountId}
+              onChange={handleChange}
+            />
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
                     Token ID
                   </label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter Token ID"
-                  />
+              type="text"
+              className="form-control"
+              id="tokenId"
+              name="tokenId"
+              placeholder="Enter Token ID"
+              value={formData.tokenId}
+              onChange={handleChange}
+            />
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
                     AD Name
                   </label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter AD Name"
-                  />
+              type="text"
+              className="form-control"
+              id="adName"
+              name="adName"
+              placeholder="Enter AD Name"
+              value={formData.adName}
+              onChange={handleChange}
+            />
                 </div>
               </div>
               <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary">
+              <button
+            type="button"
+            className="btn btn-primary"
+            disabled={!isFormComplete} // Disable if fields are not filled
+          >
                   Save
                 </button>
               </div>
@@ -361,37 +349,48 @@ const ManageAdAccount = () => {
                     AD Account ID
                   </label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter AD Account ID"
-                  />
+              type="text"
+              className="form-control"
+              id="adAccountId"
+              name="adAccountId"
+              placeholder="Enter AD Account ID"
+              value={formData.adAccountId}
+              onChange={handleChange}
+            />
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
                     Token ID
                   </label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter Token ID"
-                  />
+              type="text"
+              className="form-control"
+              id="tokenId"
+              name="tokenId"
+              placeholder="Enter Token ID"
+              value={formData.tokenId}
+              onChange={handleChange}
+            />
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
                     AD Name
                   </label>
                   <input
-                    type="text"
-                    class="form-control"
-                    id=""
-                    placeholder="Enter AD Name"
-                  />
+              type="text"
+              className="form-control"
+              id="adName"
+              name="adName"
+              placeholder="Enter AD Name"
+              value={formData.adName}
+              onChange={handleChange}
+            />
                 </div>
               </div>
               <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary"
+                disabled={!isFormComplete} // Disable if fields are not filled
+                >
                   Save
                 </button>
               </div>

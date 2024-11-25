@@ -82,9 +82,13 @@ const ManageGoogleAccount = () => {
                 <thead>
                   <tr>
                     <th>Sr No</th>
-
-                    <th>AD Name</th>
-
+                    <th>Action</th>
+                    <th>Ad Account Name</th>
+                    <th>Proprty Id</th>
+                    <th>Json File</th>
+                    <th>Account Status</th>
+                    <th>Visibility</th>
+                    <th>Status</th>
                     <th>Last Sync</th>
                   </tr>
                 </thead>
@@ -96,8 +100,27 @@ const ManageGoogleAccount = () => {
                     <>
                       <tr>
                         <td>1</td>
-                        <td>Facebook </td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
+                        </td>
+                        <td>Google Analytics </td>
+                        <td>456061812</td>
 
+                        <td>google_keys/savvy-fountain-434706-q5-f56ab62b4ac7.json</td>
+                        <td>Success</td>
+                        <td>
+                          
+                        </td>
+                        <td>
+                          
+                        </td>
                         <td>
                           <p class="mb-0">
                             <span class="d-flex justify-content-center align-items-center">
@@ -111,23 +134,7 @@ const ManageGoogleAccount = () => {
                           </p>
                         </td>
                       </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Google </td>
-
-                        <td>
-                          <p class="mb-0">
-                            <span class="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                          </p>
-                        </td>
-                      </tr>
+                      
                     </>
                   )}
                 </tbody>

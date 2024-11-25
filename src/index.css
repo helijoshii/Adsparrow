@@ -22766,3 +22766,6 @@ select.form-control.select_control {
     /* color: #000; */
     border: 1px solid #000000;
 }
+div.dt-container div.dt-length label:first-letter {
+    text-transform: capitalize;
+}

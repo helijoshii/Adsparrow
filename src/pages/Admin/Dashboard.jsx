@@ -7,6 +7,7 @@ import {
   faRectangleAd,
   faCalendarDays,
   faClock,
+  faArrowsRotate 
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
@@ -74,9 +75,13 @@ const Dashboard = () => {
           <div className="col-lg-6 col-md-6 col-sm-6 col-12">
             <div className="row">
               <div className="col-lg-auto col-md-auto col-sm-auto col-12">
-                <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
+                <div
+                  className={`white_shadow dasboard-3 ${
+                    loading ? "shimmerCard" : ""
+                  }`}
+                >
                   <div className="left">
-                    <span>Total META ADS Counts</span>
+                    <span>Total META ADS Count</span>
                     <h3>30 </h3>
                   </div>
                   <div className="right">
@@ -88,73 +93,163 @@ const Dashboard = () => {
               </div>
               <div className="col-12">
                 <div className="white_table">
-                  
-                  <table id="Meta_data_table" className="table table-striped " style={{ width: '100%' }}>
-                         <thead>
-                           <tr>
-                             <th>Sr No</th>
-                             <th>Ad Name</th>
-                             <th>Last SYNC</th>
-                           </tr>
-                         </thead>
-                         <tbody>
-                         {loading ? (
-                  // Show shimmer rows when data is loading
-                  [...Array(3)].map((_, index) => <ShimmerRow key={index} />)
-                ) : (
-                  <>
-                           <tr>
-                             <td>1</td>
-                             <td>Google</td>
-                             <td>
-                               <p className="mb-0">
-                                 <span className="d-flex justify-content-center align-items-center">
-                                  
-                                   <FontAwesomeIcon icon={faCalendarDays} className=' me-2' />
-                                   27/03/2021
-                                   <br />
-                                 </span>
-                                 <span className="d-flex justify-content-center align-items-center time_span">
-                                 <FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM
-                                 </span>
-                               </p>
-                             </td>
-                           </tr>
-                           <tr>
-                             <td>2</td>
-                             <td>Webapprise</td>
-                             <td>
-                               <p className="mb-0">
-                                 <span className="d-flex justify-content-center align-items-center">
-                                 <FontAwesomeIcon icon={faCalendarDays} className=' me-2' />
-                                   27/03/2021
-                                   <br />
-                                 </span>
-                                 <span className="d-flex justify-content-center align-items-center time_span">
-                                 <FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM
-                                 </span>
-                               </p>
-                             </td>
-                           </tr>
-                           <tr>
-                             <td>3</td>
-                             <td>Zion z1</td>
-                             <td>
-                               <p className="mb-0">
-                                 <span className="d-flex justify-content-center align-items-center">
-                                 <FontAwesomeIcon icon={faCalendarDays} className=' me-2' />
-                                   27/03/2021
-                                   <br />
-                                 </span>
-                                 <span className="d-flex justify-content-center align-items-center time_span">
-                                 <FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM
-                                 </span>
-                               </p>
-                             </td>
-                           </tr>
-                           </>
-                )}
-                         </tbody>
+                  <table
+                    id="Meta_data_table"
+                    className="table table-striped "
+                    style={{ width: "100%" }}
+                  >
+                    <thead>
+                      <tr>
+                        <th>Sr No</th>
+                        <th>Ad Name</th>
+                        <th>Status</th>
+                        <th>Sync</th>
+                        <th>Last SYNC</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {loading ? (
+                        // Show shimmer rows when data is loading
+                        [...Array(3)].map((_, index) => (
+                          <ShimmerRow key={index} />
+                        ))
+                      ) : (
+                        <>
+                          <tr>
+                            <td>1</td>
+                            <td>Google</td>
+                            <td>
+                              <span
+                                class="badge 
+                                bg-success
+                                "
+                              >
+                                Success
+                              </span>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                class="btn btn-primary small_bt"
+                                data-bs-toggle="modal"
+                                data-bs-target="#update_account"
+                                id="run-fb-data-btn"
+                                data-account-id="2"
+                              >
+                                <FontAwesomeIcon icon={faArrowsRotate} />
+                              </button>
+                            </td>
+                            <td>
+                              <p className="mb-0">
+                                <span className="d-flex justify-content-center align-items-center">
+                                  <FontAwesomeIcon
+                                    icon={faCalendarDays}
+                                    className=" me-2"
+                                  />
+                                  27/03/2021
+                                  <br />
+                                </span>
+                                <span className="d-flex justify-content-center align-items-center time_span">
+                                  <FontAwesomeIcon
+                                    icon={faClock}
+                                    className=" me-2"
+                                  />
+                                  07:00AM
+                                </span>
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>2</td>
+                            <td>Webapprise</td>
+                            <td>
+                              <span
+                                class="badge 
+                                bg-success
+                                "
+                              >
+                                Success
+                              </span>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                class="btn btn-primary small_bt"
+                                data-bs-toggle="modal"
+                                data-bs-target="#update_account"
+                                id="run-fb-data-btn"
+                                data-account-id="2"
+                              >
+                                <FontAwesomeIcon icon={faArrowsRotate} />
+                              </button>
+                            </td>
+                            <td>
+                              <p className="mb-0">
+                                <span className="d-flex justify-content-center align-items-center">
+                                  <FontAwesomeIcon
+                                    icon={faCalendarDays}
+                                    className=" me-2"
+                                  />
+                                  27/03/2021
+                                  <br />
+                                </span>
+                                <span className="d-flex justify-content-center align-items-center time_span">
+                                  <FontAwesomeIcon
+                                    icon={faClock}
+                                    className=" me-2"
+                                  />
+                                  07:00AM
+                                </span>
+                              </p>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>3</td>
+                            <td>Zion z1</td>
+                            <td>
+                              <span
+                                class="badge 
+                                bg-success
+                                "
+                              >
+                                Success
+                              </span>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                class="btn btn-primary small_bt"
+                                data-bs-toggle="modal"
+                                data-bs-target="#update_account"
+                                id="run-fb-data-btn"
+                                data-account-id="2"
+                              >
+                                <FontAwesomeIcon icon={faArrowsRotate} />
+                              </button>
+                            </td>
+                            <td>
+                              <p className="mb-0">
+                                <span className="d-flex justify-content-center align-items-center">
+                                  <FontAwesomeIcon
+                                    icon={faCalendarDays}
+                                    className=" me-2"
+                                  />
+                                  27/03/2021
+                                  <br />
+                                </span>
+                                <span className="d-flex justify-content-center align-items-center time_span">
+                                  <FontAwesomeIcon
+                                    icon={faClock}
+                                    className=" me-2"
+                                  />
+                                  07:00AM
+                                </span>
+                              </p>
+                            </td>
+                          </tr>
+                        </>
+                      )}
+                    </tbody>
                   </table>
                 </div>
               </div>
@@ -163,9 +258,13 @@ const Dashboard = () => {
           <div className="col-lg-6 col-md-6 col-sm-6 col-12">
             <div className="row">
               <div className="col-lg-auto col-md-auto col-sm-auto col-12">
-                <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
+                <div
+                  className={`white_shadow dasboard-3 ${
+                    loading ? "shimmerCard" : ""
+                  }`}
+                >
                   <div className="left">
-                    <span>Total Google Counts</span>
+                    <span>Total Google Count</span>
                     <h3>1 </h3>
                   </div>
                   <div className="right">
@@ -186,42 +285,67 @@ const Dashboard = () => {
                       <tr>
                         <th>Sr No</th>
                         <th>Ad Name</th>
+                        <th>Status</th>
+                        <th>Sync</th>
                         <th>Last SYNC</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {loading ? (
-                  // Show shimmer rows when data is loading
-                  [...Array(1)].map((_, index) => <ShimmerRow key={index} />)
-                ) : (
-                  // Show actual data after loading
-                  <>
-                      <tr>
-                        <td>1</td>
-                        <td>Google</td>
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              {/* <i className="fa fa-calendar-alt me-2"></i> */}
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                            <span className="d-flex justify-content-center align-items-center time_span">
-                              <FontAwesomeIcon
-                                icon={faClock}
-                                className=" me-2"
-                              />
-                              07:00AM
-                            </span>
-                          </p>
-                        </td>
-                      </tr>
-                      </>
-                )}
+                      {loading ? (
+                        // Show shimmer rows when data is loading
+                        [...Array(1)].map((_, index) => (
+                          <ShimmerRow key={index} />
+                        ))
+                      ) : (
+                        // Show actual data after loading
+                        <>
+                          <tr>
+                            <td>1</td>
+                            <td>Google</td>
+                            <td>
+                              <span
+                                class="badge 
+                                bg-success
+                                "
+                              >
+                                Success
+                              </span>
+                            </td>
+                            <td>
+                              <button
+                                type="button"
+                                class="btn btn-primary small_bt"
+                                data-bs-toggle="modal"
+                                data-bs-target="#update_account"
+                                id="run-fb-data-btn"
+                                data-account-id="2"
+                              >
+                                <FontAwesomeIcon icon={faArrowsRotate} />
+                              </button>
+                            </td>
+                            <td>
+                              <p className="mb-0">
+                                <span className="d-flex justify-content-center align-items-center">
+                                  {/* <i className="fa fa-calendar-alt me-2"></i> */}
+                                  <FontAwesomeIcon
+                                    icon={faCalendarDays}
+                                    className=" me-2"
+                                  />
+                                  27/03/2021
+                                  <br />
+                                </span>
+                                <span className="d-flex justify-content-center align-items-center time_span">
+                                  <FontAwesomeIcon
+                                    icon={faClock}
+                                    className=" me-2"
+                                  />
+                                  07:00AM
+                                </span>
+                              </p>
+                            </td>
+                          </tr>
+                        </>
+                      )}
                     </tbody>
                   </table>
                 </div>
