@@ -21164,7 +21164,7 @@ table.dataTable>tbody>tr:hover {
     background-image: url("./assets/leftbar.png");
     background-position: bottom;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     background-color: rgb(245 246 247);
 }
 

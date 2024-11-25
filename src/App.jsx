@@ -12,6 +12,7 @@ import MasterAdmin from './pages/MasterAdmin/MasterAdmin';
 import ManageUser from './pages/MasterAdmin/ManageUser';
 import MasterDashboard1 from './pages/MasterAdmin/MasterDashboard1';
 import NotFound from './components/NotFound';
+import HcpConsent from './pages/HcpConsent';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
         >
           <Routes>
             <Route path="*" element={<NotFound />} />
+            <Route path="hcp-consent" element={<HcpConsent />} />
             <Route path="/login" element={<Login />} />
             <Route path="/" element={<MainLayout />}>
               <Route index element={<Dashboard />} />

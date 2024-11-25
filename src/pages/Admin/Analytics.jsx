@@ -221,20 +221,6 @@ const Analytics = () => {
   //   };
   // }, []);
 
-  // const handleDateChange = (dates) => {
-  //   const [start, end] = dates;
-  //   setStartDate(start);
-  //   setEndDate(end);
-  // };
-
-  // Handle the "Today" button click
-  // const handleTodayClick = () => {
-  //   const today = new Date();
-  //   setStartDate(today);
-  //   setEndDate(today);
-  //   setIsOpen(false); // Optionally close the calendar after selecting today
-  // };
-
   return (
     <div>
       <div className="container-fluid">
@@ -244,7 +230,7 @@ const Analytics = () => {
           </div>
           <div className="col-lg-auto  col-md-auto col-sm-auto">
             <select
-              // className="select2 js-example-basic-single select-label form-control w-100"
+              
               name="select-label"
               class="form-control select_control"
             >
@@ -258,7 +244,7 @@ const Analytics = () => {
           </div>
           <div className="col-lg-auto  col-md-auto col-sm-auto">
             <select
-              // className="select2 js-example-basic-single select-label form-control w-100"
+              
               className="form-control select_control"
               name="select-label"
             >
@@ -272,39 +258,7 @@ const Analytics = () => {
           </div>
           <div className="col-lg-auto  col-md-auto col-sm-auto">
             <div className="d-flex align-items-center">
-              {/* <div id="reportrange" className="daterange">
-                <FontAwesomeIcon icon={faCalendarDays} />
-                &nbsp;
-                <span>January 11, 2024 - February 9, 2024</span>{" "}
-                <FontAwesomeIcon icon={faAngleDown} />
-              </div> */}
-
-              {/* <div
-                id="reportrange"
-                className="daterange"
-                onClick={handleRangeClick}
-              >
-                <FontAwesomeIcon icon={faCalendarDays} />
-                &nbsp;
-                <span>
-                  {`${state[0].startDate.toDateString()} - ${state[0].endDate.toDateString()}`}
-                </span>{" "}
-                <FontAwesomeIcon icon={faAngleDown} />
-              </div>
-
-              {isCalendarOpen && (
-                <div className="calendar-container" ref={calendarRef} style={{ position: "absolute", zIndex: 1000, top: "100%", display: "block", left: "auto", right: 0 }}>
-                  <DateRangePicker
-                    ranges={state}
-                    onChange={(item) => setState([item.selection])}
-                    showSelectionPreview={true}
-                    moveRangeOnFirstSelection={false}
-                    months={2} // Display two months at a time
-                    direction="horizontal" // Layout to show months side by side
-                    rangeColors={["#fff"]} // Custom color for the selected range
-                  />
-                </div>
-              )} */}
+              
 
               <div
                 id="reportrange"
