@@ -30,6 +30,28 @@ const ShimmerRow = () => (
 
 const ManageGoogleAccount = () => {
   const [loading, setLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    propertyId: "",
+    adName: "",
+    file: null,
+  });
+  // Disable save button untill all form data is filled
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      file: e.target.files[0],
+    }));
+  };
+
+  const isFormValid = formData.propertyId && formData.adName && formData.file;
 
   useEffect(() => {
     // Destroy the DataTable if it is already initialized
@@ -163,17 +185,34 @@ const ManageGoogleAccount = () => {
                 ></button>
               </div>
               <div class="modal-body">
-                <div class="mb-3">
-                  <label for="property_id" class="form-label">
-                    Property ID
-                  </label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="property_id"
-                    placeholder="Enter Property ID"
-                  />
-                </div>
+              <div className="mb-3">
+            <label htmlFor="propertyId" className="form-label">
+              Property ID
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="propertyId"
+              name="propertyId"
+              placeholder="Enter Property ID"
+              value={formData.propertyId}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="adName" className="form-label">
+              Ad Name
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="adName"
+              name="adName"
+              placeholder="Enter Ad Name"
+              value={formData.adName}
+              onChange={handleInputChange}
+            />
+            </div>
                 <div class="mb-3">
                   <label for="json_key" class="form-label">
                     File Upload
@@ -188,12 +227,13 @@ const ManageGoogleAccount = () => {
                       name="json_key"
                       class="form-control"
                       id="json_key"
+                      onChange={handleFileChange}
                     />
                   </div>
                 </div>
               </div>
               <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary">
+                <button type="button" class="btn btn-primary" disabled={!isFormValid}>
                   Save
                 </button>
               </div>
