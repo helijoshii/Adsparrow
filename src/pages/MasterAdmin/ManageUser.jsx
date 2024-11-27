@@ -231,16 +231,16 @@ const ManageUser = () => {
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="" class="form-label">AD Account ID</label>
-          <input type="text" class="form-control" id="" placeholder="Enter AD Account ID" />
+          <label for="" class="form-label">Name</label>
+          <input type="text" class="form-control" id="" placeholder="Enter Name" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">Token ID</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Token ID" />
+          <label for="" class="form-label">Email</label>
+          <input type="text" class="form-control" id="" placeholder="Enter Email" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">AD Name</label>
-          <input type="text" class="form-control" id="" placeholder="Enter AD Name" />
+          <label for="" class="form-label">Password</label>
+          <input type="text" class="form-control" id="" placeholder="Enter Password" />
         </div>
       </div>
       <div class="modal-footer justify-content-center">
@@ -258,16 +258,16 @@ const ManageUser = () => {
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label for="" class="form-label">AD Account ID</label>
-          <input type="text" class="form-control" id="" placeholder="Enter AD Account ID" />
+          <label for="" class="form-label">Name</label>
+          <input type="text" class="form-control" id="" placeholder="Enter Name" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">Token ID</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Token ID" />
+          <label for="" class="form-label">Email</label>
+          <input type="text" class="form-control" id="" placeholder="Enter Email" />
         </div>
         <div class="mb-3">
-          <label for="" class="form-label">AD Name</label>
-          <input type="text" class="form-control" id="" placeholder="Enter AD Name" />
+          <label for="" class="form-label">Password</label>
+          <input type="text" class="form-control" id="" placeholder="Enter Password" />
         </div>
       </div>
       <div class="modal-footer justify-content-center">

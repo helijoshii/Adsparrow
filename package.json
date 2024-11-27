@@ -14,6 +14,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@popperjs/core": "^2.11.8",
+    "axios": "^1.7.8",
     "bootstrap": "^5.3.3",
     "datatables.net": "^2.1.6",
     "datatables.net-bs5": "^2.1.6",
