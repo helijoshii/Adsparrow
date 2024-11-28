@@ -28,13 +28,109 @@ import 'react-tabs/style/react-tabs.css';
 import { z } from "zod";
 
 const Trends = () => {
+    const [activeTab, setActiveTab] = useState('tab1');
+    const [loading, setLoading] = useState(true);
+
+    const handleTabClick = (tabId) => {
+        setActiveTab(tabId); // Set active tab when a tab is clicked
+      };
+
+
+      
+      useEffect(() => {
+        if ($.fn.DataTable.isDataTable("#ROI_data_table")) {
+          $("#ROI_data_table").DataTable().destroy();
+        }
+    
+        // Simulate data loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+    
+        if (!loading) {
+          $("#ROI_data_table").DataTable({
+            scrollX: true,
+            destroy: true, 
+          });
+        }
+      }, [loading]); 
+      useEffect(() => {
+        if ($.fn.DataTable.isDataTable("#Amount_data_table")) {
+          $("#Amount_data_table").DataTable().destroy();
+        }
+    
+        // Simulate data loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+    
+        if (!loading) {
+          $("#Amount_data_table").DataTable({
+            scrollX: true,
+            destroy: true, 
+          });
+        }
+      }, [loading]); 
+      useEffect(() => {
+        if ($.fn.DataTable.isDataTable("#Revenue_data_table")) {
+          $("#Revenue_data_table").DataTable().destroy();
+        }
+    
+        // Simulate data loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+    
+        if (!loading) {
+          $("#Revenue_data_table").DataTable({
+            scrollX: true,
+            destroy: true, 
+          });
+        }
+      }, [loading]); 
+      useEffect(() => {
+        if ($.fn.DataTable.isDataTable("#PL_data_table")) {
+          $("#PL_data_table").DataTable().destroy();
+        }
+    
+        // Simulate data loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+    
+        if (!loading) {
+          $("#PL_data_table").DataTable({
+            scrollX: true,
+            destroy: true, 
+          });
+        }
+      }, [loading]); 
+      useEffect(() => {
+        if ($.fn.DataTable.isDataTable("#CPC_data_table")) {
+          $("#CPC_data_table").DataTable().destroy();
+        }
+    
+        // Simulate data loading
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+    
+        if (!loading) {
+          $("#CPC_data_table").DataTable({
+            scrollX: true,
+            destroy: true, 
+          });
+        }
+      }, [loading]); 
+
+      
   return (
     <>
       <div>
         <div class="container-fluid">
           <div class="row g-2">
             <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
-              <h2 class="main_title m-0">Trends</h2>
+              <h2 class="main_title m-0">Demotab</h2>
             </div>
             <div class="col-lg-auto  col-md-auto col-sm-auto">
               <select
@@ -87,9 +183,10 @@ const Trends = () => {
                   <div class="col-lg-12">
                     <div class="amount_spend">
                       <ul class="tabs">
-                        <li class="tab-link current" data-tab="tab-1">
+                        <li className={activeTab === 'tab1' ? 'current' : ''}
+          onClick={() => handleTabClick('tab1')}>
                           <span>
-                            <svg
+                          <svg
                               id="Layer_2"
                               data-name="Layer 2"
                               xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +202,8 @@ const Trends = () => {
                           </span>
                           <p> ROI</p>
                         </li>
-                        <li class="tab-link" data-tab="tab-2">
+                        <li className={activeTab === 'tab2' ? 'current' : ''}
+          onClick={() => handleTabClick('tab2')}>
                           <span>
                             <svg
                               id="Layer_2"
@@ -135,7 +233,8 @@ const Trends = () => {
                           </span>
                           <p> Amount Spend </p>
                         </li>
-                        <li class="tab-link" data-tab="tab-3">
+                        <li className={activeTab === 'tab3' ? 'current' : ''}
+          onClick={() => handleTabClick('tab3')}>
                           <span>
                             <svg
                               id="Layer_2"
@@ -171,7 +270,8 @@ const Trends = () => {
                           </span>
                           <p> Revenue</p>
                         </li>
-                        <li class="tab-link" data-tab="tab-4">
+                        <li  className={activeTab === 'tab4' ? 'current' : ''}
+          onClick={() => handleTabClick('tab4')}>
                           <span>
                             <svg
                               id="Layer_2"
@@ -207,7 +307,8 @@ const Trends = () => {
                           </span>
                           <p> P&L</p>
                         </li>
-                        <li class="tab-link" data-tab="tab-5">
+                        <li  className={activeTab === 'tab5' ? 'current' : ''}
+          onClick={() => handleTabClick('tab5')}>
                           <span>
                             <svg
                               id="Layer_2"
@@ -241,8 +342,8 @@ const Trends = () => {
                     </div>
                   </div>
                 </div>
-                <div id="tab-1" class="tab-content current">
-                  <table id="" class="table table-striped data-table-pl">
+                <div id="tab1" className={`tab-content ${activeTab === 'tab1' ? 'current' : ''}`}>
+                  <table id="ROI_data_table" class="table table-striped data-table-pl">
                     <thead>
                       <tr>
                         <th>Sr No</th>
@@ -431,26 +532,26 @@ const Trends = () => {
                     </tbody>
                   </table>
                 </div>
-                <div id="tab-2" class="tab-content">
-                  <table id="" class="table table-striped data-table-pl">
+                <div id="tab2" className={`tab-content ${activeTab === 'tab2' ? 'current' : ''}`}>
+                  <table id="Amount_data_table" class="table table-striped data-table-pl">
                     <thead>
                       <tr>
-                        <th>Sr No</th>
-                        <th>Ad Account </th>
-                        <th>AD Name</th>
-                        <th>Budget</th>
-                        <th>9th Nov </th>
-                        <th>10th Nov </th>
-                        <th>11th Nov </th>
-                        <th>12th Nov </th>
-                        <th>13th Nov </th>
-                        <th>14th Nov </th>
-                        <th>15th Nov </th>
-                        <th>16th Nov </th>
-                        <th>17th Nov </th>
-                        <th>18th Nov </th>
-                        <th>19th Nov </th>
-                        <th>20th Nov </th>
+                        <th>No</th>
+                        <th>Ad heli </th>
+                        <th>AD naman</th>
+                        <th>parth</th>
+                        <th>9th oct </th>
+                        <th>10th oct </th>
+                        <th>11th oct </th>
+                        <th>12th oct </th>
+                        <th>13th oct </th>
+                        <th>14th oct </th>
+                        <th>15th oct </th>
+                        <th>16th oct </th>
+                        <th>17th oct </th>
+                        <th>18th oct </th>
+                        <th>19th oct </th>
+                        <th>20th oct </th>
                         <th>Total/Average </th>
                         <th>Action</th>
                         <th>Date And Time</th>
@@ -620,8 +721,8 @@ const Trends = () => {
                     </tbody>
                   </table>
                 </div>
-                <div id="tab-3" class="tab-content">
-                  <table id="" class="table table-striped data-table-pl">
+                <div id="tab-3" className={`tab-content ${activeTab === 'tab3' ? 'current' : ''}`}>
+                  <table id="Revenue_data_table" class="table table-striped data-table-pl">
                     <thead>
                       <tr>
                         <th>Sr No</th>
@@ -629,17 +730,17 @@ const Trends = () => {
                         <th>AD Name</th>
                         <th>Budget</th>
                         <th>9th Nov </th>
-                        <th>10th Nov </th>
-                        <th>11th Nov </th>
-                        <th>12th Nov </th>
-                        <th>13th Nov </th>
-                        <th>14th Nov </th>
-                        <th>15th Nov </th>
-                        <th>16th Nov </th>
-                        <th>17th Nov </th>
-                        <th>18th Nov </th>
-                        <th>19th Nov </th>
-                        <th>20th Nov </th>
+                        <th>10th jan </th>
+                        <th>11th jan </th>
+                        <th>12th jan </th>
+                        <th>13th jan </th>
+                        <th>14th jan </th>
+                        <th>15th jan </th>
+                        <th>16th jan </th>
+                        <th>17th jan </th>
+                        <th>18th jan </th>
+                        <th>19th jan </th>
+                        <th>20th jan </th>
                         <th>Total/Average </th>
                         <th>Action</th>
                         <th>Date And Time</th>
@@ -810,8 +911,8 @@ const Trends = () => {
                     </tbody>
                   </table>
                 </div>
-                <div id="tab-4" class="tab-content">
-                  <table id="" class="table table-striped data-table-pl">
+                <div id="tab-4"  className={`tab-content ${activeTab === 'tab4' ? 'current' : ''}`}>
+                  <table id="PL_data_table" class="table table-striped data-table-pl">
                     <thead>
                       <tr>
                         <th>Sr No</th>
@@ -819,17 +920,17 @@ const Trends = () => {
                         <th>AD Name</th>
                         <th>Budget</th>
                         <th>9th Nov </th>
-                        <th>10th Nov </th>
-                        <th>11th Nov </th>
-                        <th>12th Nov </th>
-                        <th>13th Nov </th>
-                        <th>14th Nov </th>
-                        <th>15th Nov </th>
-                        <th>16th Nov </th>
-                        <th>17th Nov </th>
-                        <th>18th Nov </th>
-                        <th>19th Nov </th>
-                        <th>20th Nov </th>
+                        <th>10th feb </th>
+                        <th>11th feb </th>
+                        <th>12th feb </th>
+                        <th>13th feb </th>
+                        <th>14th feb </th>
+                        <th>15th feb </th>
+                        <th>16th feb </th>
+                        <th>17th feb </th>
+                        <th>18th feb </th>
+                        <th>19th feb </th>
+                        <th>20th feb </th>
                         <th>Total/Average </th>
                         <th>Action</th>
                         <th>Date And Time</th>
@@ -998,8 +1099,8 @@ const Trends = () => {
                     </tbody>
                   </table>
                 </div>
-                <div id="tab-5" class="tab-content">
-                  <table id="" class="table table-striped data-table-pl">
+                <div id="tab-5"  className={`tab-content ${activeTab === 'tab5' ? 'current' : ''}`}>
+                  <table id="CPC_data_table" class="table table-striped data-table-pl">
                     <thead>
                       <tr>
                         <th>Sr No</th>
