@@ -22879,3 +22879,11 @@ select.form-control.select_control {
 div.dt-container div.dt-length label:first-letter {
     text-transform: capitalize;
 }
+ul.tabs li p {
+    margin: 0;
+}
+ul.tabs li span svg {
+    height: 23px;
+    width: 23px;
+    margin-right: 10px;
+}

@@ -13,6 +13,7 @@ import MasterAdmin from './pages/MasterAdmin/MasterAdmin';
 import ManageUser from './pages/MasterAdmin/ManageUser';
 import MasterDashboard1 from './pages/MasterAdmin/MasterDashboard1';
 import NotFound from './pages/NotFound';
+import Demotab from './pages/Admin/Demotab';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
                 element={<ManageGoogleAccount />}
               />
               <Route path="trends" element={<Trends />} />
+              <Route path="demotab" element={<Demotab />} />
             </Route>
             <Route path="/master-admin" element={<MasterAdmin />}>
               <Route index element={<MasterDashboard1 />} />

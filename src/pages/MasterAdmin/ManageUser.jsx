@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from "react";
-import $ from 'jquery';
-import 'datatables.net-bs5';
-import 'datatables.net-bs5/css/dataTables.bootstrap5.min.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPenToSquare, faCalendarDays, faClock, faPlus   } from '@fortawesome/free-solid-svg-icons';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
+import $ from "jquery";
+import "datatables.net-bs5";
+import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faPenToSquare,
+  faCalendarDays,
+  faClock,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import axios from "axios";
 const MySwal = withReactContent(Swal);
-
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -20,9 +25,13 @@ const ShimmerRow = () => (
   </tr>
 );
 
-
 const ManageUser = () => {
   const [loading, setLoading] = useState(true);
+  const [inputs, setInputs] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   const [checkboxStates, setCheckboxStates] = useState({
     toggle1: false,
@@ -39,6 +48,14 @@ const ManageUser = () => {
     } else {
       unChecked(id);
     }
+  };
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setInputs((prevInputs) => ({
+      ...prevInputs,
+      [name]: value,
+    }));
   };
 
   const checked = (id) => {
@@ -90,8 +107,19 @@ const ManageUser = () => {
       }
     });
   };
-  
-      useEffect(() => {
+
+  const handleManageUser = async () => {
+    console.log(inputs);
+    try {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+      const res = await axios.post(`${API_BASE_URL}/manageuser/`, inputs);
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
     // Destroy the DataTable if it is already initialized
     if ($.fn.DataTable.isDataTable("#Manage_User")) {
       $("#Manage_User").DataTable().destroy();
@@ -109,7 +137,7 @@ const ManageUser = () => {
         destroy: true, // Ensure old table is destroyed before reinitializing
       });
     }
-  }, [loading]); 
+  }, [loading]);
 
   return (
     <>
@@ -283,7 +311,7 @@ const ManageUser = () => {
               </div>
               <div className="modal-body">
                 <div className="mb-3">
-                  <label htmlFor ="" className="form-label">
+                  <label htmlFor="" className="form-label">
                     Name
                   </label>
                   <input
@@ -291,10 +319,12 @@ const ManageUser = () => {
                     className="form-control"
                     id=""
                     placeholder="Enter Name"
+                    name="name"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor ="" className="form-label">
+                  <label htmlFor="" className="form-label">
                     Email
                   </label>
                   <input
@@ -302,22 +332,30 @@ const ManageUser = () => {
                     className="form-control"
                     id=""
                     placeholder="Enter Email"
+                    name="email"
+                    onChange={handleInputChange}
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor ="" className="form-label">
+                  <label htmlFor="" className="form-label">
                     Password
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     className="form-control"
                     id=""
+                    name="password"
                     placeholder="Enter Password"
+                    onChange={handleInputChange}
                   />
                 </div>
               </div>
               <div className="modal-footer justify-content-center">
-                <button type="button" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleManageUser}
+                >
                   Save
                 </button>
               </div>
@@ -346,7 +384,7 @@ const ManageUser = () => {
               </div>
               <div className="modal-body">
                 <div className="mb-3">
-                  <label htmlFor ="" className="form-label">
+                  <label htmlFor="" className="form-label">
                     Name
                   </label>
                   <input
@@ -357,7 +395,7 @@ const ManageUser = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor ="" className="form-label">
+                  <label htmlFor="" className="form-label">
                     Email
                   </label>
                   <input
@@ -368,7 +406,7 @@ const ManageUser = () => {
                   />
                 </div>
                 <div className="mb-3">
-                  <label htmlFor ="" className="form-label">
+                  <label htmlFor="" className="form-label">
                     Password
                   </label>
                   <input
@@ -390,6 +428,6 @@ const ManageUser = () => {
       </div>
     </>
   );
-}
+};
 
-export default ManageUser
+export default ManageUser;
