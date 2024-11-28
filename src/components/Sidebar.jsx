@@ -15,7 +15,8 @@ import {
   faGears,
   faRectangleAd,
   faXmark,
-  faBars
+  faBars,
+  faArrowTrendUp 
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { NavLink, useLocation } from "react-router-dom";
@@ -146,6 +147,14 @@ const Sidebar = () => {
                       </NavLink>
                     </li>
                   </ul>
+                </li>
+                <li className="sidebar-item">
+                  <NavLink className="sidebar-link" to="/trends">
+                    <span>
+                      <FontAwesomeIcon icon={faArrowTrendUp } />
+                    </span>
+                    <span className="hide-menu">Trends</span>
+                  </NavLink>
                 </li>
               </ul>
             </nav>

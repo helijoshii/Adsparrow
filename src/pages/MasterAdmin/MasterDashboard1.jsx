@@ -17,12 +17,12 @@ const MasterDashboard1 = () => {
     return (
         <>
           <div className="container-fluid">
-            <div class="row pt-3">
-              <div class="col-auto">
-                <h2 class="main_title">Dashboard</h2>
+            <div className="row pt-3">
+              <div className="col-auto">
+                <h2 className="main_title">Dashboard</h2>
               </div>
             </div>
-            <div class="row pt-2">
+            <div className="row pt-2">
             <div className="col-lg-auto col-md-auto col-sm-auto col-12">
         <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
           <div className="left">
@@ -41,7 +41,7 @@ const MasterDashboard1 = () => {
         <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
           <div className="left">
             <span>{loading ? "" : "Total META ADS Counts"}</span>
-            <h3>{loading ? "" : "30"}</h3>
+            <h3>{loading ? "" : "0"}</h3>
           </div>
           <div className="right">
             <span>
@@ -55,7 +55,7 @@ const MasterDashboard1 = () => {
         <div className={`white_shadow dasboard-3 ${loading ? "shimmerCard" : ""}`}>
           <div className="left">
             <span>{loading ? "" : "Total Google Counts"}</span>
-            <h3>{loading ? "" : "1"}</h3>
+            <h3>{loading ? "" : "0"}</h3>
           </div>
           <div className="right">
             <span>

@@ -113,16 +113,16 @@ const ManageUser = () => {
 
   return (
     <>
-      <div class="container-fluid">
-        <div class="row g-2">
-          <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
-            <h2 class="main_title m-0">Manage User</h2>
+      <div className="container-fluid">
+        <div className="row g-2">
+          <div className="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
+            <h2 className="main_title m-0">Manage User</h2>
           </div>
 
-          <div class="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
+          <div className="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#add_user"
             >
@@ -131,12 +131,12 @@ const ManageUser = () => {
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12">
-            <div class="white_table">
+        <div className="row">
+          <div className="col-12">
+            <div className="white_table">
               <table
                 id="Manage_User"
-                class="table table-striped data-table-dr"
+                className="table table-striped data-table-dr"
                 style={{ width: "100%" }}
               >
                 <thead>
@@ -161,7 +161,7 @@ const ManageUser = () => {
                         <td>
                           <button
                             type="button"
-                            class="btn btn-primary small_bt"
+                            className="btn btn-primary small_bt"
                             data-bs-toggle="modal"
                             data-bs-target="#edit"
                           >
@@ -176,7 +176,7 @@ const ManageUser = () => {
                           <div className="toggle">
                             <input
                               type="checkbox"
-                              className="phase-class"
+                              className="phase-className"
                               id="toggle1"
                               checked={checkboxStates.toggle1}
                               onChange={handleCheckboxChange("toggle1")}
@@ -186,8 +186,8 @@ const ManageUser = () => {
                         </td>
 
                         <td>
-                          <p class="mb-0">
-                            <span class="d-flex justify-content-center align-items-center">
+                          <p className="mb-0">
+                            <span className="d-flex justify-content-center align-items-center">
                               <FontAwesomeIcon
                                 icon={faCalendarDays}
                                 className=" me-2"
@@ -195,7 +195,7 @@ const ManageUser = () => {
                               27/03/2021
                               <br />
                             </span>
-                            <span class="d-flex justify-content-center align-items-center time_span">
+                            <span className="d-flex justify-content-center align-items-center time_span">
                               <FontAwesomeIcon
                                 icon={faClock}
                                 className=" me-2"
@@ -210,7 +210,7 @@ const ManageUser = () => {
                         <td>
                           <button
                             type="button"
-                            class="btn btn-primary small_bt"
+                            className="btn btn-primary small_bt"
                             data-bs-toggle="modal"
                             data-bs-target="#edit"
                           >
@@ -225,7 +225,7 @@ const ManageUser = () => {
                           <div className="toggle">
                             <input
                               type="checkbox"
-                              className="phase-class"
+                              className="phase-className"
                               id="toggle2"
                               checked={checkboxStates.toggle2}
                               onChange={handleCheckboxChange("toggle2")}
@@ -235,8 +235,8 @@ const ManageUser = () => {
                         </td>
 
                         <td>
-                          <p class="mb-0">
-                            <span class="d-flex justify-content-center align-items-center">
+                          <p className="mb-0">
+                            <span className="d-flex justify-content-center align-items-center">
                               <FontAwesomeIcon
                                 icon={faCalendarDays}
                                 className=" me-2"
@@ -244,7 +244,7 @@ const ManageUser = () => {
                               27/03/2021
                               <br />
                             </span>
-                            <span class="d-flex justify-content-center align-items-center time_span">
+                            <span className="d-flex justify-content-center align-items-center time_span">
                               <FontAwesomeIcon
                                 icon={faClock}
                                 className=" me-2"
@@ -262,62 +262,62 @@ const ManageUser = () => {
           </div>
         </div>
         <div
-          class="modal fade"
+          className="modal fade"
           id="add_user"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
                   Add User
                 </h1>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="" class="form-label">
+              <div className="modal-body">
+                <div className="mb-3">
+                  <label htmlFor ="" className="form-label">
                     Name
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id=""
                     placeholder="Enter Name"
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor ="" className="form-label">
                     Email
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id=""
                     placeholder="Enter Email"
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor ="" className="form-label">
                     Password
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id=""
                     placeholder="Enter Password"
                   />
                 </div>
               </div>
-              <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary">
+              <div className="modal-footer justify-content-center">
+                <button type="button" className="btn btn-primary">
                   Save
                 </button>
               </div>
@@ -325,62 +325,62 @@ const ManageUser = () => {
           </div>
         </div>
         <div
-          class="modal fade"
+          className="modal fade"
           id="edit"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
                   Edit User
                 </h1>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="" class="form-label">
+              <div className="modal-body">
+                <div className="mb-3">
+                  <label htmlFor ="" className="form-label">
                     Name
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id=""
                     placeholder="Enter Name"
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor ="" className="form-label">
                     Email
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id=""
                     placeholder="Enter Email"
                   />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+                <div className="mb-3">
+                  <label htmlFor ="" className="form-label">
                     Password
                   </label>
                   <input
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id=""
                     placeholder="Enter Password"
                   />
                 </div>
               </div>
-              <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary">
+              <div className="modal-footer justify-content-center">
+                <button type="button" className="btn btn-primary">
                   Save
                 </button>
               </div>

@@ -366,7 +366,7 @@ const ManageAdAccount = () => {
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  Edit Account
+                  Edit Account Access Token
                 </h1>
                 <button
                   type="button"
@@ -378,7 +378,7 @@ const ManageAdAccount = () => {
               <div class="modal-body">
                 <div class="mb-3">
                   <label for="" class="form-label">
-                    AD Account ID
+                  Access Token
                   </label>
                   <input
               type="text"
@@ -392,7 +392,7 @@ const ManageAdAccount = () => {
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
-                    Token ID
+                  AD Account ID
                   </label>
                   <input
               type="text"
@@ -406,14 +406,42 @@ const ManageAdAccount = () => {
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
-                    AD Name
+                  App ID
                   </label>
                   <input
               type="text"
               className="form-control"
               id="adName"
               name="adName"
-              placeholder="Enter AD Name"
+              placeholder="Enter App ID"
+              value={formData.adName}
+              onChange={handleChange}
+            />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                 App Secret
+                  </label>
+                  <input
+              type="text"
+              className="form-control"
+              id="adName"
+              name="adName"
+              placeholder="Enter App Secret"
+              value={formData.adName}
+              onChange={handleChange}
+            />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                 Account Name
+                  </label>
+                  <input
+              type="text"
+              className="form-control"
+              id="adName"
+              name="adName"
+              placeholder="Enter Account Name"
               value={formData.adName}
               onChange={handleChange}
             />

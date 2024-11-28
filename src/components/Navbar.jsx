@@ -2,6 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+
 import axios from "axios";
 
 const Navbar = () => {
@@ -26,7 +27,7 @@ const Navbar = () => {
               <a
                 className="nav-link sidebartoggler nav-icon-hover"
                 id="headerCollapse"
-                href="javascript:void(0)"
+                href="#"
               >
                 <FontAwesomeIcon icon={faBars} />
               </a>
@@ -41,7 +42,7 @@ const Navbar = () => {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link nav-icon-hover"
-                  href="javascript:void(0)"
+                  href="#"
                   id="drop2"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"

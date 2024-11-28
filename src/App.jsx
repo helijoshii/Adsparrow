@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Admin/Dashboard';
 import MainLayout from './pages/Admin/MainLayout';
 import Analytics from './pages/Admin/Analytics';
+import Trends from './pages/Admin/Trends';
 import ManageAdAccount from './pages/Admin/Setting/ManageAdAccount';
 import ManageGoogleAccount from './pages/Admin/Setting/ManageGoogleAccount';
 import MasterAdmin from './pages/MasterAdmin/MasterAdmin';
@@ -54,6 +55,7 @@ function App() {
                 path="manage-google-account"
                 element={<ManageGoogleAccount />}
               />
+              <Route path="trends" element={<Trends />} />
             </Route>
             <Route path="/master-admin" element={<MasterAdmin />}>
               <Route index element={<MasterDashboard1 />} />
