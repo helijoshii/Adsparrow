@@ -114,172 +114,282 @@ const ManageUser = () => {
   return (
     <>
       <div class="container-fluid">
+        <div class="row g-2">
+          <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
+            <h2 class="main_title m-0">Manage User</h2>
+          </div>
 
-    <div class="row g-2">
-      
-    <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
-        <h2 class="main_title m-0">Manage User</h2>
-    </div>
-      
-      <div class="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#add_user">
-        <FontAwesomeIcon icon={faPlus} className="me-2" /> Add User 
-        </button>
-      </div>
-      
-    </div>
+          <div class="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#add_user"
+            >
+              <FontAwesomeIcon icon={faPlus} className="me-2" /> Add User
+            </button>
+          </div>
+        </div>
 
-  
-    <div class="row">
-      <div class="col-12">
-        <div class="white_table">        
-          <table id="Manage_User" class="table table-striped data-table-dr" style={{ width: '100%' }}>
-            <thead>
-              <tr>
-                <th>Sr No</th>
-                <th>Action</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Status</th>
-                <th>Date And Time</th>
-              </tr>
-            </thead>
-            <tbody>
-            {loading ? (
-                  // Show shimmer rows when data is loading
-                  [...Array(2)].map((_, index) => <ShimmerRow key={index} />)
-                ) : (
-                  <>
-              <tr>
-              <td>1</td>
-              <td>
-                  <button type="button" class="btn btn-primary small_bt"  data-bs-toggle="modal" data-bs-target="#edit">
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                  </button>
-              </td>
-              <td>Jayesh</td>
-              <td>abc@gmail.com</td>
-              <td>1234567890</td>
-              
-              
-              <td>
-              <div className="toggle">
+        <div class="row">
+          <div class="col-12">
+            <div class="white_table">
+              <table
+                id="Manage_User"
+                class="table table-striped data-table-dr"
+                style={{ width: "100%" }}
+              >
+                <thead>
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Action</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                    <th>Status</th>
+                    <th>Date And Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {loading ? (
+                    // Show shimmer rows when data is loading
+                    [...Array(2)].map((_, index) => <ShimmerRow key={index} />)
+                  ) : (
+                    <>
+                      <tr>
+                        <td>1</td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
+                        </td>
+                        <td>Jayesh</td>
+                        <td>abc@gmail.com</td>
+                        <td>1234567890</td>
+
+                        <td>
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle1"
                               checked={checkboxStates.toggle1}
-                              onChange={handleCheckboxChange('toggle1')}
+                              onChange={handleCheckboxChange("toggle1")}
                             />
                             <label></label>
                           </div>
-                </td>
-              
-                <td>
-                  <p class="mb-0">
-                    <span class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faCalendarDays} className=' me-2' />27/03/2021<br /></span>
-                    <span class="d-flex justify-content-center align-items-center time_span"><FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM</span>
-                  </p>
-                </td>
-              </tr>
-              <tr>
-              <td>2</td>
-              <td>
-                  <button type="button" class="btn btn-primary small_bt"  data-bs-toggle="modal" data-bs-target="#edit">
-                  <FontAwesomeIcon icon={faPenToSquare} />
-                  </button>
-              </td>
-              <td>Rajesh</td>
-              <td>xyz@gmail.com</td>
-              <td>1234567890</td>
-              
-              
-              <td>
-              <div className="toggle">
+                        </td>
+
+                        <td>
+                          <p class="mb-0">
+                            <span class="d-flex justify-content-center align-items-center">
+                              <FontAwesomeIcon
+                                icon={faCalendarDays}
+                                className=" me-2"
+                              />
+                              27/03/2021
+                              <br />
+                            </span>
+                            <span class="d-flex justify-content-center align-items-center time_span">
+                              <FontAwesomeIcon
+                                icon={faClock}
+                                className=" me-2"
+                              />
+                              07:00AM
+                            </span>
+                          </p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>2</td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-primary small_bt"
+                            data-bs-toggle="modal"
+                            data-bs-target="#edit"
+                          >
+                            <FontAwesomeIcon icon={faPenToSquare} />
+                          </button>
+                        </td>
+                        <td>Rajesh</td>
+                        <td>xyz@gmail.com</td>
+                        <td>1234567890</td>
+
+                        <td>
+                          <div className="toggle">
                             <input
                               type="checkbox"
                               className="phase-class"
                               id="toggle2"
                               checked={checkboxStates.toggle2}
-                              onChange={handleCheckboxChange('toggle2')}
+                              onChange={handleCheckboxChange("toggle2")}
                             />
                             <label></label>
                           </div>
-                </td>
-              
-                <td>
-                  <p class="mb-0">
-                    <span class="d-flex justify-content-center align-items-center"><FontAwesomeIcon icon={faCalendarDays} className=' me-2' />27/03/2021<br /></span>
-                    <span class="d-flex justify-content-center align-items-center time_span"><FontAwesomeIcon icon={faClock} className=' me-2' />07:00AM</span>
-                  </p>
-                </td>
-              </tr>
-              </>
-                )}
-            </tbody>
-          </table>        
+                        </td>
+
+                        <td>
+                          <p class="mb-0">
+                            <span class="d-flex justify-content-center align-items-center">
+                              <FontAwesomeIcon
+                                icon={faCalendarDays}
+                                className=" me-2"
+                              />
+                              27/03/2021
+                              <br />
+                            </span>
+                            <span class="d-flex justify-content-center align-items-center time_span">
+                              <FontAwesomeIcon
+                                icon={faClock}
+                                className=" me-2"
+                              />
+                              07:00AM
+                            </span>
+                          </p>
+                        </td>
+                      </tr>
+                    </>
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
-      </div>     
-    </div>
-    <div class="modal fade" id="add_user" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Add User</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div
+          class="modal fade"
+          id="add_user"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Add User
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Name"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Email"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Password"
+                  />
+                </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="modal fade"
+          id="edit"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Edit User
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Name"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Email
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Email"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Password
+                  </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id=""
+                    placeholder="Enter Password"
+                  />
+                </div>
+              </div>
+              <div class="modal-footer justify-content-center">
+                <button type="button" class="btn btn-primary">
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="" class="form-label">Name</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Name" />
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Email</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Email" />
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Password</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Password" />
-        </div>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-        </div>
-        <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Edit User</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="mb-3">
-          <label for="" class="form-label">Name</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Name" />
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Email</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Email" />
-        </div>
-        <div class="mb-3">
-          <label for="" class="form-label">Password</label>
-          <input type="text" class="form-control" id="" placeholder="Enter Password" />
-        </div>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn btn-primary">Save</button>
-      </div>
-    </div>
-  </div>
-        </div>
-        
-  </div>
     </>
-  )
+  );
 }
 
 export default ManageUser

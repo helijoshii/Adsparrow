@@ -29,6 +29,8 @@ const ManageAdAccount = () => {
     adAccountId: "",
     tokenId: "",
     adName: "",
+    appSecret: "",
+    accountName: "",
   });
 
     // status toggle 
@@ -131,7 +133,9 @@ const ManageAdAccount = () => {
   const isFormComplete =
     formData.adAccountId.trim() &&
     formData.tokenId.trim() &&
-    formData.adName.trim();
+    formData.adName.trim() &&
+    formData.appSecret.trim() &&
+    formData.accountName.trim();
 
   return (
     <>
@@ -258,7 +262,7 @@ const ManageAdAccount = () => {
             <div class="modal-content">
               <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                  Add Account
+                  Account Access Token
                 </h1>
                 <button
                   type="button"
@@ -270,43 +274,71 @@ const ManageAdAccount = () => {
               <div class="modal-body">
                 <div class="mb-3">
                   <label for="" class="form-label">
-                    AD Account ID
+                  Access Token<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
               type="text"
               className="form-control"
               id="adAccountId"
               name="adAccountId"
-              placeholder="Enter AD Account ID"
+              placeholder="Enter Access Token"
               value={formData.adAccountId}
               onChange={handleChange}
             />
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
-                    Token ID
+                    AD Account ID<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
               type="text"
               className="form-control"
               id="tokenId"
               name="tokenId"
-              placeholder="Enter Token ID"
+              placeholder="Enter AD Account ID"
               value={formData.tokenId}
               onChange={handleChange}
             />
                 </div>
                 <div class="mb-3">
                   <label for="" class="form-label">
-                    AD Name
+                    App ID<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
               type="text"
               className="form-control"
               id="adName"
               name="adName"
-              placeholder="Enter AD Name"
+              placeholder="Enter App ID"
               value={formData.adName}
+              onChange={handleChange}
+            />
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    App Secret<span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+              type="text"
+              className="form-control"
+              id="appSecret"
+              name="appSecret"
+              placeholder="Enter App Secret"
+              value={formData.appSecret}
+              onChange={handleChange}
+            />
+            </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">
+                    Account Name (optional)
+                  </label>
+                  <input
+              type="text"
+              className="form-control"
+              id="accountName"
+              name="accountName"
+              placeholder="Enter Account Name (optional)"
+              value={formData.accountName}
               onChange={handleChange}
             />
                 </div>

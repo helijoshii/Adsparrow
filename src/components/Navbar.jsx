@@ -1,15 +1,22 @@
-import React from 'react';
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 const Navbar = () => {
   const navigate = useNavigate();
-    const login = () => {
+  const logout = async () => {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Access the env variable
+    const res = await axios.post(
+      `${API_BASE_URL}/logout/`
+    );
+    if (res.status === 200) {
       navigate("/login");
-    };
+      // console.log("logout successfully!");
+    }
+  };
 
-    
   return (
     <>
       <div className="app-header">
@@ -46,13 +53,12 @@ const Navbar = () => {
                   aria-labelledby="drop2"
                 >
                   <div className="message-body">
-                    <a
-                      href=""
+                    <p
                       className="btn btn-outline-primary mx-3 mt-2 d-block"
-                      onClick={login}
+                      onClick={logout}
                     >
                       Logout
-                    </a>
+                    </p>
                   </div>
                 </div>
               </li>
@@ -62,6 +68,6 @@ const Navbar = () => {
       </div>
     </>
   );
-}
+};
 
-export default Navbar
+export default Navbar;
