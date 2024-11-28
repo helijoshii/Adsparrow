@@ -22177,6 +22177,97 @@ table.dataTable>tbody>tr:hover {
     vertical-align: baseline;
     border-radius: var(--bs-badge-border-radius);
 }
+.ad_acc {
+    font-size: 16px;
+  }
+  
+  .ad_acc li {padding: 5px 0;font-weight: 500;}
+  .btn-light {
+    background-color: #1329de;
+    color: #fff;
+    border-color: #1329de;
+  }
+  
+  .btn-light:hover {
+      background-color: #0c1eb5;
+      color: #fff;
+      border-color: #0c1eb5;
+  }
+  .daterange.none_disabled {
+    background: rgb(1 1 1 / 10%);
+    pointer-events: none;
+  }
+  .tabs{
+    margin: 0px 0 10px;
+    padding: 0px;
+    list-style: none;
+    text-align: center;
+  }
+  ul.tabs li{
+    background: none;
+    color: #222;
+    display: inline-flex;
+    padding: 7px 12px;
+    cursor: pointer;
+    max-width: max-content;
+    width: 100%;
+    border-radius: 4px;
+    background: #ededed;
+    color: #222;
+    transform: scale(1);
+    position: relative;
+  }
+  
+  ul.tabs li.current{
+    background: #cf2027;
+    color: #fff;
+    transform: scale(1);
+  }
+  
+  .tab-content{
+    display: none;
+    background: #fff;
+    padding: 10px;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+  }
+  
+  .tab-content.current{
+    display: inherit;
+  }
+  .tab-link span svg {height: 20px;fill: #212;width: 20px;margin-right: 10px;}
+  
+  .tab-link p {
+      color: #222;
+      font-size: 14px;
+      margin: 0;
+      padding: 0;
+      font-weight: 500;
+  }
+  
+  ul.tabs li.current span svg {
+      fill: #fff;
+      color: #fff;
+  }
+  
+  ul.tabs li.current p {
+      color: #fff;
+  }
+  ul.tabs li.current:before {
+    position: absolute;
+    content: '';
+    width: 15px;
+    height: 15px;
+    background: #cf2027;
+    bottom: -7px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    transform: rotate(45deg);
+  }
+  div.dataTables_wrapper div.dataTables_filter input {
+    padding: 4px 16px;
+  }
 
 /*min-devices-media-query*/
 
@@ -22256,6 +22347,25 @@ table.dataTable>tbody>tr:hover {
         width: 100%;
         border-radius: 0;
     }
+    ul.tabs li {
+        display: block;
+        width: 100%;
+        min-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 0;
+        }
+        
+        .tab-link span svg {
+        width: 30px;
+        margin-right: 10px;
+        height: 30px;
+        }
+        
+        ul.tabs li.current:before {
+        opacity: 0;
+        }
 }
 
 ul#sidebarnav {
