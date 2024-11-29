@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import $ from "jquery";
 import "datatables.net-bs5";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
@@ -7,10 +7,10 @@ import {
   faRectangleAd,
   faCalendarDays,
   faClock,
-  faArrowsRotate 
+  faArrowsRotate,
 } from "@fortawesome/free-solid-svg-icons";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
-
+import axios from "axios";
 
 const ShimmerRow = () => (
   <tr>
@@ -25,7 +25,21 @@ const ShimmerRow = () => (
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
 
-  
+  const getDashboardData = async () => {
+    try {
+      const response = await axios.get(
+        "https://devadsparrowapi.bdccoder.in/api/dashboard/"
+      );
+      console.log("Dashboard data:", response);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching dashboard data:", error);
+      return null;
+    }
+  };
+
+  useEffect(() => getDashboardData, []);
+
   useEffect(() => {
     if ($.fn.DataTable.isDataTable("#Meta_data_table")) {
       $("#Meta_data_table").DataTable().destroy();
@@ -39,10 +53,10 @@ const Dashboard = () => {
     if (!loading) {
       $("#Meta_data_table").DataTable({
         scrollX: true,
-        destroy: true, 
+        destroy: true,
       });
     }
-  }, [loading]); 
+  }, [loading]);
 
   useEffect(() => {
     if ($.fn.DataTable.isDataTable("#Google_data_table")) {
@@ -57,11 +71,10 @@ const Dashboard = () => {
     if (!loading) {
       $("#Google_data_table").DataTable({
         scrollX: true,
-        destroy: true, 
+        destroy: true,
       });
     }
-  }, [loading]); 
-
+  }, [loading]);
 
   return (
     <>
@@ -120,7 +133,7 @@ const Dashboard = () => {
                             <td>Google</td>
                             <td>
                               <span
-                                class="badge 
+                                className="badge 
                                 bg-success
                                 "
                               >
@@ -130,7 +143,7 @@ const Dashboard = () => {
                             <td>
                               <button
                                 type="button"
-                                class="btn btn-primary small_bt"
+                                className="btn btn-primary small_bt"
                                 data-bs-toggle="modal"
                                 data-bs-target="#update_account"
                                 id="run-fb-data-btn"
@@ -164,7 +177,7 @@ const Dashboard = () => {
                             <td>Webapprise</td>
                             <td>
                               <span
-                                class="badge 
+                                className="badge 
                                 bg-success
                                 "
                               >
@@ -174,7 +187,7 @@ const Dashboard = () => {
                             <td>
                               <button
                                 type="button"
-                                class="btn btn-primary small_bt"
+                                className="btn btn-primary small_bt"
                                 data-bs-toggle="modal"
                                 data-bs-target="#update_account"
                                 id="run-fb-data-btn"
@@ -208,7 +221,7 @@ const Dashboard = () => {
                             <td>Zion z1</td>
                             <td>
                               <span
-                                class="badge 
+                                className="badge 
                                 bg-success
                                 "
                               >
@@ -218,7 +231,7 @@ const Dashboard = () => {
                             <td>
                               <button
                                 type="button"
-                                class="btn btn-primary small_bt"
+                                className="btn btn-primary small_bt"
                                 data-bs-toggle="modal"
                                 data-bs-target="#update_account"
                                 id="run-fb-data-btn"
@@ -304,7 +317,7 @@ const Dashboard = () => {
                             <td>Google</td>
                             <td>
                               <span
-                                class="badge 
+                                className="badge 
                                 bg-success
                                 "
                               >
@@ -314,7 +327,7 @@ const Dashboard = () => {
                             <td>
                               <button
                                 type="button"
-                                class="btn btn-primary small_bt"
+                                className="btn btn-primary small_bt"
                                 data-bs-toggle="modal"
                                 data-bs-target="#update_account"
                                 id="run-fb-data-btn"
