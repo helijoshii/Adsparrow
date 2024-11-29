@@ -1,8 +1,6 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faXmark } from "@fortawesome/free-solid-svg-icons";
-
+import { faBars } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 
 const Navbar = () => {
@@ -13,8 +11,9 @@ const Navbar = () => {
       `${API_BASE_URL}/logout/`
     );
     if (res.status === 200) {
+      localStorage.removeItem("token");
       navigate("/login");
-      // console.log("logout successfully!");
+      console.log("Logged out");
     }
   };
 
@@ -27,13 +26,13 @@ const Navbar = () => {
               <a
                 className="nav-link sidebartoggler nav-icon-hover"
                 id="headerCollapse"
-                href="#"
+                href="javascript:void(0)"
               >
                 <FontAwesomeIcon icon={faBars} />
               </a>
             </li>
           </ul>
-          {/* <FontAwesomeIcon icon={faBars} /> */}
+
           <div
             className="navbar-collapse justify-content-end px-0"
             id="navbarNav"
@@ -42,7 +41,7 @@ const Navbar = () => {
               <li className="nav-item dropdown">
                 <a
                   className="nav-link nav-icon-hover"
-                  href="#"
+                  href="javascript:void(0)"
                   id="drop2"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"

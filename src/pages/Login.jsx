@@ -206,7 +206,8 @@ const Login = () => {
                       className="w-100 btn btn-primary mt-4"
                       disabled={loading}
                     >
-                      {loading ? "Loading..." : "Login"}
+                      {loading ? <div className="spinner"></div>  : "Login"}
+                      {/* <div className="spinner"></div> */}
                     </button>
                   </div>
                 </form>

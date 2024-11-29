@@ -22887,3 +22887,24 @@ ul.tabs li span svg {
     width: 23px;
     margin-right: 10px;
 }
+/* Spinner Styles */
+.spinner {
+    border: 2px solid #000000;
+    border-top: 4px solid #ffffff;
+    border-radius: 50%;
+    width: 23px;
+    height: 20px;
+    animation: spin 1s linear infinite;
+    display: table;
+    margin: 0 auto;
+}
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
