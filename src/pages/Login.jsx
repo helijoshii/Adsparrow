@@ -4,6 +4,7 @@ import bgImg from "../assets/bg.png";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import axios from "axios";
+import { setAccessToken } from "../utils/helper";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -12,11 +13,13 @@ const loginSchema = z.object({
 
 const Login = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   const handleLogin = async (obj) => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Access the env variable
     try {
+      setLoading(true);
       const response = await axios.post(
-        `${API_BASE_URL}/login/`,
+        `${API_BASE_URL}/login/`  ,
         obj,
         {
           headers: {
@@ -25,15 +28,20 @@ const Login = () => {
         }
       );
 
+      setLoading(false);
+
       if (response.status === 200) {
         if (response.data.data.user_type === "Admin") {
+          setAccessToken(response.data.data.token);
           navigate("/");
         } else if (response.data.data.user_type === "Master Admin") {
+          setAccessToken(response.data.data.token);
           navigate("/master-admin");
         }
       }
     } catch (error) {
       console.error("Error during login:", error);
+      setLoading(false);
     }
   };
 
@@ -196,8 +204,9 @@ const Login = () => {
                     <button
                       type="submit"
                       className="w-100 btn btn-primary mt-4"
+                      disabled={loading}
                     >
-                      Login
+                      {loading ? "Loading..." : "Login"}
                     </button>
                   </div>
                 </form>

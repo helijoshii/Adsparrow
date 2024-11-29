@@ -33,10 +33,7 @@ const Trends = () => {
 
     const handleTabClick = (tabId) => {
         setActiveTab(tabId); // Set active tab when a tab is clicked
-      };
-
-
-      
+      }; 
       useEffect(() => {
         if ($.fn.DataTable.isDataTable("#ROI_data_table")) {
           $("#ROI_data_table").DataTable().destroy();
