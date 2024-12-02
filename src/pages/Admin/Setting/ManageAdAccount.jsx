@@ -23,7 +23,7 @@ const ShimmerRow = () => (
   </tr>
 );
 
-const ManageAdAccount = () => {
+const ManageAdAccount = () => { 
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     adAccountId: "",

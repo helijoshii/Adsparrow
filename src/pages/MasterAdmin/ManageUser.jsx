@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
 const MySwal = withReactContent(Swal);
+import { z } from "zod";
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -32,6 +33,7 @@ const ManageUser = () => {
     email: "",
     password: "",
   });
+  
 
   const [checkboxStates, setCheckboxStates] = useState({
     toggle1: false,
@@ -312,7 +314,7 @@ const ManageUser = () => {
               <div className="modal-body">
                 <div className="mb-3">
                   <label htmlFor="" className="form-label">
-                    Name
+                    Name<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -325,7 +327,7 @@ const ManageUser = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="" className="form-label">
-                    Email
+                    Email<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -338,7 +340,7 @@ const ManageUser = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="" className="form-label">
-                    Password
+                    Password<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="password"
@@ -385,7 +387,7 @@ const ManageUser = () => {
               <div className="modal-body">
                 <div className="mb-3">
                   <label htmlFor="" className="form-label">
-                    Name
+                    Name<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -396,7 +398,7 @@ const ManageUser = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="" className="form-label">
-                    Email
+                    Email<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
@@ -407,7 +409,7 @@ const ManageUser = () => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="" className="form-label">
-                    Password
+                    Password<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
