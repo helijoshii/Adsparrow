@@ -12,6 +12,7 @@ import {
   faPenToSquare,
   faCalendarDays,
   faClock,
+  faAnglesRight 
 } from "@fortawesome/free-solid-svg-icons";
 import "select2/dist/css/select2.min.css"; // Import Select2 CSS
 import "select2"; // Import Select2 JavaScript
@@ -225,6 +226,24 @@ const Analytics = () => {
     }
   }, [loading]);
 
+  useEffect(() => {
+    if ($.fn.DataTable.isDataTable("#Trends")) {
+      $("#Trends").DataTable().destroy();
+    }
+
+    // Simulate data loading
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    if (!loading) {
+      $("#Trends").DataTable({
+        scrollX: true,
+        destroy: true, 
+      });
+    }
+  }, [loading]); 
+
   // Date picker
   // Toggle the calendar
   // const handleToggleCalendar = () => {
@@ -412,7 +431,11 @@ const Analytics = () => {
                       <tr>
                         <td>1</td>
                         <td>Temuu2</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button></td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -450,7 +473,12 @@ const Analytics = () => {
                       <tr>
                         <td>2</td>
                         <td>Temuu2</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -488,7 +516,12 @@ const Analytics = () => {
                       <tr>
                         <td>3</td>
                         <td>Temuu3</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -526,7 +559,12 @@ const Analytics = () => {
                       <tr>
                         <td>4</td>
                         <td>Temuu4</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -564,7 +602,12 @@ const Analytics = () => {
                       <tr>
                         <td>5</td>
                         <td>Temuu5</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -602,7 +645,12 @@ const Analytics = () => {
                       <tr>
                         <td>6</td>
                         <td>Temuu6</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -640,7 +688,12 @@ const Analytics = () => {
                       <tr>
                         <td>7</td>
                         <td>Temuu7</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -678,7 +731,12 @@ const Analytics = () => {
                       <tr>
                         <td>8</td>
                         <td>Temuu8</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -716,7 +774,12 @@ const Analytics = () => {
                       <tr>
                         <td>9</td>
                         <td>Temuu9</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -754,7 +817,12 @@ const Analytics = () => {
                       <tr>
                         <td>10</td>
                         <td>Temuu10</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -792,7 +860,12 @@ const Analytics = () => {
                       <tr>
                         <td>11</td>
                         <td>Temuu11</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -830,7 +903,12 @@ const Analytics = () => {
                       <tr>
                         <td>12</td>
                         <td>Temuu12</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -868,7 +946,12 @@ const Analytics = () => {
                       <tr>
                         <td>13</td>
                         <td>Temuu13</td>
-                        <td>boss386</td>
+                        <td><button type="button"
+                           className="btn "
+                           style={{ backgroundColor: '#3abc2f', color: 'white' }}
+                            data-bs-toggle="modal"
+                            data-bs-target="#trends">boss386</button>
+                            </td>
                         <td>
                           <span className="badge text-bg-info">5</span>
                           <button
@@ -910,6 +993,9 @@ const Analytics = () => {
             </div>
           </div>
         </div>
+
+
+        {/* modal for edit budget  */}
         <div
           className="modal fade"
           id="buget"
@@ -958,6 +1044,123 @@ const Analytics = () => {
             </div>
           </div>
         </div>
+          
+
+          {/* modal for trends  */}
+        <div>
+        <div class="modal fade" id="trends" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel"> <b>7 days trends</b> </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="ad_acc">
+          <li><FontAwesomeIcon icon={faAnglesRight} /> <b>Ad Account :</b>  Google </li>
+          <li><FontAwesomeIcon icon={faAnglesRight} /> <b>Ad Name :</b> Video </li>
+          <li><FontAwesomeIcon icon={faAnglesRight} /> <b>Current CPC :</b> Video</li>
+          <li>
+            <FontAwesomeIcon icon={faAnglesRight} /> <b>Current Budget :</b>
+            <span>
+              <span class="badge text-bg-info">5</span>
+              <button type="button" class="btn btn-primary small_bt" data-bs-toggle="modal" data-bs-target="#buget">
+              <FontAwesomeIcon icon={faPenToSquare} />
+              </button>
+            </span>
+          </li>
+          <li>
+            <FontAwesomeIcon icon={faAnglesRight} /> <b>Status :</b>
+            <span>
+              <div class="toggle" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+                <input type="checkbox" />
+                <label></label>
+              </div>
+            </span>
+          </li>
+        </ul>
+        <div class="daye_sevan_rs">
+          <table id="Trends" class="table table-striped data-table-dr1"  style={{ width: '100%' }}>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Total</th>
+                <th>9th Nov </th>
+                <th>10th Nov  </th>
+                <th>11th Nov   </th>
+                <th>12th Nov  </th>
+                <th>13th Nov </th>
+                <th>14th Nov </th>
+                <th>15th Nov </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ROI</td>
+                <td>Average ROI</td>
+                <td>-</td>
+                <td>- </td>
+                <td>1200</td>
+                <td>1250</td>
+                <td>1350</td>
+                <td>4000</td>
+                <td>4500 </td>
+              </tr>
+              <tr>
+                <td>Amount Spend </td>
+                <td>Total Amount Spend</td>
+                <td>-</td>
+                <td>- </td>
+                <td>1200</td>
+                <td>1250</td>
+                <td>1350</td>
+                <td>4000</td>
+                <td>4500 </td>
+              </tr>
+              <tr>
+                <td>CPC </td>
+                <td>Average CPC</td>
+                <td>-</td>
+                <td>- </td>
+                <td>1200</td>
+                <td>1250</td>
+                <td>1350</td>
+                <td>4000</td>
+                <td>4500 </td>
+              </tr>
+              <tr>
+                <td>Revenue </td>
+                <td>Total Revenue</td>
+                <td>-</td>
+                <td>- </td>
+                <td>1200</td>
+                <td>1250</td>
+                <td>1350</td>
+                <td>4000</td>
+                <td>4500 </td>
+              </tr>
+              <tr>
+                <td>P&L </td>
+                <td>Total P&L</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        </div>
+
+
+
       </div>
     </>
   );

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import axios from "axios";
 import { setAccessToken } from "../utils/helper";
+import { errorToast } from "../utils/helper";
 
 const loginSchema = z.object({
   email: z.string().email("Invalid email address"),
@@ -18,15 +19,11 @@ const Login = () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Access the env variable
     try {
       setLoading(true);
-      const response = await axios.post(
-        `${API_BASE_URL}/login/`  ,
-        obj,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axios.post(`${API_BASE_URL}/login/`, obj, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       setLoading(false);
 
@@ -41,6 +38,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
+      errorToast(error.response.data.message);
       setLoading(false);
     }
   };
@@ -206,7 +204,7 @@ const Login = () => {
                       className="w-100 btn btn-primary mt-4"
                       disabled={loading}
                     >
-                      {loading ? <div className="spinner"></div>  : "Login"}
+                      {loading ? <div className="spinner"></div> : "Login"}
                       {/* <div className="spinner"></div> */}
                     </button>
                   </div>
