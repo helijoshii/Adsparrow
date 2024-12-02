@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
 import bgImg from "../assets/bg.png";

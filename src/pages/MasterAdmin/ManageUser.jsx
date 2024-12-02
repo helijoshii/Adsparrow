@@ -137,6 +137,8 @@ const ManageUser = () => {
       $("#Manage_User").DataTable({
         scrollX: true,
         destroy: true, // Ensure old table is destroyed before reinitializing
+        ordering: false,
+        lengthMenu: [[100, 200, 300, 400], [100, 200, 300, 400]], // Set custom page length options
       });
     }
   }, [loading]);
@@ -176,6 +178,7 @@ const ManageUser = () => {
                     <th>Name</th>
                     <th>Email</th>
                     <th>Password</th>
+                    <th>Premium access</th>
                     <th>Status</th>
                     <th>Date And Time</th>
                   </tr>
@@ -201,7 +204,18 @@ const ManageUser = () => {
                         <td>Jayesh</td>
                         <td>abc@gmail.com</td>
                         <td>1234567890</td>
-
+                        <td>
+                          <div className="toggle">
+                            <input
+                              type="checkbox"
+                              className="phase-className"
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
+                            />
+                            <label></label>
+                          </div>
+                        </td>
                         <td>
                           <div className="toggle">
                             <input
@@ -250,6 +264,19 @@ const ManageUser = () => {
                         <td>Rajesh</td>
                         <td>xyz@gmail.com</td>
                         <td>1234567890</td>
+
+                        <td>
+                          <div className="toggle">
+                            <input
+                              type="checkbox"
+                              className="phase-className"
+                              id="toggle1"
+                              checked={checkboxStates.toggle1}
+                              onChange={handleCheckboxChange("toggle1")}
+                            />
+                            <label></label>
+                          </div>
+                        </td>
 
                         <td>
                           <div className="toggle">

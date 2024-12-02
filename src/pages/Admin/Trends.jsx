@@ -48,6 +48,7 @@ const Trends = () => {
           $("#ROI_data_table").DataTable({
             scrollX: true,
             destroy: true, 
+            ordering: false,
           });
         }
       }, [loading]); 
@@ -65,6 +66,7 @@ const Trends = () => {
           $("#Amount_data_table").DataTable({
             scrollX: true,
             destroy: true, 
+            ordering: false,
           });
         }
       }, [loading]); 
@@ -82,6 +84,7 @@ const Trends = () => {
           $("#Revenue_data_table").DataTable({
             scrollX: true,
             destroy: true, 
+            ordering: false,
           });
         }
       }, [loading]); 
@@ -99,6 +102,7 @@ const Trends = () => {
           $("#PL_data_table").DataTable({
             scrollX: true,
             destroy: true, 
+            ordering: false,
           });
         }
       }, [loading]); 
@@ -116,6 +120,7 @@ const Trends = () => {
           $("#CPC_data_table").DataTable({
             scrollX: true,
             destroy: true, 
+            ordering: false,
           });
         }
       }, [loading]); 

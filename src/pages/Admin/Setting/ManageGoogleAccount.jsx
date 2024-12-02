@@ -69,6 +69,7 @@ const ManageGoogleAccount = () => {
       $("#Manage_Google_table").DataTable({
         scrollX: true,
         destroy: true, // Ensure old table is destroyed before reinitializing
+        ordering: false,
       });
     }
   }, [loading]); 

@@ -54,6 +54,7 @@ const Dashboard = () => {
       $("#Meta_data_table").DataTable({
         scrollX: true,
         destroy: true,
+        ordering: false,
       });
     }
   }, [loading]);
@@ -72,6 +73,7 @@ const Dashboard = () => {
       $("#Google_data_table").DataTable({
         scrollX: true,
         destroy: true,
+        ordering: false,
       });
     }
   }, [loading]);

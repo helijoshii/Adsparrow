@@ -222,6 +222,7 @@ const Analytics = () => {
       $("#Analytics_table_data").DataTable({
         scrollX: true,
         destroy: true,
+        ordering: false,
       });
     }
   }, [loading]);
@@ -240,6 +241,10 @@ const Analytics = () => {
       $("#Trends").DataTable({
         scrollX: true,
         destroy: true, 
+        bLengthChange: false, // Hides page length dropdown
+        paging: false,        // Disables pagination
+        searching: false,     // Disables the search bar
+        ordering: false,
       });
     }
   }, [loading]); 
@@ -274,12 +279,11 @@ const Analytics = () => {
             <h2 className="main_title m-0">Analytics</h2>
           </div>
           <div className="col-lg-auto  col-md-auto col-sm-auto">
-            <select
-              
+            <select            
               name="select-label"
-              class="form-control select_control"
+              className="form-control select_control"
             >
-              <option value="Senora" selected>
+              <option value="Senora" defaultValue>
                 Ad Account name
               </option>
               <option value="Senora">Account 1</option>
@@ -293,7 +297,7 @@ const Analytics = () => {
               className="form-control select_control"
               name="select-label"
             >
-              <option value="Senora" selected>
+              <option value="Senora" defaultValue>
                 Select Status
               </option>
               <option value="Senora">Pending</option>
@@ -1048,23 +1052,23 @@ const Analytics = () => {
 
           {/* modal for trends  */}
         <div>
-        <div class="modal fade" id="trends" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-xl">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel"> <b>7 days trends</b> </h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div className="modal fade" id="trends" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog modal-dialog-centered modal-xl">
+    <div className="modal-content">
+      <div className="modal-header">
+        <h1 className="modal-title fs-5" id="exampleModalLabel"> <b>7 days trends</b> </h1>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-        <ul class="ad_acc">
+      <div className="modal-body">
+        <ul className="ad_acc">
           <li><FontAwesomeIcon icon={faAnglesRight} /> <b>Ad Account :</b>  Google </li>
           <li><FontAwesomeIcon icon={faAnglesRight} /> <b>Ad Name :</b> Video </li>
           <li><FontAwesomeIcon icon={faAnglesRight} /> <b>Current CPC :</b> Video</li>
           <li>
             <FontAwesomeIcon icon={faAnglesRight} /> <b>Current Budget :</b>
             <span>
-              <span class="badge text-bg-info">5</span>
-              <button type="button" class="btn btn-primary small_bt" data-bs-toggle="modal" data-bs-target="#buget">
+              <span className="badge text-bg-info">5</span>
+              <button type="button" className="btn btn-primary small_bt" data-bs-toggle="modal" data-bs-target="#buget">
               <FontAwesomeIcon icon={faPenToSquare} />
               </button>
             </span>
@@ -1072,15 +1076,15 @@ const Analytics = () => {
           <li>
             <FontAwesomeIcon icon={faAnglesRight} /> <b>Status :</b>
             <span>
-              <div class="toggle" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
+              <div className="toggle" style={{ display: 'inline-block', verticalAlign: 'middle' }}>
                 <input type="checkbox" />
                 <label></label>
               </div>
             </span>
           </li>
         </ul>
-        <div class="daye_sevan_rs">
-          <table id="Trends" class="table table-striped data-table-dr1"  style={{ width: '100%' }}>
+        <div className="daye_sevan_rs">
+          <table id="Trends" className="table table-striped data-table-dr1"  style={{ width: '100%' }}>
             <thead>
               <tr>
                 <th></th>
