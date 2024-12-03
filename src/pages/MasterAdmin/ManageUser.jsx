@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import $ from "jquery";
 import "datatables.net-bs5";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
@@ -12,8 +12,10 @@ import {
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import axios from "axios";
-const MySwal = withReactContent(Swal);
 import { z } from "zod";
+import { addUserSchema } from "../../utils/validationSchemas";
+import { errorToast } from "../../utils/helper";
+const MySwal = withReactContent(Swal);
 
 // Shimmer loader component
 const ShimmerRow = () => (
@@ -28,13 +30,12 @@ const ShimmerRow = () => (
 
 const ManageUser = () => {
   const [loading, setLoading] = useState(true);
-  const [inputs, setInputs] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
   });
-  
-
+  const [errors, setErrors] = useState({});
   const [checkboxStates, setCheckboxStates] = useState({
     toggle1: false,
     toggle2: false,
@@ -52,14 +53,10 @@ const ManageUser = () => {
     }
   };
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setInputs((prevInputs) => ({
-      ...prevInputs,
-      [name]: value,
-    }));
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
-
   const checked = (id) => {
     MySwal.fire({
       title: <p>Are you sure?</p>,
@@ -110,14 +107,29 @@ const ManageUser = () => {
     });
   };
 
-  const handleManageUser = async () => {
-    console.log(inputs);
+  const handleAddUser = async (data) => {
+    console.log("Form Data:", data);
     try {
-      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-      const res = await axios.post(`${API_BASE_URL}/manageuser/`, inputs);
-      console.log(res);
+      const response = await axios.post(
+        `http://devadsparrowapi.bdccoder.in/api/manageuser/`,
+        data
+      );
+      console.log("API Response:", response.data);
     } catch (error) {
-      console.error(error);
+      console.error("API Error:", error);
+      errorToast(error.message);
+    }
+  };
+
+  const handleManageUser = () => {
+    const result = addUserSchema.safeParse(formData);
+    if (result.success) {
+      handleAddUser(result.data);
+      setFormData({ name: "", email: "", password: "" });
+      setErrors({});
+    } else {
+      const fieldErrors = result.error.flatten().fieldErrors;
+      setErrors(fieldErrors);
     }
   };
 
@@ -138,7 +150,10 @@ const ManageUser = () => {
         scrollX: true,
         destroy: true, // Ensure old table is destroyed before reinitializing
         ordering: false,
-        lengthMenu: [[100, 200, 300, 400], [100, 200, 300, 400]], // Set custom page length options
+        lengthMenu: [
+          [100, 200, 300, 400],
+          [100, 200, 300, 400],
+        ], // Set custom page length options
       });
     }
   }, [loading]);
@@ -340,43 +355,61 @@ const ManageUser = () => {
               </div>
               <div className="modal-body">
                 <div className="mb-3">
-                  <label htmlFor="" className="form-label">
+                  <label htmlFor="name" className="form-label">
                     Name<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    id=""
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    id="edit-name"
                     placeholder="Enter Name"
                     name="name"
+                    value={formData.name}
                     onChange={handleInputChange}
                   />
+                  {errors.name && (
+                    <small className="text-danger">{errors.name}</small>
+                  )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="" className="form-label">
+                  <label htmlFor="email" className="form-label">
                     Email<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
-                    className="form-control"
-                    id=""
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    id="edit-email"
                     placeholder="Enter Email"
                     name="email"
+                    value={formData.email}
                     onChange={handleInputChange}
                   />
+                  {errors.email && (
+                    <small className="text-danger">{errors.email}</small>
+                  )}
                 </div>
                 <div className="mb-3">
-                  <label htmlFor="" className="form-label">
+                  <label htmlFor="password" className="form-label">
                     Password<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="password"
-                    className="form-control"
-                    id=""
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    id="edit-password"
                     name="password"
                     placeholder="Enter Password"
+                    value={formData.password}
                     onChange={handleInputChange}
                   />
+                  {errors.password && (
+                    <small className="text-danger">{errors.password}</small>
+                  )}
                 </div>
               </div>
               <div className="modal-footer justify-content-center">
@@ -413,13 +446,104 @@ const ManageUser = () => {
               </div>
               <div className="modal-body">
                 <div className="mb-3">
+                  <label htmlFor="name" className="form-label">
+                    Name<span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    id="edit-name"
+                    placeholder="Enter Name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                  />
+                  {errors.name && (
+                    <small className="text-danger">{errors.name}</small>
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="email" className="form-label">
+                    Email<span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    id="edit-email"
+                    placeholder="Enter Email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                  />
+                  {errors.email && (
+                    <small className="text-danger">{errors.email}</small>
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="password" className="form-label">
+                    Password<span style={{ color: "red" }}>*</span>
+                  </label>
+                  <input
+                    type="password"
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    id="edit-password"
+                    name="password"
+                    placeholder="Enter Password"
+                    value={formData.password}
+                    onChange={handleInputChange}
+                  />
+                  {errors.password && (
+                    <small className="text-danger">{errors.password}</small>
+                  )}
+                </div>
+              </div>
+              <div className="modal-footer justify-content-center">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleManageUser}
+                >
+                  Save
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* <div
+          className="modal fade"
+          id="edit"
+          tabIndex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
+                  Edit User
+                </h1>
+                <button
+                  type="button"
+                  className="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div className="modal-body">
+                <div className="mb-3">
                   <label htmlFor="" className="form-label">
                     Name<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id=""
+                    id="name"
                     placeholder="Enter Name"
                   />
                 </div>
@@ -430,7 +554,7 @@ const ManageUser = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id=""
+                    id="email"
                     placeholder="Enter Email"
                   />
                 </div>
@@ -441,7 +565,7 @@ const ManageUser = () => {
                   <input
                     type="text"
                     className="form-control"
-                    id=""
+                    id="password"
                     placeholder="Enter Password"
                   />
                 </div>
@@ -453,7 +577,7 @@ const ManageUser = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
