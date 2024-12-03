@@ -132,7 +132,7 @@ const Trends = () => {
         <div class="container-fluid">
           <div class="row g-2">
             <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
-              <h2 class="main_title m-0">Demotab</h2>
+              <h2 class="main_title m-0">Trends</h2>
             </div>
             <div class="col-lg-auto  col-md-auto col-sm-auto">
               <select

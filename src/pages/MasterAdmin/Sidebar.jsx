@@ -8,10 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { NavLink } from 'react-router-dom';
 
-
-
-
-
 const Sidebar = () => {
   
   return (

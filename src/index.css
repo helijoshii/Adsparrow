@@ -6670,8 +6670,8 @@ fieldset:disabled .btn {
 }
 
 .badge {
-    --bs-badge-padding-x: 10px;
-    --bs-badge-padding-y: 5px;
+    --bs-badge-padding-x: 6px;
+    --bs-badge-padding-y: 4px;
     --bs-badge-font-size: 0.875rem;
     --bs-badge-font-weight: 400;
     --bs-badge-color: #fff;
@@ -22472,10 +22472,116 @@ div.dt-scroll-body>table.dataTable>thead>tr>td {
 }
 
 /* Styling for sidebar */
-.toggle-btn {
+/* .toggle-btn {
     display: none;
+} */
+
+    .toggle-btn {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        z-index: 1000;
+        display: block;
+        border: 1px solid white;
+        background: black;
+        border-radius: 50%;
+        top: 6px;
+        left: 280px;
+        font-size: 9px;
+        height: 40px;
+        width: 40px;
+    }
+
+    .sidebar {
+        width: 100%;
+        /* Full-width on small screens */
+        left: -100%;
+        /* Hide off-screen on small devices */
+    }
+    .left-sidebar {
+        width: 270px;
+        background-color: #fff;
+        position: absolute;
+        -webkit-transition: 0.2s ease-in;
+        transition: 0.2s ease-in;
+        height: 100%;
+        z-index: 11;
+        border-right: 1px solid rgb(229, 234, 239)
+    }
+
+    .left-sidebar.open {
+        left: 92%;
+        position: absolute;
+    }
+    .left-sidebar.closed {
+        left: -270px;
+    }
+
+    .left-sidebar.open {
+        left: 0 !important;
+    }
+    .left-sidebar.closed .toggle-btn {
+        left: 20px;
+    }
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -270px;
+        height: 100vh;
+        transition: left 0.3s ease;
+    }
+
+    /* When sidebar is open */
+    .sidebar.open {
+        left: 0;
+        background: white;
+        width: 80%;
+    }
+
+    /* When sidebar is closed */
+    .sidebar.closed {
+        left: -270px;
+    }
+    .content {
+        margin-left: 0;
+        padding: 20px;
+    }
+
+/* When the sidebar is closed */
+body.sidebar-closed #main-wrapper[data-layout=vertical][data-header-position=fixed] .app-header {
+    width: 100%;
+  }
+  
+  body.sidebar-closed #main-wrapper[data-layout=vertical][data-sidebartype=full] .body-wrapper {
+    margin: 0;
+  }
+  
+  body.sidebar-closed .footer {
+    left: 0;
+  }
+  
+
+
+
+
+    /* .body-wrapper {}
+
+#main-wrapper[data-layout=vertical][data-header-position=fixed] .app-header {
+    width: 100%;
 }
 
+#main-wrapper[data-layout=vertical][data-sidebartype=full] .body-wrapper {
+    margin: 0;
+}
+
+.footer {
+    left: 0;
+} */
 
 /* Responsive styles for smaller screens */
 @media (max-width: 1199.98px) {

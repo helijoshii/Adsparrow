@@ -26,6 +26,17 @@ const Sidebar = () => {
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
   };
+  useEffect(() => {
+    const body = document.body;
+
+    if (isOpen) {
+      // Remove the classes when sidebar is open
+      body.classList.remove("sidebar-closed");
+    } else {
+      // Add the classes when sidebar is closed
+      body.classList.add("sidebar-closed");
+    }
+  }, [isOpen]);
   const location = useLocation();
 
   useEffect(() => {
@@ -81,9 +92,9 @@ const Sidebar = () => {
   return (
     <>
        
-      <div className={`left-sidebar ${isOpen ? "open" : "closed"}`}>
+      <div className={`left-sidebar  ${isOpen ? "open" : "closed"}`}>
 
-          <button className="toggle-btn" onClick={toggleSidebar}>
+          <button className="toggle-btn " onClick={toggleSidebar}>
             
             <FontAwesomeIcon icon={isOpen ? faXmark : faBars} size="2x" color="white" />
           </button>
