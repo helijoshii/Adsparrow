@@ -15,8 +15,11 @@ const loginSchema = z.object({
 const Login = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [errors, setErrors] = useState({ email: "", password: "" });
+
   const handleLogin = async (obj) => {
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Access the env variable
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
     try {
       setLoading(true);
       const response = await axios.post(`${API_BASE_URL}/login/`, obj, {
@@ -38,13 +41,15 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Error during login:", error);
-      errorToast(error.response.data.message);
+      // errorToast(error.response.data.message);
+      setErrors({
+        email: error.response.data.message,
+        password: error.response.data.message,
+      });
+
       setLoading(false);
     }
   };
-
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [errors, setErrors] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -144,27 +149,6 @@ const Login = () => {
                   <img src={logo} alt="logo" />
                 </div>
                 <h3>Login</h3>
-                {/* <form>
-                  <div className="login_in">
-                    <div className="mb-3">
-                      <input
-                        type="email"
-                        className="form-control"
-                        placeholder="Email"
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <input
-                        type="password"
-                        className="form-control"
-                        placeholder="Password"
-                      />
-                    </div>
-                    <button type="submit" className="w-100 btn btn-primary mt-4"  onClick={dashboard}>
-                      Login
-                    </button>
-                  </div>
-                </form> */}
                 <form onSubmit={handleSubmit}>
                   <div className="login_in">
                     <div className="mb-3">
