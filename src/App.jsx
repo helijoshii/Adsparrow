@@ -86,7 +86,7 @@ function App() {
     return routes.map((individualRoute) => {
       if (individualRoute.path) {
         if (individualRoute.isPrivate) {
-          console.log(individualRoute);
+          // console.log(individualRoute);
           return (
             <Route key={individualRoute.path} element={<PrivateRoute />}>
               <Route

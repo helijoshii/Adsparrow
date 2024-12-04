@@ -30,7 +30,7 @@ const Dashboard = () => {
       const response = await axios.get(
         "https://devadsparrowapi.bdccoder.in/api/dashboard/"
       );
-      console.log("Dashboard data:", response);
+      // console.log("Dashboard data:", response);
       return response.data;
     } catch (error) {
       console.error("Error fetching dashboard data:", error);

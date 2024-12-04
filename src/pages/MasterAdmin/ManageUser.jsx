@@ -114,7 +114,7 @@ const ManageUser = () => {
         `http://devadsparrowapi.bdccoder.in/api/manageuser/`,
         data
       );
-      console.log("API Response:", response.data);
+      // console.log("API Response:", response.data);
     } catch (error) {
       console.error("API Error:", error);
       errorToast(error.message);

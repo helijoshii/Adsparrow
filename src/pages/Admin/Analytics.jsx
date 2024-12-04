@@ -124,7 +124,7 @@ const Analytics = () => {
       setError(result.error.format().budget?._errors[0] || "Invalid input");
     } else {
       setError("");
-      console.log("Budget saved:", budget);
+      // console.log("Budget saved:", budget);
       // Perform save operation or API call here
     }
   };
