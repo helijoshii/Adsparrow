@@ -20,7 +20,7 @@ const MySwal = withReactContent(Swal);
 // Shimmer loader component
 const ShimmerRow = () => (
   <tr>
-    {[...Array(7)].map((_, index) => (
+    {[...Array(8)].map((_, index) => (
       <td key={index}>
         <div className="shimmer-line"></div>
       </td>
@@ -39,7 +39,7 @@ const ManageUser = () => {
   const [checkboxStates, setCheckboxStates] = useState({
     toggle1: false,
     toggle2: false,
-    toggle3: false, // Add more toggles as needed
+    toggle3: false, 
   });
 
   const handleCheckboxChange = (id) => (event) => {
@@ -144,7 +144,6 @@ const ManageUser = () => {
       setLoading(false);
     }, 1000); // Simulate loading delay
 
-    // Once data is loaded, initialize DataTable
     if (!loading) {
       $("#Manage_User").DataTable({
         scrollX: true,
@@ -165,7 +164,6 @@ const ManageUser = () => {
           <div className="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
             <h2 className="main_title m-0">Manage User</h2>
           </div>
-
           <div className="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
             <button
               type="button"
@@ -177,7 +175,6 @@ const ManageUser = () => {
             </button>
           </div>
         </div>
-
         <div className="row">
           <div className="col-12">
             <div className="white_table">

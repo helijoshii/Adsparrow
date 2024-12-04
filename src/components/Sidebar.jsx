@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
 import logo from "../assets/logo.png";
-import {
-  ChartLine,
-  ChevronDown,
-  LayoutDashboard,
-  Settings,
-} from "lucide-react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import $ from "jquery";
 import {
@@ -91,9 +85,7 @@ const Sidebar = () => {
 
   return (
     <>
-       
       <div className={`left-sidebar  ${isOpen ? "open" : "closed"}`}>
-
           <button className="toggle-btn " onClick={toggleSidebar}>
             
             <FontAwesomeIcon icon={isOpen ? faXmark : faBars} size="2x" color="white" />
