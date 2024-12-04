@@ -223,6 +223,10 @@ const Analytics = () => {
         scrollX: true,
         destroy: true,
         ordering: false,
+        lengthMenu: [
+          [100, 200, 300, 400],
+          [100, 200, 300, 400],
+        ], // Set custom page length options
       });
     }
   }, [loading]);
@@ -429,7 +433,7 @@ const Analytics = () => {
                 <tbody>
                   {loading ? (
                     // Show shimmer rows when data is loading
-                    [...Array(10)].map((_, index) => <ShimmerRow key={index} />)
+                    [...Array(13)].map((_, index) => <ShimmerRow key={index} />)
                   ) : (
                     <>
                       <tr>

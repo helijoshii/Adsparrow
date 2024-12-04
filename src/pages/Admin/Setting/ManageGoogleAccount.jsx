@@ -19,7 +19,7 @@ import upload from "../../../assets/upload.png"
 // Shimmer loader component
 const ShimmerRow = () => (
   <tr>
-    {[...Array(3)].map((_, index) => (
+    {[...Array(9)].map((_, index) => (
       <td key={index}>
         <div className="shimmer-line"></div>
       </td>
@@ -70,6 +70,10 @@ const ManageGoogleAccount = () => {
         scrollX: true,
         destroy: true, // Ensure old table is destroyed before reinitializing
         ordering: false,
+        lengthMenu: [
+          [100, 200, 300, 400],
+          [100, 200, 300, 400],
+        ], // Set custom page length options
       });
     }
   }, [loading]); 
@@ -118,7 +122,7 @@ const ManageGoogleAccount = () => {
                 <tbody>
                   {loading ? (
                     // Show shimmer rows when data is loading
-                    [...Array(2)].map((_, index) => <ShimmerRow key={index} />)
+                    [...Array(1)].map((_, index) => <ShimmerRow key={index} />)
                   ) : (
                     <>
                       <tr>

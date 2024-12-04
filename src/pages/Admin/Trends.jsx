@@ -48,7 +48,11 @@ const Trends = () => {
           $("#ROI_data_table").DataTable({
             scrollX: true,
             destroy: true, 
-            ordering: false,
+            // ordering: false,
+            lengthMenu: [
+              [100, 200, 300, 400],
+              [100, 200, 300, 400],
+            ], // Set custom page length options
           });
         }
       }, [loading]); 
@@ -66,7 +70,11 @@ const Trends = () => {
           $("#Amount_data_table").DataTable({
             scrollX: true,
             destroy: true, 
-            ordering: false,
+            // ordering: false,
+            lengthMenu: [
+              [100, 200, 300, 400],
+              [100, 200, 300, 400],
+            ], // Set custom page length options
           });
         }
       }, [loading]); 
@@ -84,7 +92,11 @@ const Trends = () => {
           $("#Revenue_data_table").DataTable({
             scrollX: true,
             destroy: true, 
-            ordering: false,
+            // ordering: false,
+            lengthMenu: [
+              [100, 200, 300, 400],
+              [100, 200, 300, 400],
+            ], // Set custom page length options
           });
         }
       }, [loading]); 
@@ -102,7 +114,11 @@ const Trends = () => {
           $("#PL_data_table").DataTable({
             scrollX: true,
             destroy: true, 
-            ordering: false,
+            // ordering: false,
+            lengthMenu: [
+              [100, 200, 300, 400],
+              [100, 200, 300, 400],
+            ], // Set custom page length options
           });
         }
       }, [loading]); 
@@ -120,7 +136,11 @@ const Trends = () => {
           $("#CPC_data_table").DataTable({
             scrollX: true,
             destroy: true, 
-            ordering: false,
+            // ordering: false,
+            lengthMenu: [
+              [100, 200, 300, 400],
+              [100, 200, 300, 400],
+            ], // Set custom page length options
           });
         }
       }, [loading]); 

@@ -15,7 +15,7 @@ const MySwal = withReactContent(Swal);
 // Shimmer loader component
 const ShimmerRow = () => (
   <tr>
-    {[...Array(8)].map((_, index) => (
+    {[...Array(11)].map((_, index) => (
       <td key={index}>
         <div className="shimmer-line"></div>
       </td>
@@ -119,6 +119,10 @@ const ManageAdAccount = () => {
         scrollX: true,
         destroy: true, // Ensure old table is destroyed before reinitializing
         ordering: false,
+        lengthMenu: [
+          [100, 200, 300, 400],
+          [100, 200, 300, 400],
+        ], // Set custom page length options
       });
     }
   }, [loading]); 
@@ -183,7 +187,7 @@ const ManageAdAccount = () => {
                 <tbody>
                   {loading ? (
                     // Show shimmer rows when data is loading
-                    [...Array(2)].map((_, index) => <ShimmerRow key={index} />)
+                    [...Array(1)].map((_, index) => <ShimmerRow key={index} />)
                   ) : (
                     <>
                       <tr>
