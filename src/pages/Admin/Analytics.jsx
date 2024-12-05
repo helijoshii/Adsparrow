@@ -50,26 +50,6 @@ const Analytics = () => {
     },
   ]);
 
-  // const calendarRef = useRef(null); // Reference for the calendar container
-
-  // const handleRangeClick = () => {
-  //   setIsCalendarOpen((prev) => !prev); // Toggle calendar open/close
-  // };
-
-  // // Close calendar when clicking outside
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (calendarRef.current && !calendarRef.current.contains(event.target)) {
-  //       setIsCalendarOpen(false);
-  //     }
-  //   };
-
-  //   document.addEventListener('mousedown', handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickOutside);
-  //   };
-  // }, []);
-
   const [tempState, setTempState] = useState(state); // Temporary state for date selection
   const calendarRef = useRef(null);
 
@@ -150,7 +130,6 @@ const Analytics = () => {
       unChecked(id);
     }
   };
-
   const checked = (id) => {
     MySwal.fire({
       title: <p>Are you sure?</p>,
@@ -174,7 +153,6 @@ const Analytics = () => {
       }
     });
   };
-
   const unChecked = (id) => {
     MySwal.fire({
       title: "Are you sure?",
@@ -392,7 +370,7 @@ const Analytics = () => {
                   <div className="text-end mb-2">
                     <FontAwesomeIcon
                       icon={faCircle}
-                      className="me-1 fa-fade"
+                      className="me-1  fa-fade"
                       style={{ color: "red" }}
                     />
                     Last SYNC at : 30-02-2025 : 12:15:50 PM

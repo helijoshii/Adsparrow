@@ -83,12 +83,39 @@ const Navbar = () => {
   const userEmail = userData.email || "";
   const logout = async () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const token = localStorage.getItem("token");
 
-    const res = await axios.post(`${API_BASE_URL}/logout/`);
-    if (res.status === 200) {
-      localStorage.removeItem("token");
-      localStorage.removeItem("user_info");
-      navigate("/login");
+    // const res = await axios.post(`${API_BASE_URL}/logout/`);
+    
+    // if (res.status === 200) {
+    //   localStorage.removeItem("token");
+    //   localStorage.removeItem("user_info");
+    //   navigate("/login");
+    // }
+
+    try {
+      // Make API request with token in headers
+      const res = await axios.post(
+        `${API_BASE_URL}/logout/`,
+        {}, // Empty body
+        {
+          headers: {
+            Authorization: `Token ${token}`, // Add the token here
+          },
+        }
+      );
+      
+      if (res.status === 200) {
+        // Clear user data from local storage
+        localStorage.removeItem("token");
+        localStorage.removeItem("user_info");
+        
+        // Redirect to login page
+        navigate("/login");
+      }
+    } catch (error) {
+      // console.error("Error during logout:", error);
+      // Handle error appropriately (e.g., show a notification or redirect)
     }
 };
 

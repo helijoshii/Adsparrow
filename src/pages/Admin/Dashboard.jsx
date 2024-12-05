@@ -24,19 +24,35 @@ const ShimmerRow = () => (
 
 const Dashboard = () => {
   const [loading, setLoading] = useState(true);
-
+  const [dashboardData, setDashboardData] = useState(null); 
+  
   const getDashboardData = async () => {
     try {
+      // Retrieve token from local storage
+      const token = localStorage.getItem("token");
+  
+      // Make API request with token in headers
       const response = await axios.get(
-        "https://devadsparrowapi.bdccoder.in/api/dashboard/"
+        "https://devadsparrowapi.bdccoder.in/api/dashboard/",
+        {
+          headers: {
+            Authorization: `Token ${token}`, // Include 'Token' header
+          },
+        }
       );
-      // console.log("Dashboard data:", response);
-      return response.data;
+
+      // Update the dashboard data state
+      setDashboardData(response.data.data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
-      return null;
+      setLoading(false);
     }
   };
+
+  useEffect(() => {
+    getDashboardData(); // Fetch data on component mount
+  }, []);
 
   useEffect(() => getDashboardData, []);
 
@@ -97,7 +113,7 @@ const Dashboard = () => {
                 >
                   <div className="left">
                     <span>Total META ADS Count</span>
-                    <h3>30 </h3>
+                    <h3>{loading ? "" : dashboardData?.total_fb_ad_accounts}</h3>
                   </div>
                   <div className="right">
                     <span>

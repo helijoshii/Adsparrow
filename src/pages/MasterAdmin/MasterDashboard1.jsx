@@ -6,6 +6,7 @@ import axios from "axios";
 
 const MasterDashboard1 = () => {
   const [loading, setLoading] = useState(true);
+  const [dashboardData, setDashboardData] = useState(null); 
 
   // Simulate data loading (you can replace this with real data fetching logic)
   useEffect(() => {
@@ -13,20 +14,34 @@ const MasterDashboard1 = () => {
       setLoading(false); // Set loading to false after data is fetched
     }, 1000);
   }, []);
+
   const getDashboardData = async () => {
-    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; // Access the env variable
     try {
+      // Retrieve token from local storage
+      const token = localStorage.getItem("token");
+  
+      // Make API request with token in headers
       const response = await axios.get(
-        `${API_BASE_URL}/dashboard/`
+        "https://devadsparrowapi.bdccoder.in/api/dashboard/",
+        {
+          headers: {
+            Authorization: `Token ${token}`, // Include 'Token' header
+          },
+        }
       );
-      // console.log("Dashboard data:", response);
-      return response.data;
+
+      // Update the dashboard data state
+      setDashboardData(response.data.data);
+      setLoading(false); // Set loading to false after data is fetched
     } catch (error) {
       console.error("Error fetching dashboard data:", error);
-      return null;
+      setLoading(false);
     }
   };
 
+  useEffect(() => {
+    getDashboardData(); // Fetch data on component mount
+  }, []);
   useEffect(() => getDashboardData, []);
 
   return (
@@ -46,7 +61,7 @@ const MasterDashboard1 = () => {
             >
               <div className="left">
                 <span>{loading ? "" : "Total User Counts"}</span>
-                <h3>{loading ? "" : "11"}</h3>
+                <h3>{loading ? "" : dashboardData?.total_users}</h3>
               </div>
               <div className="right">
                 <span>
@@ -64,7 +79,7 @@ const MasterDashboard1 = () => {
             >
               <div className="left">
                 <span>{loading ? "" : "Total META ADS Counts"}</span>
-                <h3>{loading ? "" : "30"}</h3>
+                <h3>{loading ? "" : dashboardData?.total_fb_ad_accounts}</h3>
               </div>
               <div className="right">
                 <span>
