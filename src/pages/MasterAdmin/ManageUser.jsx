@@ -107,20 +107,45 @@ const ManageUser = () => {
     });
   };
 
+  // const handleAddUser = async (data) => {
+  //   console.log("Form Data:", data);
+  //   try {
+  //     const response = await axios.post(
+  //       `http://devadsparrowapi.bdccoder.in/api/manageuser/`,
+  //       data
+  //     );
+  //     // console.log("API Response:", response.data);
+  //   } catch (error) {
+  //     console.error("API Error:", error);
+  //     errorToast(error.message);
+  //   }
+  // };
+
   const handleAddUser = async (data) => {
     console.log("Form Data:", data);
+  
+    // Retrieve the token from local storage
+    const token = localStorage.getItem("token");
+  
     try {
       const response = await axios.post(
         `http://devadsparrowapi.bdccoder.in/api/manageuser/`,
-        data
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Pass token in Authorization header
+            "Content-Type": "application/json", // Optional, specifies the type of data being sent
+          },
+        }
       );
-      // console.log("API Response:", response.data);
+  
+      // Handle the response if needed
+      console.log("API Response:", response.data);
     } catch (error) {
       console.error("API Error:", error);
-      errorToast(error.message);
+      errorToast(error.message); // Display error notification
     }
   };
-
   const handleManageUser = () => {
     const result = addUserSchema.safeParse(formData);
     if (result.success) {
