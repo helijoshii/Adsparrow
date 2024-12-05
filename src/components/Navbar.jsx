@@ -71,7 +71,6 @@
 
 // export default Navbar;
 
-
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -91,7 +90,7 @@ const Navbar = () => {
       localStorage.removeItem("user_info");
       navigate("/login");
     }
-  };
+};
 
   return (
     <>
@@ -108,7 +107,6 @@ const Navbar = () => {
               </a>
             </li>
           </ul>
-
           <div
             className="navbar-collapse justify-content-end px-0"
             id="navbarNav"
