@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import $ from "jquery";
 import "datatables.net-bs5";
 import "datatables.net-bs5/css/dataTables.bootstrap5.min.css";
@@ -8,8 +8,10 @@ import {
   faCalendarDays,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { userSchema } from "../../../utils/validationSchemas";
 const MySwal = withReactContent(Swal);
 
 // Shimmer loader component
@@ -24,6 +26,7 @@ const ShimmerRow = () => (
 );
 
 const ManageAdAccount = () => { 
+  const [users, setUsers] = useState([]); 
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
     adAccountId: "",
@@ -32,7 +35,7 @@ const ManageAdAccount = () => {
     appSecret: "",
     accountName: "",
   });
-
+  const [errors, setErrors] = useState({});
     // status toggle 
     const [checkboxStates, setCheckboxStates] = useState({
       toggle1: false,
@@ -40,7 +43,52 @@ const ManageAdAccount = () => {
       toggle3: false,
       toggle4: false, // Add more toggles as needed
     });
-  
+    const token = localStorage.getItem("token");
+    const handleInputChange = (e) => {
+      const { name, value } = e.target;
+      setFormData({ ...formData, [name]: value });
+    };
+
+    const handleManageUser = () => {
+      const result = userSchema.safeParse(formData);
+      if (result.success) {
+        handleAddUser(result.data);
+        setErrors({});
+      } else {
+        const fieldErrors = result.error.flatten().fieldErrors;
+        setErrors(fieldErrors);
+      }
+    };
+      // Add user
+  const handleAddUser = async () => {
+    const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.post(
+        `${API_BASE_URL}/facebook-ad-account/`,
+        {
+          fb_ad_account_id: formData.tokenId,          // Mapping directly in the request
+          fb_ad_access_token: formData.adAccountId,    // Mapping directly in the request
+          fb_ad_account_name: formData.accountName,    // Mapping directly in the request
+          fb_ad_app_id: formData.adName,               // Mapping directly in the request
+          fb_ad_app_secret_key: formData.appSecret,    // Mapping directly in the request
+        },
+        { headers: { Authorization: `Token ${token}` } }
+      );
+      if (response.status === 201) {
+        setUsers((prevUsers) => [...prevUsers, response.data]);
+        setFormData({ accountName: "", adAccountId: "", adName: "" , appSecret: "", tokenId: "" });
+        alert("User added successfully!");
+        
+      }
+    } catch (error) {
+      console.error("Error adding user:", error);
+      console.error("Error adding user:", error.response?.data || error.message);
+alert(error.response?.data?.message || "Failed to add user.");
+    }
+  };
+
+
     const handleCheckboxChange = (id) => (event) => {
       const isChecked = event.target.checked;
   
@@ -126,6 +174,7 @@ const ManageAdAccount = () => {
       });
     }
   }, [loading]); 
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -144,15 +193,15 @@ const ManageAdAccount = () => {
 
   return (
     <>
-      <div class="container-fluid">
-        <div class="row g-2">
-          <div class="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
-            <h2 class="main_title m-0">Manage AD Account</h2>
+      <div className="container-fluid">
+        <div className="row g-2">
+          <div className="col-lg-auto  col-md-auto col-sm-auto my-auto me-auto">
+            <h2 className="main_title m-0">Manage AD Account</h2>
           </div>
-          <div class="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
+          <div className="col-lg-auto  col-md-auto col-sm-auto col-auto ms-auto">
             <button
               type="button"
-              class="btn btn-primary"
+              className="btn btn-primary"
               data-bs-toggle="modal"
               data-bs-target="#add_account"
             >
@@ -161,12 +210,12 @@ const ManageAdAccount = () => {
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-12">
-            <div class="white_table">
+        <div className="row">
+          <div className="col-12">
+            <div className="white_table">
               <table
                 id="AD_Account_table"
-                class="table table-striped data-table-dr"
+                className="table table-striped data-table-dr"
                 style={{ width: "100%" }}
               >
                 <thead>
@@ -195,7 +244,7 @@ const ManageAdAccount = () => {
                         <td>
                           <button
                             type="button"
-                            class="btn btn-primary small_bt"
+                            className="btn btn-primary small_bt"
                             data-bs-toggle="modal"
                             data-bs-target="#edit"
                           >
@@ -205,14 +254,14 @@ const ManageAdAccount = () => {
                         <td>Temuu2</td>
                         <td>276971163774132</td>
                         <td>EAAPBBfYwfZBEBO</td>
-                        <td>1056656279502817	</td>
+                        <td>1056656279502817 </td>
                         <td>2262d17143d0195c0384c347f63f6434</td>
                         <td>Success</td>
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
-                              className="phase-class"
+                              className="phase-className"
                               id="toggle1"
                               checked={checkboxStates.toggle1}
                               onChange={handleCheckboxChange("toggle1")}
@@ -220,13 +269,12 @@ const ManageAdAccount = () => {
                             <label></label>
                           </div>
                         </td>
-                       
-                        
+
                         <td>
                           <div className="toggle">
                             <input
                               type="checkbox"
-                              className="phase-class"
+                              className="phase-className"
                               id="toggle2"
                               checked={checkboxStates.toggle2}
                               onChange={handleCheckboxChange("toggle2")}
@@ -235,8 +283,8 @@ const ManageAdAccount = () => {
                           </div>
                         </td>
                         <td>
-                          <p class="mb-0">
-                            <span class="d-flex justify-content-center align-items-center">
+                          <p className="mb-0">
+                            <span className="d-flex justify-content-center align-items-center">
                               <FontAwesomeIcon
                                 icon={faCalendarDays}
                                 className=" me-2"
@@ -247,7 +295,6 @@ const ManageAdAccount = () => {
                           </p>
                         </td>
                       </tr>
-                      
                     </>
                   )}
                 </tbody>
@@ -257,204 +304,232 @@ const ManageAdAccount = () => {
         </div>
 
         <div
-          class="modal fade"
+          className="modal fade"
           id="add_account"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
                   Account Access Token
                 </h1>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                  Access Token<span style={{ color: "red" }}>*</span>
+              <div className="modal-body">
+                <div className="mb-3">
+                  <label for="Access Token" className="form-label">
+                    Access Token<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="adAccountId"
-              name="adAccountId"
-              placeholder="Enter Access Token"
-              value={formData.adAccountId}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className={`form-control ${
+                      errors.adAccountId ? "is-invalid" : ""
+                    }`}
+                    id="adAccountId"
+                    name="adAccountId"
+                    placeholder="Enter Access Token"
+                    value={formData.adAccountId}
+                    onChange={handleInputChange}
+                  />
+                  {errors.adAccountId && (
+                    <small className="text-danger">{errors.adAccountId}</small>
+                  )}
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+                <div className="mb-3">
+                  <label for="tokenId" className="form-label">
                     AD Account ID<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="tokenId"
-              name="tokenId"
-              placeholder="Enter AD Account ID"
-              value={formData.tokenId}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className={`form-control ${
+                      errors.tokenId ? "is-invalid" : ""
+                    }`}
+                    id="tokenId"
+                    name="tokenId"
+                    placeholder="Enter AD Account ID"
+                    value={formData.tokenId}
+                    onChange={handleInputChange}
+                  />
+                  {errors.tokenId && (
+                    <small className="text-danger">{errors.tokenId}</small>
+                  )}
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+                <div className="mb-3">
+                  <label for="adName" className="form-label">
                     App ID<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="adName"
-              name="adName"
-              placeholder="Enter App ID"
-              value={formData.adName}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className={`form-control ${
+                      errors.adName ? "is-invalid" : ""
+                    }`}
+                    id="adName"
+                    name="adName"
+                    placeholder="Enter App ID"
+                    value={formData.adName}
+                    onChange={handleInputChange}
+                  />
+                  {errors.adName && (
+                    <small className="text-danger">{errors.adName}</small>
+                  )}
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
+
+                <div className="mb-3">
+                  <label for="appSecret" className="form-label">
                     App Secret<span style={{ color: "red" }}>*</span>
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="appSecret"
-              name="appSecret"
-              placeholder="Enter App Secret"
-              value={formData.appSecret}
-              onChange={handleChange}
-            />
-            </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                    Account Name (optional)
+                    type="text"
+                    className={`form-control ${
+                      errors.appSecret ? "is-invalid" : ""
+                    }`}
+                    id="appSecret"
+                    name="appSecret"
+                    placeholder="Enter App Secret"
+                    value={formData.appSecret}
+                    onChange={handleInputChange}
+                  />
+                  {errors.appSecret && (
+                    <small className="text-danger">{errors.appSecret}</small>
+                  )}
+                </div>
+                <div className="mb-3">
+                  <label for="accountName" className="form-label">
+                    Account Name
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="accountName"
-              name="accountName"
-              placeholder="Enter Account Name (optional)"
-              value={formData.accountName}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className={`form-control ${
+                      errors.accountName ? "is-invalid" : ""
+                    }`}
+                    id="accountName"
+                    name="accountName"
+                    placeholder="Enter Account Name"
+                    value={formData.accountName}
+                    onChange={handleInputChange}
+                  />
+                  {errors.accountName && (
+                    <small className="text-danger">{errors.accountName}</small>
+                  )}
                 </div>
               </div>
-              <div class="modal-footer justify-content-center">
-              <button
-            type="button"
-            className="btn btn-primary"
-            disabled={!isFormComplete} // Disable if fields are not filled
-          >
-                  Save
+              <div className="modal-footer justify-content-center">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={handleManageUser}
+                >
+                    
                 </button>
               </div>
             </div>
           </div>
         </div>
         <div
-          class="modal fade"
+          className="modal fade"
           id="edit"
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h1 className="modal-title fs-5" id="exampleModalLabel">
                   Edit Account Access Token
                 </h1>
                 <button
                   type="button"
-                  class="btn-close"
+                  className="btn-close"
                   data-bs-dismiss="modal"
                   aria-label="Close"
                 ></button>
               </div>
-              <div class="modal-body">
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                  Access Token
+              <div className="modal-body">
+                <div className="mb-3">
+                  <label for="" className="form-label">
+                    Access Token
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="adAccountId"
-              name="adAccountId"
-              placeholder="Enter AD Account ID"
-              value={formData.adAccountId}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className="form-control"
+                    id="adAccountId"
+                    name="adAccountId"
+                    placeholder="Enter AD Account ID"
+                    value={formData.adAccountId}
+                    onChange={handleChange}
+                  />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                  AD Account ID
+                <div className="mb-3">
+                  <label for="" className="form-label">
+                    AD Account ID
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="tokenId"
-              name="tokenId"
-              placeholder="Enter Token ID"
-              value={formData.tokenId}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className="form-control"
+                    id="tokenId"
+                    name="tokenId"
+                    placeholder="Enter Token ID"
+                    value={formData.tokenId}
+                    onChange={handleChange}
+                  />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                  App ID
+                <div className="mb-3">
+                  <label for="" className="form-label">
+                    App ID
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="adName"
-              name="adName"
-              placeholder="Enter App ID"
-              value={formData.adName}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className="form-control"
+                    id="adName"
+                    name="adName"
+                    placeholder="Enter App ID"
+                    value={formData.adName}
+                    onChange={handleChange}
+                  />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                 App Secret
+                <div className="mb-3">
+                  <label for="" className="form-label">
+                    App Secret
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="adName"
-              name="adName"
-              placeholder="Enter App Secret"
-              value={formData.adName}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className="form-control"
+                    id="adName"
+                    name="adName"
+                    placeholder="Enter App Secret"
+                    value={formData.adName}
+                    onChange={handleChange}
+                  />
                 </div>
-                <div class="mb-3">
-                  <label for="" class="form-label">
-                 Account Name
+                <div className="mb-3">
+                  <label for="" className="form-label">
+                    Account Name
                   </label>
                   <input
-              type="text"
-              className="form-control"
-              id="adName"
-              name="adName"
-              placeholder="Enter Account Name"
-              value={formData.adName}
-              onChange={handleChange}
-            />
+                    type="text"
+                    className="form-control"
+                    id="adName"
+                    name="adName"
+                    placeholder="Enter Account Name"
+                    value={formData.adName}
+                    onChange={handleChange}
+                  />
                 </div>
               </div>
-              <div class="modal-footer justify-content-center">
-                <button type="button" class="btn btn-primary"
-                disabled={!isFormComplete} // Disable if fields are not filled
+              <div className="modal-footer justify-content-center">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={!isFormComplete} // Disable if fields are not filled
                 >
                   Save
                 </button>
@@ -462,7 +537,6 @@ const ManageAdAccount = () => {
             </div>
           </div>
         </div>
-        
       </div>
     </>
   );
