@@ -350,6 +350,7 @@ const ManageUser = () => {
                           </td>
                         </tr>
                       ))}
+
                 </tbody>
               </table>
             </div>

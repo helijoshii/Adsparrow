@@ -36,7 +36,7 @@ const ManageAdAccount = () => {
     accountName: "",
   });
   const [errors, setErrors] = useState({});
-    // status toggle 
+
     const [checkboxStates, setCheckboxStates] = useState({
       toggle1: false,
       toggle2: false,
@@ -59,6 +59,36 @@ const ManageAdAccount = () => {
         setErrors(fieldErrors);
       }
     };
+
+
+
+    const fetchUsers = async () => {
+      const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
+      try {
+        const response = await axios.get(`${API_BASE_URL}/facebook-ad-account/`, {
+          headers: {
+            Authorization: `Token ${token}`,
+            Accept: "application/json",
+          },
+        });
+  
+
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    // Fetch users on component mount
+    useEffect(() => {
+      fetchUsers();
+    }, []);
+  
+
+
+
       // Add user
   const handleAddUser = async () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -67,11 +97,11 @@ const ManageAdAccount = () => {
       const response = await axios.post(
         `${API_BASE_URL}/facebook-ad-account/`,
         {
-          fb_ad_account_id: formData.tokenId,          // Mapping directly in the request
-          fb_ad_access_token: formData.adAccountId,    // Mapping directly in the request
-          fb_ad_account_name: formData.accountName,    // Mapping directly in the request
-          fb_ad_app_id: formData.adName,               // Mapping directly in the request
-          fb_ad_app_secret_key: formData.appSecret,    // Mapping directly in the request
+          fb_ad_account_id: formData.tokenId,      
+          fb_ad_access_token: formData.adAccountId,
+          fb_ad_account_name: formData.accountName,
+          fb_ad_app_id: formData.adName,           
+          fb_ad_app_secret_key: formData.appSecret,
         },
         { headers: { Authorization: `Token ${token}` } }
       );
@@ -87,7 +117,6 @@ const ManageAdAccount = () => {
 alert(error.response?.data?.message || "Failed to add user.");
     }
   };
-
 
     const handleCheckboxChange = (id) => (event) => {
       const isChecked = event.target.checked;
@@ -183,7 +212,6 @@ alert(error.response?.data?.message || "Failed to add user.");
     }));
   };
 
-  // Check if all fields are filled
   const isFormComplete =
     formData.adAccountId.trim() &&
     formData.tokenId.trim() &&
@@ -234,69 +262,119 @@ alert(error.response?.data?.message || "Failed to add user.");
                   </tr>
                 </thead>
                 <tbody>
-                  {loading ? (
-                    // Show shimmer rows when data is loading
-                    [...Array(1)].map((_, index) => <ShimmerRow key={index} />)
-                  ) : (
-                    <>
-                      <tr>
-                        <td>1</td>
-                        <td>
-                          <button
-                            type="button"
-                            className="btn btn-primary small_bt"
-                            data-bs-toggle="modal"
-                            data-bs-target="#edit"
-                          >
-                            <FontAwesomeIcon icon={faPenToSquare} />
-                          </button>
-                        </td>
-                        <td>Temuu2</td>
-                        <td>276971163774132</td>
-                        <td>EAAPBBfYwfZBEBO</td>
-                        <td>1056656279502817 </td>
-                        <td>2262d17143d0195c0384c347f63f6434</td>
-                        <td>Success</td>
-                        <td>
-                          <div className="toggle">
-                            <input
-                              type="checkbox"
-                              className="phase-className"
-                              id="toggle1"
-                              checked={checkboxStates.toggle1}
-                              onChange={handleCheckboxChange("toggle1")}
-                            />
-                            <label></label>
-                          </div>
-                        </td>
+                  {loading
+                   ? 
+                   [...Array(2)].map((_, index) => (
+                    <tr key={index}>
+                      <td colSpan="8" className="text-center">
+                        Loading...
+                      </td>
+                    </tr>
+                  ))
+                   :
+                  //   (
+                  //   <>
+                  //     <tr>
+                  //       <td>1</td>
+                  //       <td>
+                  //         <button
+                  //           type="button"
+                  //           className="btn btn-primary small_bt"
+                  //           data-bs-toggle="modal"
+                  //           data-bs-target="#edit"
+                  //         >
+                  //           <FontAwesomeIcon icon={faPenToSquare} />
+                  //         </button>
+                  //       </td>
+                  //       <td>Temuu2</td>
+                  //       <td>276971163774132</td>
+                  //       <td>EAAPBBfYwfZBEBO</td>
+                  //       <td>1056656279502817 </td>
+                  //       <td>2262d17143d0195c0384c347f63f6434</td>
+                  //       <td>Success</td>
+                  //       <td>
+                  //         <div className="toggle">
+                  //           <input
+                  //             type="checkbox"
+                  //             className="phase-className"
+                  //             id="toggle1"
+                  //             checked={checkboxStates.toggle1}
+                  //             onChange={handleCheckboxChange("toggle1")}
+                  //           />
+                  //           <label></label>
+                  //         </div>
+                  //       </td>
 
-                        <td>
-                          <div className="toggle">
-                            <input
-                              type="checkbox"
-                              className="phase-className"
-                              id="toggle2"
-                              checked={checkboxStates.toggle2}
-                              onChange={handleCheckboxChange("toggle2")}
+                  //       <td>
+                  //         <div className="toggle">
+                  //           <input
+                  //             type="checkbox"
+                  //             className="phase-className"
+                  //             id="toggle2"
+                  //             checked={checkboxStates.toggle2}
+                  //             onChange={handleCheckboxChange("toggle2")}
+                  //           />
+                  //           <label></label>
+                  //         </div>
+                  //       </td>
+                  //       <td>
+                  //         <p className="mb-0">
+                  //           <span className="d-flex justify-content-center align-items-center">
+                  //             <FontAwesomeIcon
+                  //               icon={faCalendarDays}
+                  //               className=" me-2"
+                  //             />
+                  //             27/03/2021
+                  //             <br />
+                  //           </span>
+                  //         </p>
+                  //       </td>
+                  //     </tr>
+                  //   </>
+                  // )}
+                  users?.results?.data?.map((user, index) => (
+                    <tr key={index}>
+                      <td>{index + 1}</td>
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-primary small_bt"
+                          data-bs-toggle="modal"
+                          data-bs-target="#edit"
+                        >
+                          <FontAwesomeIcon icon={faPenToSquare} />
+                        </button>
+                      </td>
+                      <td>{user.fb_ad_account_name || "N/A"}</td>
+                      <td>{user.fb_ad_account_id || "N/A"}</td>
+                      <td>{user.fb_ad_access_token || "N/A"}</td>
+                      <td>{user.fb_ad_app_id || "N/A"}</td>
+                      <td>{user.fb_ad_app_secret_key  || "N/A"}</td>
+                      <td>{user.fb_ad_account_status  || "N/A"}</td>
+                      <td>{user.fb_ad_app_secret_key  || "N/A"}</td>
+                      <td>{user.fb_ad_account_status  || "N/A"}</td>
+                      
+                      <td>
+                        <p className="mb-0">
+                          <span className="d-flex justify-content-center align-items-center">
+                            <FontAwesomeIcon
+                              icon={faCalendarDays}
+                              className="me-2"
                             />
-                            <label></label>
-                          </div>
-                        </td>
-                        <td>
-                          <p className="mb-0">
-                            <span className="d-flex justify-content-center align-items-center">
-                              <FontAwesomeIcon
-                                icon={faCalendarDays}
-                                className=" me-2"
-                              />
-                              27/03/2021
-                              <br />
-                            </span>
-                          </p>
-                        </td>
-                      </tr>
-                    </>
-                  )}
+                            {created_at || "N/A"}
+                            <br />
+                          </span>
+                          <span className="d-flex justify-content-center align-items-center time_span">
+                            <FontAwesomeIcon
+                              icon={faClock}
+                              className="me-2"
+                            />
+                            {created_at || "N/A"}
+                          </span>
+                        </p>
+                      </td>
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
