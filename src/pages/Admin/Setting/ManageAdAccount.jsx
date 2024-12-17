@@ -60,8 +60,6 @@ const ManageAdAccount = () => {
       }
     };
 
-
-
     const fetchUsers = async () => {
       const API_BASE_URL = import.meta.env.VITE_API_BASE_URL; 
       try {
@@ -71,8 +69,6 @@ const ManageAdAccount = () => {
             Accept: "application/json",
           },
         });
-  
-
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -80,15 +76,10 @@ const ManageAdAccount = () => {
         setLoading(false);
       }
     };
-  
-    // Fetch users on component mount
+
     useEffect(() => {
       fetchUsers();
     }, []);
-  
-
-
-
       // Add user
   const handleAddUser = async () => {
     const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
@@ -128,7 +119,7 @@ alert(error.response?.data?.message || "Failed to add user.");
         unChecked(id);
       }
     };
-  
+   
     const checked = (id) => {
       MySwal.fire({
         title: <p>Are you sure?</p>,

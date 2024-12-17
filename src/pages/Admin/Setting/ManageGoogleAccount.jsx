@@ -27,7 +27,6 @@ const ShimmerRow = () => (
   </tr>
 );
 
-
 const ManageGoogleAccount = () => {
   const [loading, setLoading] = useState(true);
   const [formData, setFormData] = useState({
